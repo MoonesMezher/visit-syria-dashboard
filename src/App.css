@@ -1,0 +1,102 @@
+:root {
+
+    /* White */
+    --white: #FFFFFF;
+
+    /* Background*/
+    --off_white_background: #F3F3F3;
+
+    /* Statistics background*/
+    --off_white_statistic_background: #F3F3F3;
+    --off_white_statistic_background_trans_20: #f2f2f233;
+
+    /*__________________________________________________________________*/
+
+    /* Black */
+    --black: #000000;
+    --black_trans_15: #00000026;
+    --black_trans_16: #00000029;
+
+    /* Black Text for Statistics and others*/
+    --black_button_text: #112211;
+    --black_button_text_trans_60: rgb(17, 34, 17, 60%);
+
+    /*__________________________________________________________________*/
+
+    /* Gray Borders*/
+    --light_gray_borders: #938E8E;
+    --light_gray_borders_trans_50: #938e8e80;
+    --light_gray_input: #9F9A9A;
+
+    /*Gray wheel*/
+    --gray_wheel_1: #54575B;
+    --gray_wheel_2: #636C77;
+    --gray_wheel_3: #78828E;
+    --gray_wheel_4: #838689;
+    --gray_wheel_5: #979BA0;
+    --gray_wheel_6: #9BA2AA;
+    --gray_wheel_7: #9D9E9F;
+    --gray_wheel_8: #BBC0C2;
+    --gray_wheel_9: #D9D9D9;
+
+    /* Gray Placeholder*/
+    --dark_gray_text: #9D9F9D;
+
+    /* Gray for pagination */
+    --light_gray: #938E8E;
+
+
+    /* Gray for add new image*/
+    --light_gray_background_image: #EEEDED;
+
+    --light_gray_image: #d9d9d9;
+    --light_gray_image_trans_75: #d9d9d9bf;
+
+    /*__________________________________________________________________*/
+    /* Green */
+    --main_green: #8DD3BB;
+    --main_green_trans_30: #8dd3ba4d;
+
+    /* Green Language button*/
+    --light_green_language: #D4EFE5;
+    --light_green_language_trans_50: #d4efe580;
+
+    /* Green Add Article*/
+    --green_button: #57DEB0;
+    --green_button_trans_75: #57deb0bf;
+
+    /* Green for icons, selected tab and login page */
+    --light_green: #D4EFE5;
+    --light_green_trans_50: #d4efe580;
+
+    /*____________________________________________ Font ___________________________________________*/
+
+    /* Font Size*/
+
+    /* Title and NavBar*/
+    --font_size_title: 1.125rem;
+
+    /* data*/
+    --font_size_data: 1rem;
+    --font_size_data_statistic: 0.75rem;
+
+    /*statistics*/
+    --font_size_data_statistics: 1.5rem;
+
+    /* Font Weight*/
+    --main_font_weight: 400;
+
+}
+
+@font-face {
+    font-family: "FrutigerLTArabic";
+    src: local("FrutigerLTArabic"), url("./assets/fonts/FrutigerLTArabic55Roman.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background-color: var(--off_white_background);
+    font-weight: var(--main_font_weight);
+    font-family: "FrutigerLTArabic";
+}
