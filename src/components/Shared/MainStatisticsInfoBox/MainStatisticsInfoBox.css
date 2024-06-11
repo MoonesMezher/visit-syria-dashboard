@@ -1,0 +1,39 @@
+.BY_MainStatisticsInfoBox {
+    background-color: var(--off_white_statistic_background_trans_20);
+    border: 1px solid var(--light_gray_borders);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    justify-content: space-between;
+    gap: 0.75rem;
+    font-weight: var(--main_font_weight);
+}
+
+.BY_MainStatisticsInfoBox .top {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: flex-end;
+}
+
+.BY_MainStatisticsInfoBox .top .left {
+    font-size: var(--font_size_data);
+    align-content: flex-end;
+    justify-content: flex-end;
+    margin-right: 0.25rem;
+    line-height: 1.5;
+}
+
+.BY_MainStatisticsInfoBox .top .right {
+    font-size: var(--font_size_data_statistics);
+    display: flex;
+    line-height: 1.1;
+}
+
+.BY_MainStatisticsInfoBox .bottom {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    font-size: var(--font_size_title);
+}
