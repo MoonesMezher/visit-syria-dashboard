@@ -4,8 +4,9 @@
     direction: rtl;
     text-align: right;
     border-top: 0.3px;
-    margin-left: 103px;
+    /* margin-left: 103px; */
     margin-top: 17px;
+    direction: rtl;
 }
 /* there is a question ??????????????????? */ 
 
@@ -15,7 +16,7 @@
         direction: rtl;
         text-align: right;
         border-top: 0.3px;
-        margin-left: 71px;
+        /* margin-left: 71px; */
         margin-top: 17px;
     }
 }
