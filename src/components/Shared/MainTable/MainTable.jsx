@@ -9,16 +9,15 @@ import previous from "./../../../assets/icons/Vector.svg";
 const MainTable = ({ headers, data }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(10); // Adjust based on your preference
-
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
-    // Calculate the current page's data
+    // Calculate the current page's data.
     const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
     const pageCount = Math.ceil(data.length / itemsPerPage);
 
-    // Corrected handlePageChange to ensure currentPage stays within bounds
+    // Corrected handlePageChange to ensure currentPage stays within bounds.
     const handlePageChange = (newPage) => {
         if (newPage >= 1 && newPage <= pageCount) {
             setCurrentPage(newPage);
