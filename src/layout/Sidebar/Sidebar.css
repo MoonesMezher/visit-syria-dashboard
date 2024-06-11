@@ -1,0 +1,58 @@
+.sidebar {
+    width: 281px;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    right: 0;
+    top: 90px;
+    direction: rtl;
+}
+
+.sidebar a,
+.sidebar .dropdown {
+    text-decoration: none;
+    font-family: Frutiger LT Arabic;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 34.54px;
+    padding: 10px 100px 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(17, 34, 17, 1);
+}
+
+.sidebar a span {
+    font-size: 1.25rem;
+    color: rgba(17, 34, 17, 1);
+}
+
+.dropdown-icon {
+    font-size: 2rem;
+}
+
+.sidebar .details {
+    transition: .5s ease;
+    transform: translateY(-100%);
+    opacity: 0;
+    display: none;
+}
+
+.sidebar .normal {
+    transition: .5s ease;
+    cursor: pointer;
+}
+
+.sidebar .active {
+    transition: .5s ease;
+    background-color: rgba(212, 239, 229, 0.5);
+}
+.sidebar .double-active {
+    background-color: rgba(141, 211, 187, 0.3);
+}
+.sidebar .details.details-avtive {
+    transform: translateY(0);
+    transition: .3s ease;
+}

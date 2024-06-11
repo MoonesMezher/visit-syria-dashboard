@@ -88,6 +88,10 @@
 
 }
 
+* {
+    text-align: right;
+}
+
 @font-face {
     font-family: "FrutigerLTArabic";
     src: local("FrutigerLTArabic"), url("./assets/fonts/FrutigerLTArabic55Roman.ttf") format('truetype');
@@ -99,4 +103,11 @@ body {
     background-color: var(--off_white_background);
     font-weight: var(--main_font_weight);
     font-family: "FrutigerLTArabic";
+}
+
+.content {
+    background-color: rgba(243, 243, 243, 1);
+    width: 100%;
+    min-height: calc(100vh - 90px);
+    padding: 31px 31px 52px;
 }

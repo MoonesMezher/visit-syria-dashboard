@@ -1,0 +1,70 @@
+.mm-header {
+    width: 100%;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 10px 0 20px 0px #ccc;
+}
+
+.mm-header .left-side {
+    gap: 2em;
+}
+
+.mm-header .profile-icon,
+.mm-header .language-icon {
+    font-size: 2rem;
+}
+
+.mm-header .profile-icon,
+.mm-header .notefication-icon,
+.mm-header .language {
+    cursor: pointer;
+}
+
+.mm-header .notefication-icon {
+    font-size: 1.5rem;
+}
+
+.mm-header .language {
+    border-radius: 8px;
+    background-color: rgba(212, 239, 229, 0.5);
+    padding: 5px 24px;
+    gap: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.mm-header .language span {
+    color: rgba(17, 34, 17, 1);
+    font-family: Frutiger LT Arabic;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 34.54px;
+    text-align: left;
+}
+
+.mm-header .search-input {
+    border-bottom: 1px solid black;
+    width: 400px;
+    margin-right: 112px;
+}
+
+.mm-header .search-input input {
+    all: unset;
+    width: calc(100% - 1.5rem);
+    box-sizing: border-box;
+    padding: 8px 8px 8px 0;
+}
+
+.mm-header .search-input .search-icon {
+    font-size: 1.5rem;
+}
+
+.mm-header .logo {
+    gap: 4px;
+}
+
+.mm-header .logo img:nth-child(2) {
+    transform: translateY(2px);
+}
