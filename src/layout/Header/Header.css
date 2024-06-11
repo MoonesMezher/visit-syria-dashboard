@@ -68,3 +68,10 @@
 .mm-header .logo img:nth-child(2) {
     transform: translateY(2px);
 }
+
+@media screen and (max-width: 1000px) {
+    .mm-header .search-input {
+        width: 200px;
+        margin-right: 56px;
+    }
+}

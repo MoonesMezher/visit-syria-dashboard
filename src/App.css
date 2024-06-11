@@ -107,7 +107,7 @@ body {
 
 .content {
     background-color: rgba(243, 243, 243, 1);
-    width: 100%;
+    width: calc(100% - 281px);
     min-height: calc(100vh - 90px);
     padding: 31px 31px 52px;
 }
