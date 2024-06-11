@@ -1,0 +1,66 @@
+/* there is a question ???????????? */ 
+#myTable {
+    max-width: 1040px; 
+    direction: rtl;
+    text-align: right;
+    border-top: 0.3px;
+    margin-left: 103px;
+    margin-top: 17px;
+}
+/* there is a question ???????????? */ 
+
+@media (max-width: 1366px) {
+    #myTable {
+        max-width: 950px;
+        direction: rtl;
+        text-align: right;
+        border-top: 0.3px;
+        margin-left: 71px;
+        margin-top: 17px;
+    }
+}
+
+.thead-light tr th {
+    font-weight: 500;
+}
+
+.table .thead-light tr th {
+    border-width: 0.3px 0px 0.3px 0px;
+    border-color: var(--light_gray);
+    background-color: var(--light_green);
+}
+
+table thead tr th:first-child, 
+table tbody tr td:first-child {
+    padding-right: 20px;
+}
+.pagination {
+    display: flex;
+    gap:2rem;
+    direction: rtl;
+}
+.pagination .disabled .page-link{
+    background-color: var(--off_white_background);
+    color:var(--gray_wheel_8) ;
+}
+.pagination  .page-link:hover {
+    color:var(--gray_wheel_4) ;
+    background-color: var(--off_white_background);
+}
+
+.pagination  .page-link {
+    color: var(--gray_wheel_4);
+    cursor: pointer;
+    border: none;
+    background-color: var(--off_white_background);
+}
+
+.pagination .active .page-link{
+    background-color: var(--off_white_background);
+    color: var(--black);
+}
+
+.pagination .page-item .page-link {
+    display: flex;
+    gap: 1rem;
+}
