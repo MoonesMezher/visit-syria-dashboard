@@ -99,11 +99,7 @@
     font-style: normal;
 }
 
-body {
-    background-color: var(--off_white_background);
-    font-weight: var(--main_font_weight);
-    font-family: "FrutigerLTArabic";
-}
+
 
 .content {
     background-color: rgba(243, 243, 243, 1);
