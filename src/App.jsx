@@ -21,6 +21,8 @@ import Hotel from './pages/Hotel/Hotel'
 import Blog from './pages/Blog/Blog'
 import Login from './pages/Login/Login'
 import Settings from './pages/Settings/Settings'
+import EditAbout from './pages/EditAbout/EditAbout'
+import AddAbout from './pages/AddAbout/AddAbout'
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/about" element={<About/>} />
+        <Route path="/about/add" element={<AddAbout/>} />
+        <Route path="/about/edit/:id" element={<EditAbout/>} />
         <Route path="/hotels" element={<Hotel/>} />
         <Route path="/hotels/add" element={<AddHotel/>} />
         <Route path="/hotels/edit/:id" element={<EditHotel/>} />
