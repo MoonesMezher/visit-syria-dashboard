@@ -1,7 +1,9 @@
 const AddResturant = () => {
-    return (
-        <section>AddResturant</section>
-    )
-}
+  return (
+    <>
+      <section>add Restaurant</section>
+    </>
+  );
+};
 
-export default AddResturant
+export default AddResturant;
