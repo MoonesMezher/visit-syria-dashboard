@@ -23,10 +23,19 @@ import Login from './pages/Login/Login'
 import Settings from './pages/Settings/Settings'
 import EditAbout from './pages/EditAbout/EditAbout'
 import AddAbout from './pages/AddAbout/AddAbout'
+import { ToastContainer } from 'react-toastify'
 
 function App() {
   return (
     <Layout>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+      />
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/about" element={<About/>} />

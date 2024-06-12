@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const MainButton = ({ text, goTo }) => {
     const navigate = useNavigate();
     const handleClick = () => {
-        navigate(`${goTo}`);
+        navigate(`${goTo || '#'}`);
     };
     return (
         <div className='BY_MainButton'>
