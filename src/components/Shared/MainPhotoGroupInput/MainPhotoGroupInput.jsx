@@ -1,8 +1,16 @@
-import { PiPencilSimpleLine } from "react-icons/pi";
 import MainPhotoInput from "../MainPhotoInput/MainPhotoInput";
-import { IoAdd } from "react-icons/io5";
-
+import { useRef, useState } from "react";
 const MainPhotoGroupInput = () => {
+  const imgRef = useRef(null);
+  const [img, setImg] = useState("/src/assets/images/input/add.png ");
+  const handleImgChange = (e) => {
+    const file = e.target.files;
+    console.log(file);
+    setImg(URL.createObjectURL(e.target.files[0]));
+  };
+  const HandleImgClick = () => {
+    imgRef.current.click();
+  };
   return (
     <div
       className="container border rounded border-dark-subtle d-flex align-items-center justify-content-center"
@@ -19,22 +27,19 @@ const MainPhotoGroupInput = () => {
           height: "224px",
         }}
       >
-        <div className="row">
+        <div className="row" style={{ marginBottom: "24px" }}>
           <div className="col-6 ">
             <MainPhotoInput />
           </div>
-          <div
-            className="col-6"
-            style={{
-              marginBottom: "24px",
-            }}
-          >
+          <div className="col-6">
             <MainPhotoInput />
           </div>
         </div>
         <div className="row position-relative">
-          <MainPhotoInput />
-          <div className="col-6">
+          <div className="col-6 ">
+            <MainPhotoInput />
+          </div>
+          {/* <div className="col-6">
             <div
               className="container position-relative border rounded border-dark-subtle d-flex align-items-center justify-content-center "
               style={{ width: "100px", height: "100px" }}
@@ -55,8 +60,16 @@ const MainPhotoGroupInput = () => {
                 />
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="col-6">
+            <MainPhotoInput />
+          </div>
+
+          <div
+            className="col-6"
+            onClick={HandleImgClick}
+            style={{ cursor: "pointer" }}
+          >
             <div
               className="container position-absolute border d-flex align-items-center justify-content-center "
               style={{
@@ -64,14 +77,21 @@ const MainPhotoGroupInput = () => {
                 width: "100px",
                 height: "100px",
                 bottom: "0px",
-                right: "0px",
                 borderRadius: "10px",
               }}
             >
-              <IoAdd
-                style={{
-                  fontSize: "60px",
-                }}
+              <img
+                src={img}
+                alt="..."
+                style={{ height: "100px", width: "100px" }}
+              />
+              <input
+                type="file"
+                name="img"
+                id="inputImg"
+                ref={imgRef}
+                onChange={handleImgChange}
+                style={{ display: "none" }}
               />
             </div>
           </div>
