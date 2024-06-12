@@ -8,7 +8,7 @@ import previous from "./../../../assets/icons/Vector.svg";
 
 const MainTable = ({ headers, data }) => {
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(10); // Adjust based on your preference
+    const [itemsPerPage, setItemsPerPage] = useState(9); // Adjust based on your preference
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
@@ -25,8 +25,8 @@ const MainTable = ({ headers, data }) => {
     };  
     return (
         <>
-            {/* <div className="table-responsive "> */}
-                <table className="table" id='myTable' style={{ maxHeight: "480px" }}>
+            <div className="table-responsive ">
+                <table className="table" id='myTable'>
                     <thead className="thead-light">
                         <tr>
                             {headers.map((header, index) => (
@@ -50,7 +50,7 @@ const MainTable = ({ headers, data }) => {
                     ))}
                     </tbody>
                 </table>
-            {/* </div> */}
+            </div>
             <nav aria-label="Page navigation example">
                 <ul className="pagination justify-content-center">
                     <li className={`page-item ${currentPage === 1? 'disabled' : ''}`}>

@@ -1,15 +1,10 @@
-/* there is a question ???????????? */ 
 #myTable {
     max-width: 1040px; 
     direction: rtl;
     text-align: right;
     border-top: 0.3px;
-    /* margin-left: 103px; */
     margin-top: 17px;
-    direction: rtl;
 }
-/* there is a question ??????????????????? */ 
-
 @media (max-width: 1366px) {
     #myTable {
         max-width: 950px;
@@ -20,7 +15,12 @@
         margin-top: 17px;
     }
 }
-
+@media (max-width: 1080px) {
+    #myTable {
+        white-space: nowrap;
+        overflow: scroll;
+    }
+}
 .thead-light tr th {
     font-weight: 500;
 }

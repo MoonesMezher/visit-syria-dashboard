@@ -2,6 +2,7 @@ export const headers = ["id", "اسم الفندق", "الموقع", "الوصف
 export const dataPage1 = [
        [1, "Hotel 1", "Location 1", "Description 1", "Services 1", "$$"],
        [2, "Hotel 1", "Location 1", "Description 1", "Services 1", "$$"],
+       [3, "Hotel 1", "Location 1", "Description 1", "Services 1", "$$"],
        [4, "Hotel 1", "Location 1", "Description 1", "Services 1", "$$"],
        [5, "Hotel 1", "Location 1", "Description 1", "Services 1", "$$"],
        [6, "Hotel 1", "Location 1", "Description 1", "Services 1", "$$"],
@@ -17,7 +18,5 @@ export const dataPage1 = [
        [16, "Hotel 1", "Location 1", "Description 1", "Services 1", "$$"],
        [17, "Hotel 1", "Location 1", "Description 1", "Services 1", "$$"],
       [18, "Hotel 1", "Location 1", "Description 1", "Services 1", "$$"],
-      [19, "Hotel 1", "Location 1", "Description 1", "Services 1", "$$"],
-      [20, "Hotel 1", "Location 1", "Description 1", "Services 1", "$$"],
-      [21, "Hotel 1", "Location 1", "Description 1", "Services 1", "$$"],
+
 ];
