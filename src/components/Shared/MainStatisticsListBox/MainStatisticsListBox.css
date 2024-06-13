@@ -1,0 +1,47 @@
+.main-statistic-ay {
+    direction: rtl;
+    font-size: 0.75rem;
+    width: 250px;
+    
+}
+.main-statistic-ay .card-header {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--light_green);
+}
+.main-statistic-ay .card-header h6.title{
+    margin-bottom: 0px;
+}
+.main-statistic-ay .card-header span {
+    width: 13px;
+    height: 11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2px;
+}
+.main-statistic-ay .card-header span svg {
+    width: 13px;
+    height: 11px;
+}
+.main-statistic-ay .card-header h6 {
+    font-size: 0.75rem;
+}
+.main-statistic-ay .list-group {
+    padding-right: 0px;
+}
+
+.main-statistic-ay .list-group .list-group-item {
+    display: flex;
+    justify-content: space-between;
+    height: 25px;
+    padding: 0 16px;
+}
+
+.main-statistic-ay .list-group .list-group-item div {
+    margin-top: 2px;
+}
+
+.main-statistic-ay .list-group .list-group-item .number .fixed-ay {
+    margin-right: 1rem;
+}
