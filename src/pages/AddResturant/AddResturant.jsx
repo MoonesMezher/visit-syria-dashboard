@@ -1,7 +1,12 @@
+import MainPhotoGroupInput from "../../components/Shared/MainPhotoGroupInput/MainPhotoGroupInput";
 const AddResturant = () => {
-    return (
-        <section>AddResturant</section>
-    )
-}
+  return (
+    <>
+      <section>
+        <MainPhotoGroupInput />
+      </section>
+    </>
+  );
+};
 
-export default AddResturant
+export default AddResturant;
