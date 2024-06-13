@@ -1,16 +1,17 @@
 import MainPhotoInput from "../MainPhotoInput/MainPhotoInput";
 import { useRef, useState } from "react";
-const MainPhotoGroupInput = () => {
+const MainPhotoGroupInput = ({ imgs, setImgs }) => {
   const imgRef = useRef(null);
-  const [img, setImg] = useState(null);
+
   const handleImgChange = (e) => {
     const file = e.target.files;
     console.log(file);
-    setImg(URL.createObjectURL(e.target.files[0]));
+    setImgs(URL.createObjectURL(e.target.files[0]));
   };
   const HandleImgClick = () => {
     imgRef.current.click();
   };
+
   return (
     <div
       className="container border rounded border-dark-subtle d-flex align-items-center justify-content-center"
@@ -80,9 +81,9 @@ const MainPhotoGroupInput = () => {
                 borderRadius: "10px",
               }}
             >
-              {img ? (
+              {imgs ? (
                 <img
-                  src={img}
+                  src={imgs}
                   alt="..."
                   style={{ height: "100px", width: "100px" }}
                 />

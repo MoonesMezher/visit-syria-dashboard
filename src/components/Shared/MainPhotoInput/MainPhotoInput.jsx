@@ -1,14 +1,15 @@
 import { PiPencilSimpleLine } from "react-icons/pi";
 import { useRef, useState } from "react";
 
-const MainPhotoInput = () => {
+const MainPhotoInput = ( { img, setImg } ) => {
   const imgRef = useRef(null);
-  const [img, setImg] = useState(null);
+
   const handleImgChange = (e) => {
     const file = e.target.files;
     console.log(file);
     setImg(URL.createObjectURL(e.target.files[0]));
   };
+  
   const HandleImgClick = () => {
     imgRef.current.click();
   };

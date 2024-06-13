@@ -16,7 +16,7 @@ const MainSelect = ({title,options}) => {
             {isOpen && (
                 <div className="dropdown-menu">
                     {options.map((option, index) => (
-                        <button key={index} className="dropdown-item" onClick={() => alert(option)}>
+                        <button key={index} className="dropdown-item" onClick={() => 1}>
                             {option}
                         </button>
                     ))}

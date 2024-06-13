@@ -1,37 +1,35 @@
-import { useState } from "react";
-const MainInput = (Props) => {
-  const [input_value, setInputValue] = useState(" ");
+const MainInput = ({ type, name, id, label, value, setInputValue, options = []}) => {
   return (
     <>
       <div className="mb-3" style={{ direction: "rtl" }}>
-        <label htmlFor={Props.id}>{Props.label}</label>
-        {Props.type == "textarea" ? (
+        <label htmlFor={id}>{label}</label>
+        {type == "textarea" ? (
           <textarea
             className="form-control"
-            name={Props.name}
-            id={Props.id}
-            rows={Props.rows_num}
-            value={input_value}
+            name={name}
+            id={id}
+            rows={5}
+            value={value}
             onChange={(e) => setInputValue(e.target.value)}
           ></textarea>
-        ) : Props.type == "text" ? (
+        ) : type == "text" ? (
           <input
             className="form-control"
             type="text"
-            id={Props.id}
+            id={id}
             max={30}
-            value={input_value}
+            value={value}
             onChange={(e) => setInputValue(e.target.value)}
           />
         ) : (
           <select
             className="form-control"
-            name={Props.name}
-            id={Props.id}
-            value={input_value}
+            name={name}
+            id={id}
+            value={value}
             onChange={(e) => setInputValue(e.target.value)}
           >
-            {Props.options.map((e, index) => (
+            {options.map((e, index) => (
               <option key={index} value={e}>
                 {e}
               </option>
