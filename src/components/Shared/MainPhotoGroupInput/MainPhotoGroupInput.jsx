@@ -2,7 +2,7 @@ import MainPhotoInput from "../MainPhotoInput/MainPhotoInput";
 import { useRef, useState } from "react";
 const MainPhotoGroupInput = () => {
   const imgRef = useRef(null);
-  const [img, setImg] = useState("/src/assets/images/input/add.png ");
+  const [img, setImg] = useState(null);
   const handleImgChange = (e) => {
     const file = e.target.files;
     console.log(file);
@@ -80,11 +80,24 @@ const MainPhotoGroupInput = () => {
                 borderRadius: "10px",
               }}
             >
-              <img
+              {img ? (
+                <img
+                  src={img}
+                  alt="..."
+                  style={{ height: "100px", width: "100px" }}
+                />
+              ) : (
+                <img
+                  src="/src/assets/images/input/add.png "
+                  alt="......."
+                  style={{ height: "50px", width: "50px" }}
+                />
+              )}
+              {/* <img
                 src={img}
                 alt="..."
-                style={{ height: "100px", width: "100px" }}
-              />
+                // style={{ height: "100px", width: "100px" }}
+              /> */}
               <input
                 type="file"
                 name="img"

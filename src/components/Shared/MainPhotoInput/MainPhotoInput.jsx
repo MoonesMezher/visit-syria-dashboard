@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 
 const MainPhotoInput = () => {
   const imgRef = useRef(null);
-  const [img, setImg] = useState("/src/assets/images/input/addPhoto.png ");
+  const [img, setImg] = useState(null);
   const handleImgChange = (e) => {
     const file = e.target.files;
     console.log(file);
@@ -18,11 +18,20 @@ const MainPhotoInput = () => {
       style={{ width: "100px", height: "100px", cursor: "pointer" }}
       onClick={HandleImgClick}
     >
-      <img
+      {/* <img
         src={img}
         alt="..."
         // style={{ height: "100px", width: "100px" }}
-      />
+      /> */}
+      {img ? (
+        <img src={img} alt="..." style={{ height: "100px", width: "100px" }} />
+      ) : (
+        <img
+          src="/src/assets/images/input/addPhoto.png "
+          alt="......."
+          style={{ height: "50px", width: "50px" }}
+        />
+      )}
       <div className="">
         <PiPencilSimpleLine
           className="position-absolute bottom-0"
