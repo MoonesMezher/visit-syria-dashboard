@@ -65,3 +65,12 @@ table tbody tr td:first-child {
     display: flex;
     gap: 1rem;
 }
+
+
+/* In MainTable.css */
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 50px; /* Adjust the max-width as needed */
+}

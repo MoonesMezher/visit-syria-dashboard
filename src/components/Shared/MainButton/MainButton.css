@@ -23,3 +23,9 @@
 .BY_MainButton button:hover {
     background-color: var(--green_button);
 }
+
+@media (max-width: 1080px) {
+    .BY_MainButton {
+        width: 117px;
+    }
+}
