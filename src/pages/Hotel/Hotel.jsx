@@ -3,49 +3,24 @@ import MainTable from "../../components/Shared/MainTable/MainTable";
 import "./Hotel.css"
 import MainButton from "../../components/Shared/MainButton/MainButton";
 import MainSearchInput from "../../components/Shared/MainSearchInput/MainSearchInput";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { Navigate, useNavigate, useNavigation } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { deleteItem, useFetchCities, useFetchHotels } from "../../constant/api/FetchData";
 
 const Hotel = () => {
 
     const options = ['id','اسم الفندق','المحافظة','عروض الاسعار'];
     const headers = ["id", "اسم الفندق", "الموقع", "الوصف", "عرض الأسعار"];
-    const [cities , setCities] = useState([]);
-    const [cityNames, setCityNames] = useState([]);
-    const [hotels , setHotels] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(0);
-    const [selectedItem, setSelectedItem] = useState(null);
-    const [get ,setGet] = useState(true);
-    // const [itemsPerPage, setItemsPerPage] = useState(9); 
+    const [getItem, setGetItem] = useState(true);
     const navigate = useNavigate()
 
+    // Fetch data (cities and hotels)
+    const { cities, cityNames, isLoadingCities } = useFetchCities();
+    const { hotels, totalPages, isLoadingHotels } = useFetchHotels(currentPage,getItem);
+    const isLoading = isLoadingCities || isLoadingHotels;
 
-    useEffect (() => {
-        axios.get('http://127.0.0.1:8000/api/cities')
-        .then ( res => {
-            setCities(res.data.data);
-            // Extracting city names and setting them to state
-            const names = res.data.data.map(city => city.name);
-            setCityNames(names);
-        })
-    },[]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(`http://127.0.0.1:8000/api/hotels?page=${currentPage}`);
-                setHotels(response.data.data);
-                setTotalPages(response.data.pagination.total_pages);
-            } catch (error) {
-                console.error("Failed to fetch hotels:", error);
-            }
-        };
-
-        fetchData();
-    }, [currentPage,get]);
-      // Function to handle page change
+    // Function to handle page change
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
@@ -61,27 +36,23 @@ const Hotel = () => {
         ]
     }));
 
-    
     const handleDelete = (itemId) => {
-        axios.delete(`http://127.0.0.1:8000/api/hotels/${itemId}`, null)
-        .then(res => {
-            console.log(res.data);
-            setGet((prev) =>!prev);
-        }).catch(error => {
-            console.error("Failed to delete hotel:", error);
-        });
+        deleteItem(itemId,setGetItem); // Use the deleteHotel function from the hook
     };
 
     const handleEdit = (itemId) => {
-        // Implement editing logic here
-        // console.log(`Editing item with ID: ${itemId}`);
-        setSelectedItem(itemId);
         navigate(`/hotels/edit/${itemId}`)
     };
 
-
     return (
         <section className="hotel-management">
+            {isLoading && 
+                <div className="d-flex justify-content-center">
+                    <div className="spinner-border" style={{ color:"rgb(126, 126, 126)" }} role="status">
+                    <span className="sr-only"></span>
+                    </div>
+                </div>
+            }
             <div className="hotel-btn">
                 <div className="filter">
                     <MainSelect title="كامل القطر" options={cityNames}/>
