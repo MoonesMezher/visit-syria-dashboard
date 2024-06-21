@@ -1,15 +1,15 @@
 import { PiPencilSimpleLine } from "react-icons/pi";
 import { useRef, useState } from "react";
 
-const MainPhotoInput = ( { img, setImg } ) => {
+const MainPhotoInput = ( { img, setImg ,name} ) => {
   const imgRef = useRef(null);
 
   const handleImgChange = (e) => {
-    const file = e.target.files;
-    console.log(file);
-    setImg(URL.createObjectURL(e.target.files[0]));
+    const file = event.target.files[0];
+    setImg((file));
   };
   
+
   const HandleImgClick = () => {
     imgRef.current.click();
   };
@@ -24,8 +24,9 @@ const MainPhotoInput = ( { img, setImg } ) => {
         alt="..."
         // style={{ height: "100px", width: "100px" }}
       /> */}
+       {/* show img */}
       {img ? (
-        <img src={img} alt="..." style={{ height: "100px", width: "100px" }} />
+        <img src={URL.createObjectURL(img)} alt="..." style={{ height: "100px", width: "100px" }} />
       ) : (
         <img
           src="/src/assets/images/input/addPhoto.png "
@@ -43,14 +44,28 @@ const MainPhotoInput = ( { img, setImg } ) => {
           }}
         />
       </div>
-      <input
+      {/* <input
         type="file"
-        name="img"
+        name={name}
         id="inputImg"
         ref={imgRef}
         onChange={handleImgChange}
         style={{ display: "none" }}
+      /> */}
+             
+
+                 <input
+        type="file"
+        id="file-input"
+        name={name}
+        onChange={handleImgChange}
+        style={{ display: 'none' }}
+        ref={imgRef}
       />
+    <div>
+
+            
+    </div>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-const MainInput = ({ type, name, id, label, value, setInputValue, options = []}) => {
+const MainInput = ({ type, name, id, label, value, setInputValue, options = [],selected}) => {
   return (
     <>
       <div className="mb-3" style={{ direction: "rtl" }}>
@@ -29,10 +29,17 @@ const MainInput = ({ type, name, id, label, value, setInputValue, options = []})
             value={value}
             onChange={(e) => setInputValue(e.target.value)}
           >
+             <option   selected>
+                {selected}
+              </option>
             {options.map((e, index) => (
-              <option key={index} value={e}>
+              <>
+              
+                <option key={index} value={e}>
                 {e}
               </option>
+              </>
+            
             ))}
           </select>
         )}

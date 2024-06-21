@@ -1,12 +1,12 @@
 import MainPhotoInput from "../MainPhotoInput/MainPhotoInput";
 import { useRef, useState } from "react";
-const MainPhotoGroupInput = ({ imgs, setImgs }) => {
+const MainPhotoGroupInput = ({ imgs, setImgs,name }) => {
   const imgRef = useRef(null);
 
   const handleImgChange = (e) => {
     const file = e.target.files;
     console.log(file);
-    setImgs(URL.createObjectURL(e.target.files[0]));
+    setImgs((e.target.files));
   };
   const HandleImgClick = () => {
     imgRef.current.click();
@@ -81,13 +81,17 @@ const MainPhotoGroupInput = ({ imgs, setImgs }) => {
                 borderRadius: "10px",
               }}
             >
+              
               {imgs ? (
                 <img
                   src={imgs}
                   alt="..."
                   style={{ height: "100px", width: "100px" }}
                 />
-              ) : (
+              )
+              
+              
+              : (
                 <img
                   src="/src/assets/images/input/add.png "
                   alt="......."
@@ -101,11 +105,12 @@ const MainPhotoGroupInput = ({ imgs, setImgs }) => {
               /> */}
               <input
                 type="file"
-                name="img"
+                name={name}
                 id="inputImg"
                 ref={imgRef}
                 onChange={handleImgChange}
                 style={{ display: "none" }}
+                multiple
               />
             </div>
           </div>
