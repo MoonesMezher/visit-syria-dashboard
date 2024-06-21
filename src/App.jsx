@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Layout from './layout/Layout'
 import Home from './pages/Home/Home'
@@ -24,6 +24,7 @@ import Settings from './pages/Settings/Settings'
 import EditAbout from './pages/EditAbout/EditAbout'
 import AddAbout from './pages/AddAbout/AddAbout'
 import { ToastContainer } from 'react-toastify'
+import ErrorPage from './pages/Error/Error'
 
 function App() {
   return (
@@ -59,7 +60,8 @@ function App() {
         <Route path="/places/reports" element={<SatisticsLandMark/>} />
         <Route path="/settings" element={<Settings/>} />
         <Route path="/login" element={<Login/>} />
-        <Route path="*" element={<div>Not Found</div>} />
+        <Route path="*" element={<Navigate to="/error"/>} />
+        <Route path="/error" element={<ErrorPage/>} />
       </Routes>
     </Layout>
   )
