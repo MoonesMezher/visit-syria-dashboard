@@ -1,7 +1,7 @@
 import { PiPencilSimpleLine } from "react-icons/pi";
 import { useRef, useState } from "react";
 
-const MainPhotoInput = ( { img, setImg } ) => {
+const MainPhotoInput = ({ img, setImg }) => {
   const imgRef = useRef(null);
 
   const handleImgChange = (e) => {
@@ -9,7 +9,7 @@ const MainPhotoInput = ( { img, setImg } ) => {
     console.log(file);
     setImg(URL.createObjectURL(e.target.files[0]));
   };
-  
+
   const HandleImgClick = () => {
     imgRef.current.click();
   };

@@ -1,5 +1,6 @@
 import MainPhotoInput from "../MainPhotoInput/MainPhotoInput";
-import { useRef, useState } from "react";
+import { useRef } from "react";
+import "./MainPhotoGroupInput.css";
 const MainPhotoGroupInput = ({ imgs, setImgs }) => {
   const imgRef = useRef(null);
 
@@ -13,57 +14,23 @@ const MainPhotoGroupInput = ({ imgs, setImgs }) => {
   };
 
   return (
-    <div
-      className="container border rounded border-dark-subtle d-flex align-items-center justify-content-center"
-      style={{
-        width: "284px",
-        height: "267px",
-        direction: "rtl",
-      }}
-    >
-      <div
-        className="container"
-        style={{
-          width: "221px",
-          height: "224px",
-        }}
-      >
+    <div className="container rounded group-photo d-flex align-items-center justify-content-center">
+      <div className="container base-group-photo">
         <div className="row" style={{ marginBottom: "24px" }}>
           <div className="col-6 ">
-            <MainPhotoInput />
+            <MainPhotoInput img={imgs[0]} setImg={setImgs[0]} />
           </div>
           <div className="col-6">
-            <MainPhotoInput />
+            <MainPhotoInput img={imgs[1]} setImg={setImgs[1]} />
           </div>
         </div>
         <div className="row position-relative">
           <div className="col-6 ">
-            <MainPhotoInput />
+            <MainPhotoInput img={imgs[2]} setImg={setImgs[2]} />
           </div>
-          {/* <div className="col-6">
-            <div
-              className="container position-relative border rounded border-dark-subtle d-flex align-items-center justify-content-center "
-              style={{ width: "100px", height: "100px" }}
-            >
-              <img
-                src="/src/assets/images/input/addPhoto.png "
-                className="img-style"
-                alt="..."
-              />
-              <div className="">
-                <PiPencilSimpleLine
-                  className="position-absolute bottom-0"
-                  style={{
-                    width: "18.75px",
-                    height: "18.75px",
-                    left: "15px",
-                  }}
-                />
-              </div>
-            </div>
-          </div> */}
+
           <div className="col-6">
-            <MainPhotoInput />
+            <MainPhotoInput img={imgs[3]} setImg={setImgs[3]} />
           </div>
 
           <div
@@ -74,16 +41,16 @@ const MainPhotoGroupInput = ({ imgs, setImgs }) => {
             <div
               className="container position-absolute border d-flex align-items-center justify-content-center "
               style={{
-                backgroundColor: "rgba(217, 217, 217, 0.75)",
+                backgroundColor: "var(--gray_wheel_9))",
                 width: "100px",
                 height: "100px",
                 bottom: "0px",
                 borderRadius: "10px",
               }}
             >
-              {imgs ? (
+              {imgs[5] ? (
                 <img
-                  src={imgs}
+                  src={imgs[5]}
                   alt="..."
                   style={{ height: "100px", width: "100px" }}
                 />
