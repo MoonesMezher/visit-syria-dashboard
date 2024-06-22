@@ -1,0 +1,10 @@
+.loading {
+    animation: .7s spin infinite linear;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(360deg);
+    }
+}
+

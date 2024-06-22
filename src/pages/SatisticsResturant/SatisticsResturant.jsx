@@ -81,16 +81,16 @@ const SatisticsResturant = () => {
                 <MainSelect title={'حسب المحافظة'} options={cityNames}/>
                 <MainSelect title={'خلال'} options={['شهر', 'اسبوع', 'يوم']}/>
             </div>
-            <div className="bg-white d-flex gap-5 flex-row-reverse p-4 rounded-3 mt-4">
+            <div className="bg-white d-flex gap-5 flex-row-reverse p-4 rounded-3 mt-4 justify-content-between">
                 <div className="d-flex flex-column gap-5">
                     {satisticsList.map((e, i) => <MainStatisticsListBox key={i} title={e.title} icon={e.icon} list={e.list} fixed={e.icon}/>)}
                 </div>
                 <div className="bg-white d-flex gap-5 flex-column">
-                    <div className="d-flex">
+                    <div className="d-flex justify-content-between">
                         <MainStatisticsInfoBox title={'مجموع قيمة الحجوزات'} number={'15,000'} unit={'$'}/>
                         <MainStatisticsInfoBox title={'مجموع حجوزات المطاع'} number={150} unit={'حجز'}/>
                     </div>
-                    <MainChart/>
+                    <MainChart arrData={[1, 10, 90, 0]}/>
                 </div>
             </div>
         </section>

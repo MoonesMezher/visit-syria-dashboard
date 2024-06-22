@@ -1,3 +1,5 @@
+import './MainInput.css'
+
 const MainInput = ({ type, name, id, label, value, setInputValue, options = []}) => {
   return (
     <>
@@ -8,9 +10,14 @@ const MainInput = ({ type, name, id, label, value, setInputValue, options = []})
             className="form-control"
             name={name}
             id={id}
-            rows={5}
+            rows={3}
             value={value}
             onChange={(e) => setInputValue(e.target.value)}
+            style={{
+              marginTop: '10px',
+              background: 'transparent',
+              borderColor: 'rgba(159, 154, 154, 1)',
+            }}
           ></textarea>
         ) : type == "text" ? (
           <input
@@ -20,6 +27,12 @@ const MainInput = ({ type, name, id, label, value, setInputValue, options = []})
             max={30}
             value={value}
             onChange={(e) => setInputValue(e.target.value)}
+            style={{
+              outline: '0px solid red',
+              marginTop: '10px',
+              background: 'transparent',
+              borderColor: 'rgba(159, 154, 154, 1)',
+            }}
           />
         ) : (
           <select
@@ -28,6 +41,12 @@ const MainInput = ({ type, name, id, label, value, setInputValue, options = []})
             id={id}
             value={value}
             onChange={(e) => setInputValue(e.target.value)}
+            style={{
+              outline: '0px solid red',
+              marginTop: '10px',
+              background: 'transparent',
+              borderColor: 'rgba(159, 154, 154, 1)',
+            }}
           >
             {options.map((e, index) => (
               <option key={index} value={e}>
