@@ -1,4 +1,4 @@
-const MainInput = ({ type, name, id, label, value, setInputValue, options = [],selected}) => {
+const MainInput = ({ type, name, id,value, label,  setInputValue, options = [],selected,defaultValue}) => {
   return (
     <>
       <div className="mb-3" style={{ direction: "rtl" }}>
@@ -9,7 +9,8 @@ const MainInput = ({ type, name, id, label, value, setInputValue, options = [],s
             name={name}
             id={id}
             rows={5}
-            value={value}
+            // value={value}
+            defaultValue={defaultValue}
             onChange={(e) => setInputValue(e.target.value)}
           ></textarea>
         ) : type == "text" ? (
@@ -18,7 +19,9 @@ const MainInput = ({ type, name, id, label, value, setInputValue, options = [],s
             type="text"
             id={id}
             max={30}
-            value={value}
+            defaultValue={defaultValue}
+
+            // value={value}
             onChange={(e) => setInputValue(e.target.value)}
           />
         ) : (
@@ -26,6 +29,8 @@ const MainInput = ({ type, name, id, label, value, setInputValue, options = [],s
             className="form-control"
             name={name}
             id={id}
+            defaultValue={defaultValue}
+
             value={value}
             onChange={(e) => setInputValue(e.target.value)}
           >

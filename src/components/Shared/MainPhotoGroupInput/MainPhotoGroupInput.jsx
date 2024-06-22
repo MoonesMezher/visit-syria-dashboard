@@ -1,6 +1,6 @@
 import MainPhotoInput from "../MainPhotoInput/MainPhotoInput";
 import { useRef, useState } from "react";
-const MainPhotoGroupInput = ({ imgs, setImgs,name }) => {
+const MainPhotoGroupInput = ({ imgs, setImgs,name ,defaultValue}) => {
   const imgRef = useRef(null);
 
   const handleImgChange = (e) => {
@@ -81,6 +81,7 @@ const MainPhotoGroupInput = ({ imgs, setImgs,name }) => {
                 borderRadius: "10px",
               }}
             >
+             
               {/* show multi img */}
                 {imgs &&  imgs.length > 0 ? (
           imgs?.map((image, index) => (
@@ -91,33 +92,25 @@ const MainPhotoGroupInput = ({ imgs, setImgs,name }) => {
 
           
           ))
-        ) : (
-<img
+        )
+        // show image when update 
+        :defaultValue && defaultValue.length > 0 ? (
+          defaultValue.map((image, index) => (
+            <img
+              key={index}
+              src={`http://127.0.0.1:8000${image.path}`}
+              style={{ height: "100px", width: "100px" }}
+            />
+          ))
+        )
+
+        :  (
+           <img
                   src="/src/assets/images/input/add.png "
                   alt="......."
                   style={{ height: "50px", width: "50px" }}
                 />        )}
-              {/* {imgs ? (
-                <img
-                  src={imgs}
-                  alt="..."
-                  style={{ height: "100px", width: "100px" }}
-                />
-              )
-              
-              
-              : (
-                <img
-                  src="/src/assets/images/input/add.png "
-                  alt="......."
-                  style={{ height: "50px", width: "50px" }}
-                />
-              )} */}
-              {/* <img
-                src={img}
-                alt="..."
-                // style={{ height: "100px", width: "100px" }}
-              /> */}
+            
               <input
                 type="file"
                 name={name}

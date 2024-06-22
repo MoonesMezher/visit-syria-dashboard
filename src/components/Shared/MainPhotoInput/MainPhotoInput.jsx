@@ -1,7 +1,7 @@
 import { PiPencilSimpleLine } from "react-icons/pi";
 import { useRef, useState } from "react";
 
-const MainPhotoInput = ( { img, setImg ,name} ) => {
+const MainPhotoInput = ( { img, setImg ,name,defaultValue} ) => {
   const imgRef = useRef(null);
 
   const handleImgChange = (e) => {
@@ -19,13 +19,28 @@ const MainPhotoInput = ( { img, setImg ,name} ) => {
       style={{ width: "100px", height: "100px", cursor: "pointer" }}
       onClick={HandleImgClick}
     >
-      {/* <img
-        src={img}
-        alt="..."
-        // style={{ height: "100px", width: "100px" }}
-      /> */}
+   
        {/* show img */}
-      {img ? (
+       {/* update */}
+       {img ? (
+                 <img src={URL.createObjectURL(img)} alt="..." style={{ height: "100px", width: "100px" }} />
+//show when update
+        ) 
+        : defaultValue={defaultValue}
+        
+        ? (
+          <img src={defaultValue} alt="..." style={{ height: "100px", width: "100px" }} />
+
+        ) 
+        :{img} (
+          <img
+          src="/src/assets/images/input/addPhoto.png "
+          alt="......."
+          style={{ height: "50px", width: "50px" }}
+        />
+        )}
+
+      {/* {img  ? (
         <img src={URL.createObjectURL(img)} alt="..." style={{ height: "100px", width: "100px" }} />
       ) : (
         <img
@@ -33,7 +48,8 @@ const MainPhotoInput = ( { img, setImg ,name} ) => {
           alt="......."
           style={{ height: "50px", width: "50px" }}
         />
-      )}
+      )
+      }
       <div className="">
         <PiPencilSimpleLine
           className="position-absolute bottom-0"
@@ -43,7 +59,7 @@ const MainPhotoInput = ( { img, setImg ,name} ) => {
             left: "15px",
           }}
         />
-      </div>
+      </div> */}
       {/* <input
         type="file"
         name={name}
@@ -60,7 +76,8 @@ const MainPhotoInput = ( { img, setImg ,name} ) => {
         name={name}
         onChange={handleImgChange}
         style={{ display: 'none' }}
-        ref={imgRef}
+        
+        ref={imgRef} 
       />
     <div>
 
