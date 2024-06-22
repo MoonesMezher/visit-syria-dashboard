@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import * as landmarksServices from "../../constant/api/services/landmarkService"
 import './LandMark.css';
 import ConfirmaDelete from '../../components/Shared/ConfirmDelete/ConfirmDelete';
+import MainSearchInput from "../../components/Shared/MainSearchInput/MainSearchInput";
+
 
 const LandMark = () => {
 
@@ -92,7 +94,7 @@ const LandMark = () => {
             <div className='top_section'>
                 <div className="right_section">
                     <MainButton text="إضافة معلم سياحي" goTo="./add" />
-                    {/* <MainButton text="إضافة معلم سياحي" goTo="./add" /> */}
+                    <MainSearchInput text="بحث عن معلم "/>
                 </div>
                 <div className="left_section">
                     {/* <MainSelect title="ترتيب حسب" options={sortBy} /> */}
