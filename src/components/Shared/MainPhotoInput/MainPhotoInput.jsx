@@ -1,31 +1,35 @@
 import { PiPencilSimpleLine } from "react-icons/pi";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const MainPhotoInput = ( { img, setImg } ) => {
+const MainPhotoInput = ({ setImg, img }) => {
   const imgRef = useRef(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  useEffect(() => {
+    setSelectedImage(img);
+  }, []);
 
   const handleImgChange = (e) => {
-    const file = e.target.files;
-    console.log(file);
-    setImg(URL.createObjectURL(e.target.files[0]));
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      const imageUrl = URL.createObjectURL(file);
+      setSelectedImage(imageUrl);
+      setImg(imageUrl);
+    }
   };
-  
-  const HandleImgClick = () => {
+
+  const handleImgClick = () => {
     imgRef.current.click();
   };
+
   return (
     <div
-      className="container position-relative border rounded border-dark-subtle d-flex align-items-center justify-content-center "
+      className="container position-relative border rounded border-dark-subtle d-flex align-items-center justify-content-center mx-0 overflow-hidden"
       style={{ width: "100px", height: "100px", cursor: "pointer" }}
-      onClick={HandleImgClick}
+      onClick={handleImgClick}
     >
-      {/* <img
-        src={img}
-        alt="..."
-        // style={{ height: "100px", width: "100px" }}
-      /> */}
-      {img ? (
-        <img src={img} alt="..." style={{ height: "100px", width: "100px" }} />
+      {selectedImage ? (
+        <img src={selectedImage} alt="..." style={{ height: "99px", width: "99px", 'objectFit': 'cover' }} />
       ) : (
         <img
           src="/src/assets/images/input/addPhoto.png "

@@ -21,13 +21,13 @@ Chart.register(
 
 import "./MainChart.css";
 
-const MainChart = (arrData) => {
+const MainChart = ({arrData}) => {
   const data = {
     labels: [1, 7, 15, 22, 30],
     datasets: [
       {
         label: "test",
-        data: [20, 40, 60, 80, 100, 120, 140],
+        data: arrData,
         tension: 0.1,
       },
     ],

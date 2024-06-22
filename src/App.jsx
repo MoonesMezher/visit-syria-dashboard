@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Layout from './layout/Layout'
 import Home from './pages/Home/Home'
@@ -24,8 +24,11 @@ import Settings from './pages/Settings/Settings'
 import EditAbout from './pages/EditAbout/EditAbout'
 import AddAbout from './pages/AddAbout/AddAbout'
 import { ToastContainer } from 'react-toastify'
+import ErrorPage from './pages/Error/Error'
 
 function App() {
+  const token = localStorage.getItem('token') || 1;
+
   return (
     <Layout>
       <ToastContainer
@@ -45,10 +48,10 @@ function App() {
         <Route path="/hotels/add" element={<AddHotel/>} />
         <Route path="/hotels/edit/:id" element={<EditHotel/>} />
         <Route path="/hotels/reports" element={<SatisticsHotel/>} />
-        <Route path="/resturants" element={<Resturant/>} />
-        <Route path="/resturants/add" element={<AddResturant/>} />
-        <Route path="/resturants/edit/:id" element={<EditResturant/>} />
-        <Route path="/resturants/reports" element={<SatisticsResturant/>} />
+        <Route path="/resturants" element={token? <Resturant/>: <Navigate to={'/error'}/>} />
+        <Route path="/resturants/add" element={token?<AddResturant/>: <Navigate to={'/error'}/>} />
+        <Route path="/resturants/edit/:id" element={token? <EditResturant/>: <Navigate to={'/error'}/>} />
+        <Route path="/resturants/reports" element={token? <SatisticsResturant/>: <Navigate to={'/error'}/>} />
         <Route path="/blogs" element={<Blog/>} />
         <Route path="/blogs/add" element={<AddBlog/>} />
         <Route path="/blogs/edit/:id" element={<EditBlog/>} />
@@ -58,8 +61,9 @@ function App() {
         <Route path="/places/edit/:id" element={<EditLandMark/>} />
         <Route path="/places/reports" element={<SatisticsLandMark/>} />
         <Route path="/settings" element={<Settings/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="*" element={<div>Not Found</div>} />
+        <Route path="/login" element={!token? <Login/>: <Navigate to='/'/>} />
+        <Route path="*" element={<Navigate to="/error"/>} />
+        <Route path="/error" element={<ErrorPage/>} />
       </Routes>
     </Layout>
   )
