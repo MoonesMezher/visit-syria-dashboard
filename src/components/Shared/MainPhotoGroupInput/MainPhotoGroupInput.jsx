@@ -6,12 +6,12 @@ const MainPhotoGroupInput = ({ imgs, setImgs,name }) => {
   const handleImgChange = (e) => {
     const file = e.target.files;
     console.log(file);
-    setImgs((e.target.files));
+    setImgs(Array.from(e.target.files));
   };
   const HandleImgClick = () => {
     imgRef.current.click();
   };
-
+ 
   return (
     <div
       className="container border rounded border-dark-subtle d-flex align-items-center justify-content-center"
@@ -72,7 +72,7 @@ const MainPhotoGroupInput = ({ imgs, setImgs,name }) => {
             style={{ cursor: "pointer" }}
           >
             <div
-              className="container position-absolute border d-flex align-items-center justify-content-center "
+              className="container position-absolute border d-flex align-items-center justify-content-center fldx-wrap "
               style={{
                 backgroundColor: "rgba(217, 217, 217, 0.75)",
                 width: "100px",
@@ -81,8 +81,23 @@ const MainPhotoGroupInput = ({ imgs, setImgs,name }) => {
                 borderRadius: "10px",
               }}
             >
-              
-              {imgs ? (
+              {/* show multi img */}
+                {imgs &&  imgs.length > 0 ? (
+          imgs?.map((image, index) => (
+            <img src={URL.createObjectURL(image)} alt="..."             
+                              style={{ height: "100px", width: "100px" }}
+                
+            />
+
+          
+          ))
+        ) : (
+<img
+                  src="/src/assets/images/input/add.png "
+                  alt="......."
+                  style={{ height: "50px", width: "50px" }}
+                />        )}
+              {/* {imgs ? (
                 <img
                   src={imgs}
                   alt="..."
@@ -97,7 +112,7 @@ const MainPhotoGroupInput = ({ imgs, setImgs,name }) => {
                   alt="......."
                   style={{ height: "50px", width: "50px" }}
                 />
-              )}
+              )} */}
               {/* <img
                 src={img}
                 alt="..."
@@ -116,7 +131,7 @@ const MainPhotoGroupInput = ({ imgs, setImgs,name }) => {
           </div>
         </div>
       </div>
-    </div>
+     </div>
   );
 };
 

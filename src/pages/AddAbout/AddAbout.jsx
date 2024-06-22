@@ -12,7 +12,7 @@ const [title,setInputTitle]=useState('')
 const [category,setInputcategory]=useState('')
 const [content,setInputcontent]=useState('')
 const [main_image,setImg]=useState(null)
-const [images,setImages]=useState(null)
+const [images,setImages]=useState([])
 const navigate=useNavigate()
 
 const SendData = async (event) => {
@@ -59,24 +59,20 @@ const SendData = async (event) => {
             <form onSubmit={()=>SendData(event)}  enctype="multipart/form-data">
                 <div className="container">
                     <div className="row ">
-                        <div className="col-4 mt-4">
+                        <div className="col-6 mt-4">
         <MainPhotoInput img={main_image} setImg={setImg} name="main_image" />
         {/* upload multiImage and send name prop */}
-   <div className="col-4 b" >
+   {/* <div className="col-4 b" > */}
    <MainPhotoGroupInput imgs={images} setImgs={setImages} name="images[]"/>
 
-   </div>
-   {/* <input
-                type="file"
-                name="images[]"
-                id="inputImg"
-                onChange={(e)=>{setImages(e.target.files)}}
-                multiple
-              /> */}
+   {/* </div> */}
+  
+   
+  
 
 
                         </div>
-                        <div className="col-8">
+                        <div className="col-6">
                         <MainInput label={'عنوان المقالة'} type={'text'} setInputValue={setInputTitle} name="title"/>
                         <MainInput selected={'تصنيف المقال'} type={'select'} options={options} name="category" setInputValue={setInputcategory}  />
 
@@ -88,7 +84,7 @@ const SendData = async (event) => {
                   
                    
 </div>
-
+<></>
 </div>
 <MainButton text={'Add'}/>
 
