@@ -1,35 +1,25 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
 import "./MainTable.css";
-import editIcon from './../../../assets/icons/PencilSimpleLine.svg';
-import trashIcon from './../../../assets/icons/Trash.svg';
+// import editIcon from './../../../assets/icons/PencilSimpleLine.svg';
+// import trashIcon from './../../../assets/icons/Trash.svg';
 import next from "./../../../assets/icons/chevron-right.svg";
 import previous from "./../../../assets/icons/Vector.svg";
+import ActionButtons from '../ActionButtons/ActionButtons';
 
-const MainTable = ({ headers, data }) => {
-    const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(9); // Adjust based on your preference
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+const MainTable = ({ headers, data , currentPage, totalPages, onPageChange ,onDelete ,onEdit,itemId}) => {
 
-    // Calculate the current page's data.
-    const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
-
-    const pageCount = Math.ceil(data.length / itemsPerPage);
 
     // Corrected handlePageChange to ensure currentPage stays within bounds.
     const handlePageChange = (newPage) => {
-        if (newPage >= 1 && newPage <= pageCount) {
-            setCurrentPage(newPage);
-        }
-    };  
+        onPageChange(newPage);
+    };
     return (
         <>
             <div className="table-responsive ">
                 <table className="table" id='myTable'>
                     <thead className="thead-light">
                         <tr>
-                            {headers.map((header, index) => (
+                            {headers && headers?.map((header, index) => (
                                 <th key={index}>{header}</th>
                             ))}
                             <th>تعديل</th>
@@ -37,15 +27,14 @@ const MainTable = ({ headers, data }) => {
                         </tr>
                     </thead>
                     <tbody>
-                    {currentItems.map((row, rowIndex) => ( // Use currentItems instead of data
+                    {data && data?.map((item, rowIndex) => (
                         <tr key={rowIndex}>
-                            {row.map((cell, cellIndex) => (
-                                <td key={cellIndex}>
+                            {item?.data?.map((cell, cellIndex) => (
+                                <td key={cellIndex} className="truncate">
                                     {cell}
                                 </td>
                             ))}
-                            <td><a href=""><img src={editIcon} alt="" /></a></td>
-                            <td><a href=""><img src={trashIcon} alt="" /></a></td>
+                            <ActionButtons onDelete={onDelete} onEdit={onEdit} itemId={item.id} />
                         </tr>
                     ))}
                     </tbody>
@@ -56,12 +45,12 @@ const MainTable = ({ headers, data }) => {
                     <li className={`page-item ${currentPage === 1? 'disabled' : ''}`}>
                         <a className="page-link" onClick={() => handlePageChange(currentPage - 1)}><img src={next} alt="" />السابق</a>
                     </li>
-                    {[...Array.from({ length: pageCount }, (_, i) => i + 1)].map((page) => (
+                    {[...Array.from({ length: totalPages  }, (_, i) => i + 1)]?.map((page) => (
                         <li key={page} className={`page-item ${page === currentPage? 'active' : ''}`}>
                             <a className="page-link" onClick={() => handlePageChange(page)}>{page}</a>
                         </li>
                     ))}
-                    <li className={`page-item ${currentPage === pageCount? 'disabled' : ''}`}>
+                    <li className={`page-item ${currentPage === totalPages? 'disabled' : ''}`}>
                         <a className="page-link" onClick={() => handlePageChange(currentPage + 1)}>التالي<img src={previous} alt="" /></a>
                     </li>
                 </ul>
@@ -69,8 +58,13 @@ const MainTable = ({ headers, data }) => {
         </>
     );
 }
+
 MainTable.propTypes = {
     headers: PropTypes.arrayOf(PropTypes.string).isRequired,
-    data: PropTypes.arrayOf(PropTypes.array).isRequired,
+    data: PropTypes.arrayOf(PropTypes.any).isRequired, // Changed to PropTypes.any to allow for flexible data types
+    currentPage: PropTypes.number.isRequired,
+    totalPages: PropTypes.number.isRequired,
+    onPageChange: PropTypes.func.isRequired,
 };
+
 export default MainTable;

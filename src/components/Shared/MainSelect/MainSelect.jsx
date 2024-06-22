@@ -22,7 +22,6 @@ const MainSelect = ({title,options}) => {
                     ))}
                 </div>
             )}
-        
         </div>
     );
 };

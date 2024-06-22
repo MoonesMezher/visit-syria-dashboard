@@ -48,3 +48,11 @@
 .main-select .dropdown-menu .dropdown-item:focus {
     background-color: #ffffff;
 }
+
+
+@media (max-width: 1080px) {
+    .main-select .btn {
+        font-size: 17px;
+        width: 160px;
+    }
+}
