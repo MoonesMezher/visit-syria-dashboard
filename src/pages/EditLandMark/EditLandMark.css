@@ -1,0 +1,49 @@
+.BY_EditLandMark .form_section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    direction: rtl;
+  }
+  
+  .BY_EditLandMark .form_section .inputes_section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .BY_EditLandMark .form_section .inputes_section .right_section,
+  .BY_EditLandMark .form_section .inputes_section .left_section {
+    width: 47%;
+  }
+  
+  .BY_EditLandMark .form_section .inputes_section .left_section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .BY_EditLandMark .form_section .inputes_section .left_section .image_field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .BY_EditLandMark .form_section .inputes_section .left_section .image_field.multi {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .BY_EditLandMark .form_section .inputes_section .left_section .image_field.multi label {
+    align-self: start;
+  }
+  
+  .BY_EditLandMark .form_section .inputes_section .left_section .image_field.multi .image_input {
+    display: flex;
+    align-self: flex-end;
+  }
+  
+  .BY_EditLandMark .form_section .buttonSection {
+    display: flex;
+    justify-content: center;
+  }
