@@ -97,7 +97,7 @@ const LandMark = () => {
                     <MainSearchInput text="بحث عن معلم "/>
                 </div>
                 <div className="left_section">
-                    {/* <MainSelect title="ترتيب حسب" options={sortBy} /> */}
+                    <MainSelect title="كامل القطر" options={sortBy} />
                     <MainSelect title="ترتيب حسب" options={sortBy} />
                 </div>
             </div>

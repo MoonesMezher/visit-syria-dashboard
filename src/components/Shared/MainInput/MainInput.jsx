@@ -1,17 +1,17 @@
 import './MainInput.css'
 
-const MainInput = ({ type, name, id, label, value, setInputValue, options = []}) => {
+const MainInput = ({ type, name, id, label, value, setInputValue, options = [], defaultValue }) => {
   return (
     <>
       <div className="mb-3" style={{ direction: "rtl" }}>
         <label htmlFor={id}>{label}</label>
         {type == "textarea" ? (
           <textarea
+            defaultValue={defaultValue}
             className="form-control"
             name={name}
             id={id}
             rows={3}
-            value={value}
             onChange={(e) => setInputValue(e.target.value)}
             style={{
               marginTop: '10px',
@@ -21,11 +21,12 @@ const MainInput = ({ type, name, id, label, value, setInputValue, options = []})
           ></textarea>
         ) : type == "text" ? (
           <input
+            defaultValue={defaultValue}
             className="form-control"
-            type="text"
+            name={name}
             id={id}
-            max={30}
-            value={value}
+            // max={30}
+            // value={value}
             onChange={(e) => setInputValue(e.target.value)}
             style={{
               outline: '0px solid red',
@@ -36,6 +37,7 @@ const MainInput = ({ type, name, id, label, value, setInputValue, options = []})
           />
         ) : (
           <select
+            defaultValue={defaultValue}
             className="form-control"
             name={name}
             id={id}

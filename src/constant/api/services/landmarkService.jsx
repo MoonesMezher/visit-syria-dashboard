@@ -1,9 +1,10 @@
 
 import axios from 'axios';
 import { LandMarkAPIURL } from '../LandMarksURLs';
+import { toast } from "react-toastify";
 
 // const token = localStorage.getItem("token");
-const token ="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3MTkwMDUwNTksImV4cCI6MTcxOTAwODY1OSwibmJmIjoxNzE5MDA1MDU5LCJqdGkiOiJzMExScTljNHRJZnRIWDhJIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.6r15cXWJzg75sof1vEtDW6lPtpRMxgsOuKsiG5YC0kw"
+const token ="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3MTkwODk1MDYsImV4cCI6MTcxOTA5MzEwNiwibmJmIjoxNzE5MDg5NTA2LCJqdGkiOiJxU3NvcjdEWmtJeFJlT3IyIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.tzVyjGQnuMmpBv79KwdGoxd1IlE1-FQnBJqAUx719rw"
 
 
 export async function getAllLandmarks(currentPage) {
@@ -23,6 +24,7 @@ export async function getAllLandmarks(currentPage) {
 
 export async function addNewLandmark(data) {
     try {
+        console.log('data',data);
         const response = await axios.post(LandMarkAPIURL, data, {
             headers: {
                 'Content-Type': 'multipart/form-data',
@@ -31,6 +33,8 @@ export async function addNewLandmark(data) {
         });
         if (response.status === 200) {
             const landmarkData = response.data;
+            console.log(data);
+            toast.success('تمت الإضافة بنجاح');
             return landmarkData.data;
         } else {
             throw new Error('Failed to create new landmark');
@@ -44,7 +48,7 @@ export async function addNewLandmark(data) {
 
 export async function editLandmark(data, id) {
     try {
-        const response = await axios.put(LandMarkAPIURL + '/' + id, data, {
+        const response = await axios.post(LandMarkAPIURL + '/' + id, data, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'Authorization': `Bearer ${token}`
@@ -88,8 +92,10 @@ export async function deleteLandmarkById(id) {
         });
 
         if (response.status === 200) {
+            toast.success('تم حذف المعلم بنجاح ');
             return response.data;
         } else {
+            // toast.error('لم يتم حذف المعلم');
             throw new Error(`Failed to delete landmark with id=  ${id}`);
         }
     } catch (error) {

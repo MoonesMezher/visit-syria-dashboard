@@ -6,6 +6,7 @@ const MainPhotoInput = ({ setImg, img }) => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
+    console.log('img', img);
     setSelectedImage(img);
   }, []);
 
@@ -14,7 +15,7 @@ const MainPhotoInput = ({ setImg, img }) => {
       const file = e.target.files[0];
       const imageUrl = URL.createObjectURL(file);
       setSelectedImage(imageUrl);
-      setImg(imageUrl);
+      setImg(file);
     }
   };
 
