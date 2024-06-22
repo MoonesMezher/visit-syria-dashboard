@@ -1,0 +1,68 @@
+.BY_ConfirmaDelete-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(107, 106, 106, 0.466);
+  z-index: 9999;
+}
+
+.BY_ConfirmaDelete-overlay .BY_confirmDelete {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--off_white_background);
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 10px 10px var(--dark_gray_text);
+  z-index: 9999;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  opacity: 1;
+  visibility: visible;
+}
+
+.BY_ConfirmaDelete-overlay .BY_confirmDelete .dialog-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.BY_ConfirmaDelete-overlay .BY_confirmDelete .dialog-content h2 {
+  margin-top: 0;
+  color: var(--green_button);
+  font-weight: 600;
+}
+
+.BY_ConfirmaDelete-overlay .BY_confirmDelete .dialog-content p {
+  margin-bottom: 20px;
+  direction: rtl;
+  color: var(--black_button_text);
+}
+
+.BY_ConfirmaDelete-overlay .BY_confirmDelete .dialog-content .button-group {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.BY_ConfirmaDelete-overlay .BY_confirmDelete .dialog-content .button-group .delete-button,
+.BY_ConfirmaDelete-overlay .BY_confirmDelete .dialog-content .button-group .cancel-button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.BY_ConfirmaDelete-overlay .BY_confirmDelete .dialog-content .button-group .delete-button {
+  background-color: rgb(199, 8, 8);
+  color: #fff;
+  border: none;
+}
+
+.BY_ConfirmaDelete-overlay .BY_confirmDelete .dialog-content .button-group .cancel-button {
+  background-color: rgb(152, 152, 152);
+  color: #fff;
+  border: none;
+}
