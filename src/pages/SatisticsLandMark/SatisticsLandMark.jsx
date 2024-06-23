@@ -44,8 +44,8 @@ const SatisticsLandMark = () => {
                 </div>
                 <div className="content_section">
                     <div className="right_section">
-                        <MainStatisticsListBox title="المستخدم صاحب اكبر عدد حجوزات" list={list} icon={<MdOutlineArticle />} fixed="حجز" />
-                        <MainStatisticsListBox title="المستخدم الذي دفع اكبر مبلغ" list={list} icon={<TbCoin />} fixed={<TbCoin />} />
+                        <MainStatisticsListBox title="المعالم الأكثر زيارة" list={list} icon={<MdOutlineArticle />} fixed="حجز" />
+                        <MainStatisticsListBox title="المعالم الأعلى تقييماً" list={list} icon={<TbCoin />} fixed={<TbCoin />} />
                     </div>
                     <div className="left_section">
                         <div className="satistics_boxs_section">
@@ -53,7 +53,13 @@ const SatisticsLandMark = () => {
                             <MainStatisticsInfoBox title={'عدد زيارات المعالم'} number={"117K"} unit={'زيارة'} />
                         </div>
                         <div className="chart_section">
-                            <MainChart key={1} />
+                            {/* <MainChart arrData={[1, 10,4,5,10]} label="مخطط زيارات المعالم السياحية" /> */}
+                            <MainChart
+                                chart_title="مخطط زيارات المعالم السياحية"
+                                x_labels={['30', '22', '15', '7', '1']}
+                                array={[130, 100, 90, 40, 20]}
+                                unit="K"
+                                y_steps={20} />
                         </div>
                     </div>
                 </div>
