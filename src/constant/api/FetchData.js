@@ -22,23 +22,24 @@ export const useFetchCities = () => {
 };
 
 // Custom Hook for Fetching Hotels
-export const useFetchHotels = (currentPage,getItem) => {
+export const useFetchHotels = (currentPage,getItem, selectedCity, sortBy) => {
     const [hotels, setHotels] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
     const [isLoadingHotels, setIsLoadingHotels] = useState(false);
 
     useEffect(() => {
         setIsLoadingHotels(true);
-        axios.get(`http://127.0.0.1:8000/api/hotels?page=${currentPage}`)
+        const cityQuery = selectedCity ? `&city=${selectedCity}` : '';
+        const sortQuery = sortBy ? `&sort_by=${sortBy}` : '';
+        axios.get(`http://127.0.0.1:8000/api/hotels?page=${currentPage}${cityQuery}${sortQuery}`)
             .then(res => {
                 setHotels(res.data.data);
                 setTotalPages(res.data.pagination.total_pages);
             })
             .finally(() => setIsLoadingHotels(false));
-    }, [currentPage,getItem]);
-
-    return { hotels, totalPages, isLoadingHotels };
-};
+        }, [currentPage, getItem, selectedCity, sortBy]);
+        return { hotels, totalPages, isLoadingHotels };
+    };
 
 export const deleteItem = (itemId,setGetItem) => {
     axios.delete(`http://127.0.0.1:8000/api/hotels/${itemId}`, null)
