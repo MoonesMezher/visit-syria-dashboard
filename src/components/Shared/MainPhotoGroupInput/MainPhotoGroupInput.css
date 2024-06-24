@@ -1,0 +1,10 @@
+.group-photo {
+  width: 284px;
+  height: 267px;
+  direction: rtl;
+  background-color: var(--light_gray_background_image);
+}
+.group-photo .base-group-photo {
+  width: 221px;
+  height: 224px;
+}

@@ -16,7 +16,7 @@ const MainTable = ({ headers, data ,currentPage ,totalPages,onPageChange,onEdit,
     
     return (
         <>
-            <div className="table-responsive ">
+            <div className="table-responsive" style={{justifyContent:'center', display: 'flex'}}>
                 <table className="table" id='myTable'>
                     <thead className="thead-light">
                         <tr>
