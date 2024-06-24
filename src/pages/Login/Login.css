@@ -1,0 +1,66 @@
+.login-page {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--light_green_language);
+}
+
+.login-page .form-container{
+    width: 605px;
+    height: 550px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--white);
+    border-radius: 10px;
+}
+.login-page .form-container .site-name h1{
+    font-size: 3rem;
+    margin-top: 85px;
+    margin-bottom: 20px;
+}
+.login-page .form-container .site-name h1 span{
+    color: var(--main_green);
+}
+.login-page .form-container .hello-text p{
+    font-size: 20px;
+    margin-bottom: 32px;
+}
+.login-page .form-container form{
+    width: 75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.login-page .form-container form input {
+    width: 100%;
+    height: 50px;
+    outline: none;
+    border: 0;
+    margin-bottom: 32px;
+    background-color: var(--light_green_language);
+    border: 1px solid var(--main_green);
+    border-radius: 8px;
+    padding: 13px 20px;
+    direction: rtl;
+}
+.login-page .form-container form input::placeholder{
+    font-size: 18px;
+    opacity: 100% !important;
+    color: #A1A1A1;
+    
+}
+.login-page .form-container form button{
+    width: 205px;
+    height: 50px;
+    border-radius: 8px;
+    background-color: var(--green_button);
+    font-size: 20px;
+    border: none;
+    outline: none;
+    text-align: center;
+}
