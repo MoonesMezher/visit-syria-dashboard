@@ -10,10 +10,7 @@ const MainPhotoGroupInput = ({ imgs, setImgs }) => {
 
   useEffect(() => {
     const imgs = [img1, img2, img3, img4].filter(e => e != null);
-
     setImgs(imgs);
-
-    console.log(imgs);
   }, [img1, img2, img3, img4]);
 
   return (

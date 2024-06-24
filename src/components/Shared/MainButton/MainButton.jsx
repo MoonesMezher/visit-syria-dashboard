@@ -2,14 +2,14 @@ import React from 'react'
 import './MainButton.css'
 import { useNavigate } from 'react-router-dom';
 
-const MainButton = ({ text, goTo }) => {
+const MainButton = ({ text, goTo, type }) => {
     const navigate = useNavigate();
     const handleClick = () => {
         navigate(`${goTo || '#'}`);
     };
     return (
         <div className='BY_MainButton'>
-            <button onClick={handleClick} >{text}</button>
+            <button type={type} onClick={handleClick} >{text}</button>
         </div>
     )
 }

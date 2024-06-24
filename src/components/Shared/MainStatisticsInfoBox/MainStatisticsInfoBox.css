@@ -8,6 +8,11 @@
     justify-content: space-between;
     gap: 0.75rem;
     font-weight: var(--main_font_weight);
+    max-width: 500px;
+    width: 100%;
+    max-width: 400px;
+
+    
 }
 
 .BY_MainStatisticsInfoBox .top {
@@ -18,11 +23,12 @@
 }
 
 .BY_MainStatisticsInfoBox .top .left {
-    font-size: var(--font_size_data);
     align-content: flex-end;
     justify-content: flex-end;
     margin-right: 0.25rem;
     line-height: 1.5;
+    font-size: 70%;
+
 }
 
 .BY_MainStatisticsInfoBox .top .right {
@@ -35,5 +41,5 @@
     display: flex;
     justify-content: right;
     align-items: center;
-    font-size: var(--font_size_title);
+    font-size: 80%;
 }

@@ -6,91 +6,85 @@ import { FaStar, FaUserAlt } from "react-icons/fa";
 import MainChart from "../../components/Shared/MainChart/MainChart";
 import MainStatisticsInfoBox from "../../components/Shared/MainStatisticsInfoBox/MainStatisticsInfoBox";
 
-const satisticsList = [
-    {
-        title: 'المطاعم الأكثر حجزاّ',
-        icon: <FaUserAlt/>,
-        list: [
-            {
-                name: 'بوز الجدي',
-                number: 70
-            },
-            {
-                name: 'بوز الجدي',
-                number: 70
-            },
-            {
-                name: 'بوز الجدي',
-                number: 70
-            },
-            {
-                name: 'بوز الجدي',
-                number: 70
-            },
-            {
-                name: 'بوز الجدي',
-                number: 70
-            }
-        ]
-    },
-    {
-        title: 'المطاعم الأعلى تقييماً',
-        icon: <FaStar/>,
-        list: [
-            {
-                name: 'الشاميات',
-                number: 4.5
-            },
-            {
-                name: 'الشاميات',
-                number: 4.5
-            },
-            {
-                name: 'الشاميات',
-                number: 4.5
-            },
-            {
-                name: 'الشاميات',
-                number: 4.5
-            },
-            {
-                name: 'الشاميات',
-                number: 4.5
-            }
-        ]
-    },
-]
-
 const SatisticsResturant = () => {
-    const [cities , setCities] = useState([]);
-    const [cityNames, setCityNames] = useState([]);
-
-    useEffect (() => {
-        axios.get('http://127.0.0.1:8000/api/cities')
-        .then ( res => {
-            setCities(res.data.data);
-            // Extracting city names and setting them to state
-            const names = res.data.data?.map(city => city.name);
-            setCityNames(names);
-        })
-    },[]);
-
+    const satisticsList = [
+        {
+            title: 'المطاعم الأكثر حجزاّ',
+            icon: <FaUserAlt/>,
+            list: [
+                {
+                    name: 'بوز الجدي',
+                    number: 70
+                },
+                {
+                    name: 'بوز الجدي',
+                    number: 70
+                },
+                {
+                    name: 'بوز الجدي',
+                    number: 70
+                },
+                {
+                    name: 'بوز الجدي',
+                    number: 70
+                },
+                {
+                    name: 'بوز الجدي',
+                    number: 70
+                }
+            ]
+        },
+        {
+            title: 'المطاعم الأعلى تقييماً',
+            icon: <FaStar/>,
+            list: [
+                {
+                    name: 'الشاميات',
+                    number: 4.5
+                },
+                {
+                    name: 'الشاميات',
+                    number: 4.5
+                },
+                {
+                    name: 'الشاميات',
+                    number: 4.5
+                },
+                {
+                    name: 'الشاميات',
+                    number: 4.5
+                },
+                {
+                    name: 'الشاميات',
+                    number: 4.5
+                }
+            ]
+        },
+    ]
     return (
-        <section>
-            <div className="d-flex gap-5 justify-content-end">
-                <MainSelect title={'حسب المحافظة'} options={cityNames}/>
-                <MainSelect title={'خلال'} options={['شهر', 'اسبوع', 'يوم']}/>
-            </div>
-            <div className="bg-white d-flex gap-5 flex-row-reverse p-4 rounded-3 mt-4 justify-content-between">
-                <div className="d-flex flex-column gap-5">
-                    {satisticsList.map((e, i) => <MainStatisticsListBox key={i} title={e.title} icon={e.icon} list={e.list} fixed={e.icon}/>)}
+        <section className="BY_SatisticsLandMark">
+            <div className='BY_container'>
+                <div className="top_section">
+                    <MainSelect title="خلال شهر" options={[1,2,3,4,5,6,7,8,9,10,11,12]} />
                 </div>
-                <div className="bg-white d-flex gap-5 flex-column">
-                    <div className="d-flex justify-content-between">
+                <div className="content_section">
+                    <div className="right_section">
+                        {satisticsList.map((e, i) => <MainStatisticsListBox key={i} fixed={e.icon} icon={e.icon} list={e.list} title={e.title}/>)}
+                    </div>
+                    <div className="left_section">
+                        <div className="satistics_boxs_section">
                         <MainStatisticsInfoBox title={'مجموع قيمة الحجوزات'} number={'15,000'} unit={'$'}/>
                         <MainStatisticsInfoBox title={'مجموع حجوزات المطاع'} number={150} unit={'حجز'}/>
+                        </div>
+                        <div className="chart_section">
+                            <MainChart
+                                chart_title="مخطط زيارات المطاعم"
+                                x_labels={['30', '22', '15', '7', '1']}
+                                array={[130, 100, 90, 40, 20]}
+                                unit="K"
+                                y_steps={20} />
+                        </div>
                     </div>
-                    <MainChart arrData={[1, 10, 90, 0]}/>
                 </div>
             </div>
         </section>

@@ -88,6 +88,7 @@ const Hotel = () => {
                 </div>
             </div>
             <MainTable data={filteredHotels} headers={headers} totalPages={totalPages} onPageChange={handlePageChange} onDelete={handleDelete} onEdit={handleEdit} />
+
         </section>
     )
 }

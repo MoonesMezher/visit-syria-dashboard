@@ -6,6 +6,7 @@ const MainPhotoInput = ({ setImg, img }) => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
+    console.log('img', img);
     setSelectedImage(img);
   }, []);
 
@@ -14,7 +15,7 @@ const MainPhotoInput = ({ setImg, img }) => {
       const file = e.target.files[0];
       const imageUrl = URL.createObjectURL(file);
       setSelectedImage(imageUrl);
-      setImg(imageUrl);
+      setImg(file);
     }
   };
 
@@ -29,7 +30,7 @@ const MainPhotoInput = ({ setImg, img }) => {
       onClick={handleImgClick}
     >
       {selectedImage ? (
-        <img src={selectedImage} alt="..." style={{ height: "99px", width: "99px", 'objectFit': 'cover' }} />
+        <img src={selectedImage} alt={selectedImage} style={{ height: "99px", width: "99px", 'objectFit': 'cover' }} />
       ) : (
         <img
           src="/src/assets/images/input/addPhoto.png "

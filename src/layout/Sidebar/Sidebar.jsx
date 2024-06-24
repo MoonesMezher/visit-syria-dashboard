@@ -97,7 +97,7 @@ const SidebarLink = ({ link }) => {
         navigate(link.details[0].url);
         return setShowList(showList == link.text? false: link.text);
     }
-
+    
     return (
         link.details 
         ? 
@@ -130,6 +130,14 @@ const SidebarLink = ({ link }) => {
 }
 
 const Sidebar = () => {
+    const location = useLocation();
+    const isLoginPage = location.pathname === "/login";
+  
+    if (isLoginPage) {
+      return null;
+    }
+  
+    if (!isLoginPage)
     return (
         <aside className='sidebar'>
             { sidebarLinks.map((e, i) => <SidebarLink link={e} key={i}/>) }

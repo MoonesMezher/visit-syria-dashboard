@@ -1,0 +1,64 @@
+.setting {
+  direction: rtl;
+  background-color: var(--white);
+  width: 950px;
+  height: 610px;
+  border-radius: 8px;
+}
+.setting .input-label-text {
+  font-size: 18px;
+  font-weight: var(--main_font_weight);
+  line-height: 21.78px;
+}
+.setting .img-box {
+  width: 90px;
+  height: 90px;
+  border: 1px solid var(--light_gray_input);
+  border-radius: 50%;
+
+  display: inline-block;
+}
+.setting .img-box .img-change {
+  width: 69px;
+  height: 63.17px;
+}
+.setting .img-btn {
+  width: 137.33px;
+  height: 32px;
+  border-radius: 5.33px;
+}
+.setting .input-filed {
+  height: 48px;
+  border: 1px solid var(--light_gray_input);
+  border-radius: 8px;
+}
+.setting .theme-color {
+  /* direction: rtl; */
+  height: 50px;
+  width: 50px;
+  background-color: cornflowerblue;
+  border-radius: 50%;
+  margin-right: 9.9px;
+}
+.setting .add-color {
+  background-color: var(--gray_wheel_9);
+}
+.setting .responsible-box {
+  width: 868px;
+  height: 32px;
+  border: 1.51px solid var(--light_gray_input);
+  border-radius: 12.06px;
+}
+.setting .res-img {
+  width: 27px;
+  height: 27px;
+  /* padding: 1px; */
+}
+.setting .responsible-box .add-admin-icon {
+  width: 16px;
+  height: 16px;
+}
+.setting .responsible-box .remove-admin-icon {
+  width: 18px;
+  height: 6px;
+}

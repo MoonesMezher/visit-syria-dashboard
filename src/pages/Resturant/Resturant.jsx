@@ -5,9 +5,13 @@ import MainButton from "../../components/Shared/MainButton/MainButton";
 import MainSearchInput from "../../components/Shared/MainSearchInput/MainSearchInput";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Loading from "../../components/Shared/Loading/Loading";
 import { Navigate, useNavigate, useNavigation } from "react-router-dom";
+import ConfirmaDelete from "../../components/Shared/ConfirmDelete/ConfirmDelete";
+import { toast } from "react-toastify";
 
 const Resturant = () => {
+    const [loading , setLoading] = useState(false);
 
     const options = ['id','اسم المطعم','المحافظة','عروض الاسعار'];
     const headers = ["id", "اسم المطعم", "الموقع", "الوصف", "عرض الأسعار"];
@@ -18,27 +22,31 @@ const Resturant = () => {
     const [totalPages, setTotalPages] = useState(0);
     const [selectedItem, setSelectedItem] = useState(null);
     const [get ,setGet] = useState(true);
-    // const [itemsPerPage, setItemsPerPage] = useState(9); 
+    const [itemsPerPage, setItemsPerPage] = useState(9); 
     const navigate = useNavigate()
 
 
     useEffect (() => {
         axios.get('http://127.0.0.1:8000/api/cities')
         .then ( res => {
-            setCities(res.data.data);
+            setCities(res?.data?.data);
             // Extracting city names and setting them to state
-            const names = res.data.data.map(city => city.name);
+            const names = res?.data?.data?.map(city => city.name);
             setCityNames(names);
         })
     },[]);
 
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true)
             try {
-                const response = await axios.get(`http://127.0.0.1:8000/api/resturants?page=${currentPage}`);
-                setResturants(response?.data?.data);
-                setTotalPages(response?.data?.pagination?.total_pages);
+                setLoading(false)
+                const response = await axios.get(`http://127.0.0.1:8000/api/restaurants/page/`+currentPage);
+                setResturants(response?.data?.data?.data);
+                console.log(response.data);
+                setTotalPages((response?.data?.data?.total / 9) + 1);
             } catch (error) {
+                setLoading(false)
                 console.error("Failed to fetch resturants:", error);
             }
         };
@@ -57,24 +65,30 @@ const Resturant = () => {
             e.name, 
             e.city_id,
             e.primary_description,
-            e.price,
+            e.table_price,
         ]
     }));
 
-    
+    const [keepGoing, setKeepGoing] = useState(false);
+
     const handleDelete = (itemId) => {
-        axios.delete(`http://127.0.0.1:8000/api/resturants/${itemId}`, null)
-        .then(res => {
-            console.log(res.data);
-            setGet((prev) =>!prev);
-        }).catch(error => {
-            console.error("Failed to delete resturant:", error);
-        });
+        setKeepGoing(itemId);
     };
 
+    const handleDeleteItemAfterAccept = async (itemId) => {
+        axios.delete(`http://127.0.0.1:8000/api/restaurants/delete/${itemId}`)
+            .then(res => {
+                console.log(res.data);
+                setGet((prev) =>!prev);
+                setKeepGoing(false)
+                toast.success('تم الحذف بنجاح');
+            }).catch(error => {
+                console.error("Failed to delete resturant:", error);
+                toast.error('لم يتم الحذف بنجاح');
+            });
+    }
+
     const handleEdit = (itemId) => {
-        // Implement editing logic here
-        // console.log(`Editing item with ID: ${itemId}`);
         setSelectedItem(itemId);
         navigate(`/resturants/edit/${itemId}`)
     };
@@ -89,10 +103,18 @@ const Resturant = () => {
                 </div>
                 <div className="add-search">
                     <MainSearchInput/>
-                    <MainButton text={'اضافة فندق'} goTo="/resturants/add"/>
+                    <MainButton text={'اضافة مطعم'} goTo="/resturants/add"/>
                 </div>
             </div>
-            <MainTable data={transformedHotels} headers={headers} totalPages={totalPages} onPageChange={handlePageChange} onDelete={handleDelete} onEdit={handleEdit} />
+            <Loading loading={loading} style={'loading-get-all'}/>
+            {keepGoing && (
+                    <ConfirmaDelete
+                        onDelete={() => handleDeleteItemAfterAccept(keepGoing)}
+                        onCancel={() => setKeepGoing(false)}
+                        message={"هل أنت متأكد من رغبتك في حذف هذا المطعم؟"}
+                    />
+            )}
+            {!loading && <MainTable data={transformedHotels} headers={headers} totalPages={totalPages} onPageChange={handlePageChange} onDelete={handleDelete} onEdit={handleEdit} currentPage={currentPage} />}
         </section>
     )
 }

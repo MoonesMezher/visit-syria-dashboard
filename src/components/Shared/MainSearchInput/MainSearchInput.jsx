@@ -1,5 +1,6 @@
 import { VscSearch } from "react-icons/vsc"
 import "./MainSearchInput.css"
+
 const MainSearchInput = ({placeholder,onChange }) => {
 
         const handleChange = (event) => {
@@ -7,7 +8,6 @@ const MainSearchInput = ({placeholder,onChange }) => {
                 onChange(event);
             }
         };
-
     return (
         
         <div className="search-box-ay">

@@ -1,14 +1,7 @@
 import './Loading.css'
-const Loading = ({ loading }) => {
+const Loading = ({ loading, style }) => {
     return (
-        loading && <div style={{
-            "width": '60px',
-            "height": "60px",
-            "borderRadius": "50%",
-            "backgroundColor": "transparent",
-            "border": "5px solid",
-            "borderColor": '#57deb0bf #57deb0bf #57deb0bf transparent',
-        }} className="loading"></div>
+        loading && <div className={`loading ${style}`}></div>
     )
 }
 
