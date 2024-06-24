@@ -10,13 +10,15 @@ const Layout = ({ children }) => {
     const { pathname } = useLocation();
 
     useEffect(() => {
-        setHide(pathname.includes('/error'));
+        setHide(pathname.includes('/error')
+         || pathname.includes('/login')
+        );
     }, [pathname]);
 
     return (
         <div>
             {!hide && <Header/>}
-            <div className={`content ${hide && 'w-100'}`}>
+            <div className={`${hide ? 'w-100': 'content'}`}>
                 { children }
             </div>
             {!hide && <Sidebar/>}

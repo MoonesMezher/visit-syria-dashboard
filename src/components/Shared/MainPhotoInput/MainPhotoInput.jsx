@@ -1,43 +1,56 @@
+
 import { PiPencilSimpleLine } from "react-icons/pi";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
-const MainPhotoInput = ({ setImg, img }) => {
+const MainPhotoInput = ( { img, setImg ,name,defaultValue} ) => {
   const imgRef = useRef(null);
-  const [selectedImage, setSelectedImage] = useState(null);
-
-  useEffect(() => {
-    console.log('img', img);
-    setSelectedImage(img);
-  }, []);
 
   const handleImgChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      const imageUrl = URL.createObjectURL(file);
-      setSelectedImage(imageUrl);
-      setImg(file);
-    }
+    const file = event.target.files[0];
+    setImg((file));
   };
+  
 
-  const handleImgClick = () => {
+  const HandleImgClick = () => {
     imgRef.current.click();
   };
-
   return (
     <div
-      className="container position-relative border rounded border-dark-subtle d-flex align-items-center justify-content-center mx-0 overflow-hidden"
+      className="container position-relative border rounded border-dark-subtle d-flex align-items-center justify-content-center "
       style={{ width: "100px", height: "100px", cursor: "pointer" }}
-      onClick={handleImgClick}
+      onClick={HandleImgClick}
     >
-      {selectedImage ? (
-        <img src={selectedImage} alt={selectedImage} style={{ height: "99px", width: "99px", 'objectFit': 'cover' }} />
+   
+       {/* show img */}
+       {/* update */}
+       {img ? (
+                 <img src={URL.createObjectURL(img)} alt="..." style={{ height: "100px", width: "100px" }} />
+//show when update
+        ) 
+        : defaultValue={defaultValue}
+        
+        ? (
+          <img src={defaultValue} alt="..." style={{ height: "100px", width: "100px" }} />
+
+        ) 
+        :{img} (
+          <img
+          src="/src/assets/images/input/addPhoto.png "
+          alt="......."
+          style={{ height: "50px", width: "50px" }}
+        />
+        )}
+
+      {/* {img  ? (
+        <img src={URL.createObjectURL(img)} alt="..." style={{ height: "100px", width: "100px" }} />
       ) : (
         <img
           src="/src/assets/images/input/addPhoto.png "
           alt="......."
           style={{ height: "50px", width: "50px" }}
         />
-      )}
+      )
+      }
       <div className="">
         <PiPencilSimpleLine
           className="position-absolute bottom-0"
@@ -47,15 +60,30 @@ const MainPhotoInput = ({ setImg, img }) => {
             left: "15px",
           }}
         />
-      </div>
-      <input
+      </div> */}
+      {/* <input
         type="file"
-        name="img"
+        name={name}
         id="inputImg"
         ref={imgRef}
         onChange={handleImgChange}
         style={{ display: "none" }}
+      /> */}
+             
+
+                 <input
+        type="file"
+        id="file-input"
+        name={name}
+        onChange={handleImgChange}
+        style={{ display: 'none' }}
+        
+        ref={imgRef} 
       />
+    <div>
+
+            
+    </div>
     </div>
   );
 };

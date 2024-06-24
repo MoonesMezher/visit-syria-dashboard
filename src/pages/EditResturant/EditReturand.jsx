@@ -34,16 +34,16 @@ const EditResturant = () => {
       axios.get(APIS.GET.RESTURANT+id)
       .then(res => {
         if(res?.status === 200) {
-          console.log(res.data.data);
+          // console.log(res.data.data);
           setName(res.data?.data?.name);
           setLocation(res.data?.data?.location);
           if(res.data?.data?.imgaes) {
-            setImgs(res.data?.data?.images.map(e => 'http://127.0.0.1:8000'+e))
+            setImgs(res.data?.data?.images.map(e => e))
           }
-          console.log(imgs);
-          setImg1('http://localhost:8000'+res.data?.data?.cover_image);
-          setImg2('http://localhost:8000'+res.data?.data?.logo);
-          setImg3('http://localhost:8000'+res.data?.data?.menu);
+          // console.log(imgs);
+          setImg1(res.data?.data?.cover_image);
+          setImg2(res.data?.data?.logo);
+          setImg3(res.data?.data?.menu);
           setMainDesc(res.data?.data?.primary_description);
           setPrice(+res.data?.data?.table_price);
           setSecondDesc(res.data?.data?.secondary_description);
@@ -77,8 +77,6 @@ const EditResturant = () => {
       return;
     }
 
-    console.log(imgs);
-
     setLoading1(true);
     const form = new FormData();
 
@@ -91,10 +89,12 @@ const EditResturant = () => {
         form.append(`images[${i}]`, imgs[i]);
     }
     // form.append(`images`, JSON.stringify(imgs));
-    form.append('cover_image', img1)
-    form.append('logo', img2)
-    form.append('menu', img3)
+    form.append('cover_image', img1.replace('http://localhost:8000', ''))
+    form.append('logo', img2.replace('http://localhost:8000', ''))
+    form.append('menu', img3.replace('http://localhost:8000', ''))
     form.append('city_id', 1)
+
+    console.log(form.get('logo'));
 
     axios.post(APIS.PUT.RESTURANT+id, form, {
       headers: {
