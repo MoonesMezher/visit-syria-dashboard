@@ -6,20 +6,21 @@ import next from "./../../../assets/icons/chevron-right.svg";
 import previous from "./../../../assets/icons/Vector.svg";
 import ActionButtons from '../ActionButtons/ActionButtons';
 
-const MainTable = ({ headers, data , currentPage, totalPages, onPageChange ,onDelete ,onEdit,itemId}) => {
+const MainTable = ({ headers, data ,currentPage ,totalPages,onPageChange,onEdit,onDelete}) => {
 
 
     // Corrected handlePageChange to ensure currentPage stays within bounds.
     const handlePageChange = (newPage) => {
         onPageChange(newPage);
     };
+    
     return (
         <>
-            <div className="table-responsive d-flex justify-content-end">
+            <div className="table-responsive ">
                 <table className="table" id='myTable'>
                     <thead className="thead-light">
                         <tr>
-                            {headers && headers?.map((header, index) => (
+                            {headers.map((header, index) => (
                                 <th key={index}>{header}</th>
                             ))}
                             <th>تعديل</th>
@@ -27,15 +28,16 @@ const MainTable = ({ headers, data , currentPage, totalPages, onPageChange ,onDe
                         </tr>
                     </thead>
                     <tbody>
-                    {data && data?.map((item, rowIndex) => (
+                    {data.map((item, rowIndex) => (
                         <tr key={rowIndex}>
-                            {item?.data?.map((cell, cellIndex) => (
+                            {item.data.map((cell, cellIndex) => (
                                 <td key={cellIndex} className="truncate">
                                     {cell}
                                 </td>
+                                
                             ))}
                             <ActionButtons onDelete={onDelete} onEdit={onEdit} itemId={item.id} />
-                        </tr>
+                                </tr>
                     ))}
                     </tbody>
                 </table>
@@ -45,7 +47,7 @@ const MainTable = ({ headers, data , currentPage, totalPages, onPageChange ,onDe
                     <li className={`page-item ${currentPage === 1? 'disabled' : ''}`}>
                         <a className="page-link" onClick={() => handlePageChange(currentPage - 1)}><img src={next} alt="" />السابق</a>
                     </li>
-                    {[...Array.from({ length: totalPages  }, (_, i) => i + 1)]?.map((page) => (
+                    {[...Array.from({ length: totalPages  }, (_, i) => i + 1)].map((page) => (
                         <li key={page} className={`page-item ${page === currentPage? 'active' : ''}`}>
                             <a className="page-link" onClick={() => handlePageChange(page)}>{page}</a>
                         </li>
@@ -66,5 +68,4 @@ MainTable.propTypes = {
     totalPages: PropTypes.number.isRequired,
     onPageChange: PropTypes.func.isRequired,
 };
-
 export default MainTable;

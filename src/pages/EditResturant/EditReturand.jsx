@@ -41,9 +41,9 @@ const EditResturant = () => {
             setImgs(res.data?.data?.images.map(e => e))
           }
           // console.log(imgs);
-          setImg1(res.data?.data?.cover_image);
-          setImg2(res.data?.data?.logo);
-          setImg3(res.data?.data?.menu);
+          setImg1('http://127.0.0.1:8000'+res.data?.data?.cover_image);
+          setImg2('http://127.0.0.1:8000'+res.data?.data?.logo);
+          setImg3('http://127.0.0.1:8000'+res.data?.data?.menu);
           setMainDesc(res.data?.data?.primary_description);
           setPrice(+res.data?.data?.table_price);
           setSecondDesc(res.data?.data?.secondary_description);
@@ -66,9 +66,6 @@ const EditResturant = () => {
       axios.get('http://127.0.0.1:8000/api/cities')
       .then ( res => {
           setCities(res?.data?.data);
-          // Extracting city names and setting them to state
-          const names = res?.data?.data?.map(city => city.name);
-          setCitiesName(names);
       })
   },[]);
 
@@ -80,23 +77,22 @@ const EditResturant = () => {
     setLoading1(true);
     const form = new FormData();
 
-    form.append('name', name)
-    form.append('location', location)
-    form.append('table_price', price)
-    form.append('primary_description', mainDesc)
-    form.append('secondary_description', secondDesc)
-    for (let i = 0; i < imgs.length; i++) {
-        form.append(`images[${i}]`, imgs[i]);
+    const data = {
+      name,
+      location,
+      table_price: price,
+      primary_description: mainDesc,
+      secondary_description:secondDesc,
+      cover_image: img1,
+      images: imgs,
+      logo: img2,
+      menu: img3,
+      city_id: city,
     }
-    // form.append(`images`, JSON.stringify(imgs));
-    form.append('cover_image', img1.replace('http://localhost:8000', ''))
-    form.append('logo', img2.replace('http://localhost:8000', ''))
-    form.append('menu', img3.replace('http://localhost:8000', ''))
-    form.append('city_id', 1)
 
-    console.log(form.get('logo'));
+    // console.log(form.get('logo'));
 
-    axios.post(APIS.PUT.RESTURANT+id, form, {
+    axios.post(APIS.PUT.RESTURANT+id, data, {
       headers: {
         'Content-Type': 'multipart/form-data',
         'Authorization': 'Bearer ' + localStorage.getItem('token'),
@@ -145,7 +141,7 @@ const EditResturant = () => {
         <div className="w-50">
           <MainInput label={'اسم المطعم'} name={'name'} value={name} setInputValue={setName} type={'text'} options={''}/>
           <MainInput label={'موقع المطعم'} name={'location'} value={location} setInputValue={setLocation} type={'text'} options={''}/>
-          <MainInput label={'المدينة'} name={'city'} value={city} setInputValue={setCity} type={'select'} options={citiesname && citiesname}/>          
+          <MainInput label={'المدينة'} name={'city'} value={city} setInputValue={setCity} type={'select'} options={cities && cities}/>          
           <MainInput label={'سعر حجز الطاولة'} name={'price'} value={price} setInputValue={setPrice} type={'text'} options={''}/>
           <MainInput label={'الوصف الأولي'} name={'main-desc'} setInputValue={setMainDesc} value={mainDesc} type={'textarea'} options={''}/>
           <MainInput label={'الوصف الثانوي'} name={'second-desc'} value={secondDesc} setInputValue={setSecondDesc} type={'textarea'} options={''}/>

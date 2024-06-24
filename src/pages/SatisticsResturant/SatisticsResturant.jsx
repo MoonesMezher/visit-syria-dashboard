@@ -7,18 +7,6 @@ import MainChart from "../../components/Shared/MainChart/MainChart";
 import MainStatisticsInfoBox from "../../components/Shared/MainStatisticsInfoBox/MainStatisticsInfoBox";
 
 const SatisticsResturant = () => {
-    const [cities , setCities] = useState([]);
-    const [cityNames, setCityNames] = useState([]);
-
-    useEffect (() => {
-        axios.get('http://127.0.0.1:8000/api/cities')
-        .then ( res => {
-            setCities(res.data.data);
-            // Extracting city names and setting them to state
-            const names = res.data.data?.map(city => city.name);
-            setCityNames(names);
-        })
-    },[]);
     const satisticsList = [
         {
             title: 'المطاعم الأكثر حجزاّ',
@@ -77,7 +65,7 @@ const SatisticsResturant = () => {
         <section className="BY_SatisticsLandMark">
             <div className='BY_container'>
                 <div className="top_section">
-                    <MainSelect title="خلال شهر" options={cityNames} />
+                    <MainSelect title="خلال شهر" options={[1,2,3,4,5,6,7,8,9,10,11,12]} />
                 </div>
                 <div className="content_section">
                     <div className="right_section">

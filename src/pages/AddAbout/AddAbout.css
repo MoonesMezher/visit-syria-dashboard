@@ -1,0 +1,9 @@
+.add-about{
+background-color: #ffffff;
+border-radius: 8px;
+margin: auto;
+padding: 10px;
+}
+.item {
+    display: flex;
+}

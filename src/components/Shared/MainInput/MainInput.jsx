@@ -1,3 +1,4 @@
+
 import './MainInput.css'
 
 const MainInput = ({ type, name, id, label, value, setInputValue, options = [], defaultValue }) => {
@@ -43,8 +44,8 @@ const MainInput = ({ type, name, id, label, value, setInputValue, options = [], 
             id={id}
             // value={value}
             onChange={(e) => {
-              setInputValue(e.target.value.id)
-              console.log(e.target.value);
+              setInputValue(e.target.value)
+              // console.log(e.target.value);
             }}
             style={{
               outline: '0px solid red',
@@ -59,8 +60,8 @@ const MainInput = ({ type, name, id, label, value, setInputValue, options = [], 
           >
           <option value="none" className='text-center'>عدم</option>
             {options.map((e, index) => (
-              <option key={index} value={e} className='text-center'>
-                {e}
+              <option key={index} value={e.id} className='text-center'>
+                {e.name}
               </option>
             ))}
           </select>
