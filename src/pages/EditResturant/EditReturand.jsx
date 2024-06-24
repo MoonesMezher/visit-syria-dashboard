@@ -7,7 +7,7 @@ import axios from "axios";
 import APIS from "../../constant/api";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
-import Loading from "../../components/Shared/Loading/Loading";
+// import Loading from "../../components/Shared/Loading/Loading";
 
 const EditResturant = () => {
   const [imgs, setImgs] = useState([]);
@@ -19,6 +19,7 @@ const EditResturant = () => {
   const [price, setPrice] = useState();
   const [mainDesc, setMainDesc] = useState();
   const [secondDesc, setSecondDesc] = useState();
+  const [city, setCity] = useState();
 
   const [loading, setLoading] = useState(false);
 
@@ -27,27 +28,44 @@ const EditResturant = () => {
   const to = useNavigate();
 
   useEffect(() => {
-    setLoading(true);
-    axios.get(APIS.GET.RESTURANT+id)
+    const getData = async () => {
+      setLoading(true);
+      axios.get(APIS.GET.RESTURANT+id)
       .then(res => {
-        if(res?.statusCode === 200) {
-          setName(res.data?.resturant?.name);
-          setLocation(res.data?.resturant?.location);
-          setImg1(res.data?.resturant?.cover_image);
-          setImg2(res.data?.resturant?.logo);
-          setImg3(res.data?.resturant?.menu);
-          setImgs(res.data?.resturant?.images);
-          setMainDesc(res.data?.resturant?.main_description);
-          setPrice(res.data?.resturant?.price);
-          setSecondDesc(res.data?.resturant?.second_description);
+        if(res?.status === 200) {
+          setName(res.data?.data?.name);
+          setLocation(res.data?.data?.location);
+          setImgs(res.data?.data?.images.map(e => 'http://localhost:8000/'+e))
+          setImg1('http://localhost:8000/'+res.data?.data?.cover_image);
+          setImg2('http://localhost:8000/'+res.data?.data?.logo);
+          setImg3('http://localhost:8000/'+res.data?.data?.menu);
+          setMainDesc(res.data?.data?.primary_description);
+          setPrice(+res.data?.data?.table_price);
+          setSecondDesc(res.data?.data?.secondary_description);
+          setCity(res.data?.data?.city_id);
           setLoading(false);
+          console.log(imgs);
         }
       })
       .catch(err => {
         setLoading(false);
-        to('/err')
       })
-  }, []);
+    }
+    getData();
+    }, []);
+
+  const [cities, setCities] = useState([]);
+  const [citiesname, setCitiesName] = useState([]);
+
+  useEffect(() => {
+      axios.get('http://127.0.0.1:8000/api/cities')
+      .then ( res => {
+          setCities(res?.data?.data);
+          // Extracting city names and setting them to state
+          const names = res?.data?.data?.map(city => city.name);
+          setCitiesName(names);
+      })
+  },[]);
 
   const handleAddResturant = async () => {
     if(loading) {
@@ -55,17 +73,20 @@ const EditResturant = () => {
     }
 
     setLoading(true);
-    const data = new FormData();
+    const form = new FormData();
 
-    data.append('name', name)
-    data.append('location', location)
-    data.append('price', price)
-    data.append('main_description', mainDesc)
-    data.append('second_description', secondDesc)
-    data.append('imgs', imgs)
-    data.append('cover_img', img1)
-    data.append('logo', img2)
-    data.append('menu', img3)
+    form.append('name', name)
+    form.append('location', location)
+    form.append('table_price', price)
+    form.append('primary_description', mainDesc)
+    form.append('secondary_description', secondDesc)
+    for (let i = 0; i < imgs.length; i++) {
+      form.append(`images[${i}]`, imgs[i]);
+    }
+    form.append('cover_image', img1)
+    form.append('logo', img2)
+    form.append('menu', img3)
+    form.append('city_id', 1)
 
     axios.put(APIS.PUT.RESTURANT, data, {
       headers: {
@@ -74,7 +95,7 @@ const EditResturant = () => {
       }
     })
       .then(res => {
-        if(res.statusCode === 200) {
+        if(res.status === 200) {
           setLoading(false);
           toast.success('تمت التعديل بنجاح')
           to('/resturants');
@@ -87,7 +108,8 @@ const EditResturant = () => {
   }
 
   return (
-    <> {!location ?
+    !loading &&
+    <>
       <section className="d-flex justify-content-end w-100 gap-5">
         <div className="d-flex flex-column gap-4 flex-fill">
           <div className="d-flex justify-content-between">
@@ -110,13 +132,14 @@ const EditResturant = () => {
         <div className="w-50">
           <MainInput label={'اسم المطعم'} name={'name'} value={name} setInputValue={setName} type={'text'} options={''}/>
           <MainInput label={'موقع المطعم'} name={'location'} value={location} setInputValue={setLocation} type={'text'} options={''}/>
+          <MainInput label={'المدينة'} name={'city'} value={city} setInputValue={setCity} type={'select'} options={citiesname && citiesname}/>          
           <MainInput label={'سعر حجز الطاولة'} name={'price'} value={price} setInputValue={setPrice} type={'text'} options={''}/>
           <MainInput label={'الوصف الأولي'} name={'main-desc'} setInputValue={setMainDesc} value={mainDesc} type={'textarea'} options={''}/>
           <MainInput label={'الوصف الثانوي'} name={'second-desc'} value={secondDesc} setInputValue={setSecondDesc} type={'textarea'} options={''}/>
         </div>
-      </section>: <Loading loading={loading}/>}
+      </section>
       <div className="mx-auto mt-3" style={{width: 'fit-content'}} onClick={handleAddResturant}>
-        <MainButton text={'إضافة مطعم'}/>
+        <MainButton text={'تعديل المطعم'}/>
       </div>
     </>
   );

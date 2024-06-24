@@ -92,7 +92,7 @@ const Hotel = () => {
                     <MainButton text={'اضافة فندق'} goTo="/hotels/add"/>
                 </div>
             </div>
-            <MainTable data={transformedHotels} headers={headers} totalPages={totalPages} onPageChange={handlePageChange} onDelete={handleDelete} onEdit={handleEdit} />
+            <MainTable data={transformedHotels} headers={headers} totalPages={totalPages} onPageChange={handlePageChange} onDelete={handleDelete} onEdit={handleEdit} currentPage={currentPage}/>
         </section>
     )
 }

@@ -6,7 +6,7 @@
 .hotel-management .hotel-btn {
     display: flex;
     justify-content: space-between;
-    margin-right: 60px;
+    /* margin-right: 60px; */
     gap: 10px;
 }
 

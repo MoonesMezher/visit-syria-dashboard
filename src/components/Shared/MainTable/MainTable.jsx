@@ -15,7 +15,7 @@ const MainTable = ({ headers, data , currentPage, totalPages, onPageChange ,onDe
     };
     return (
         <>
-            <div className="table-responsive ">
+            <div className="table-responsive d-flex justify-content-end">
                 <table className="table" id='myTable'>
                     <thead className="thead-light">
                         <tr>

@@ -11,7 +11,8 @@ const MainInput = ({ type, name, id, label, value, setInputValue, options = []})
             name={name}
             id={id}
             rows={3}
-            value={value}
+            defaultValue={value}
+            // value={value}
             onChange={(e) => setInputValue(e.target.value)}
             style={{
               marginTop: '10px',
@@ -25,7 +26,8 @@ const MainInput = ({ type, name, id, label, value, setInputValue, options = []})
             type="text"
             id={id}
             max={30}
-            value={value}
+            defaultValue={value}
+            // defaultValue={value}
             onChange={(e) => setInputValue(e.target.value)}
             style={{
               outline: '0px solid red',
@@ -36,11 +38,14 @@ const MainInput = ({ type, name, id, label, value, setInputValue, options = []})
           />
         ) : (
           <select
-            className="form-control"
+            className="main-select"
             name={name}
             id={id}
-            value={value}
-            onChange={(e) => setInputValue(e.target.value)}
+            defaultValue={value}
+            onChange={(e) => {
+              setInputValue(e.target.value.id)
+              console.log(e.target.value);
+            }}
             style={{
               outline: '0px solid red',
               marginTop: '10px',
@@ -48,6 +53,7 @@ const MainInput = ({ type, name, id, label, value, setInputValue, options = []})
               borderColor: 'rgba(159, 154, 154, 1)',
             }}
           >
+          <option value="">Select value</option>
             {options.map((e, index) => (
               <option key={index} value={e}>
                 {e}
