@@ -10,12 +10,14 @@ const APIS = {
         RESTURANT: apiUrl+'/restaurants/create'
     },
     PUT: {
-
+        RESTURANT: apiUrl+'/restaurants/update/'
     },
     DELETE: {
 
     }
 }
+
+
 
 export default APIS
 

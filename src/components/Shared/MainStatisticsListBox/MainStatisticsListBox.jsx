@@ -1,7 +1,7 @@
 import "./MainStatisticsListBox.css";
 const MainStatisticsListBox = ({title,icon,fixed, list}) => {
     return (
-        <div className="card main-statistic-ay" style={{ height: "159px" }}>
+        <div className="card main-statistic-ay" >
             <div className="card-header">
                 <h6 className="title">{title}</h6>
                 <span className="icon">{icon}</span>

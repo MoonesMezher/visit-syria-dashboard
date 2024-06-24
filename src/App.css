@@ -114,3 +114,62 @@
     translate: -50% 0;
     margin-top: 100px;
 }
+
+.BY_SatisticsLandMark .BY_container {
+    direction: rtl;
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .BY_SatisticsLandMark .BY_container .content_section {
+    display: flex;
+    margin-top: 50px;
+    gap: 50px;
+  
+  
+  }
+  
+  .BY_SatisticsLandMark .BY_container .content_section .right_section {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+  
+  }
+  
+  .BY_SatisticsLandMark .BY_container .content_section .left_section {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 31px;
+    /* background-color: rgb(173, 139, 145); */
+  }
+  
+  .BY_SatisticsLandMark .BY_container .content_section .left_section .satistics_boxs_section {
+    display: flex;
+    justify-content: space-between;
+    gap: 22px;
+  }
+  
+  @media screen and (max-width:1200px) {
+  
+  
+    .BY_SatisticsLandMark .BY_container .content_section {
+  
+      flex-direction: column-reverse;
+    }
+  
+    .BY_SatisticsLandMark .BY_container .content_section .right_section {
+      width: 100%;
+      flex-direction: row;
+      column-gap: 1%;
+    }
+  
+    .BY_SatisticsLandMark .BY_container .content_section .left_section {
+      width: 100%;
+    }
+  }

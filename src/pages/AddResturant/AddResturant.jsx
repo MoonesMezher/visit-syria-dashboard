@@ -38,22 +38,13 @@ const AddResturant = () => {
     form.append('menu', img3)
     form.append('city_id', 1)
 
-    // const data = {
-    //   name: 'ss',
-    //   // name: form.get('name'),
-    //   // location: form.get('location'),
-    //   // price: form.get('price'),
-    //   // mainDesc: form.get('main_description'),
-    //   // secondDesc: form.get('second_description'),
-    //   // // imgs: form.getAll('imgs'),
-    //   // img1: form.get('cover_img'),
-    //   // img2: form.get('logo'),
-    //   // img3: form.get('menu')
-    // }
+    const token = localStorage.getItem('token');
 
-    // console.log(data.get('name'));
-
-    axios.post(APIS.POST.RESTURANT, form)
+    axios.post(APIS.POST.RESTURANT, form, {
+      headers: {
+        Authorization: 'Bearer ' + token
+      }
+    })
       .then(res => {
         console.log(res);
         if(res?.status === 200) {

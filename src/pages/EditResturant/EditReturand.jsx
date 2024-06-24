@@ -7,7 +7,7 @@ import axios from "axios";
 import APIS from "../../constant/api";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
-// import Loading from "../../components/Shared/Loading/Loading";
+import Loading from '../../components/Shared/Loading/Loading'
 
 const EditResturant = () => {
   const [imgs, setImgs] = useState([]);
@@ -22,6 +22,7 @@ const EditResturant = () => {
   const [city, setCity] = useState();
 
   const [loading, setLoading] = useState(false);
+  const [loading1, setLoading1] = useState(false);
 
   const { id } = useParams();
 
@@ -33,26 +34,30 @@ const EditResturant = () => {
       axios.get(APIS.GET.RESTURANT+id)
       .then(res => {
         if(res?.status === 200) {
+          console.log(res.data.data);
           setName(res.data?.data?.name);
           setLocation(res.data?.data?.location);
-          setImgs(res.data?.data?.images.map(e => 'http://localhost:8000/'+e))
-          setImg1('http://localhost:8000/'+res.data?.data?.cover_image);
-          setImg2('http://localhost:8000/'+res.data?.data?.logo);
-          setImg3('http://localhost:8000/'+res.data?.data?.menu);
+          if(res.data?.data?.imgaes) {
+            setImgs(res.data?.data?.images.map(e => 'http://127.0.0.1:8000'+e))
+          }
+          console.log(imgs);
+          setImg1('http://localhost:8000'+res.data?.data?.cover_image);
+          setImg2('http://localhost:8000'+res.data?.data?.logo);
+          setImg3('http://localhost:8000'+res.data?.data?.menu);
           setMainDesc(res.data?.data?.primary_description);
           setPrice(+res.data?.data?.table_price);
           setSecondDesc(res.data?.data?.secondary_description);
-          setCity(res.data?.data?.city_id);
+          // setCity(res.data?.data?.city_id);
           setLoading(false);
-          console.log(imgs);
         }
       })
       .catch(err => {
         setLoading(false);
+        // to('/error')
       })
     }
     getData();
-    }, []);
+    }, [id]);
 
   const [cities, setCities] = useState([]);
   const [citiesname, setCitiesName] = useState([]);
@@ -67,12 +72,14 @@ const EditResturant = () => {
       })
   },[]);
 
-  const handleAddResturant = async () => {
-    if(loading) {
+  const handleEditResturant = async () => {
+    if(loading1) {
       return;
     }
 
-    setLoading(true);
+    console.log(imgs);
+
+    setLoading1(true);
     const form = new FormData();
 
     form.append('name', name)
@@ -81,36 +88,42 @@ const EditResturant = () => {
     form.append('primary_description', mainDesc)
     form.append('secondary_description', secondDesc)
     for (let i = 0; i < imgs.length; i++) {
-      form.append(`images[${i}]`, imgs[i]);
+        form.append(`images[${i}]`, imgs[i]);
     }
+    // form.append(`images`, JSON.stringify(imgs));
     form.append('cover_image', img1)
     form.append('logo', img2)
     form.append('menu', img3)
     form.append('city_id', 1)
 
-    axios.put(APIS.PUT.RESTURANT, data, {
+    axios.post(APIS.PUT.RESTURANT+id, form, {
       headers: {
         'Content-Type': 'multipart/form-data',
-        'Authorization': 'Bearer ' + localStorage.getItem('token')
-      }
+        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+      },
     })
       .then(res => {
         if(res.status === 200) {
-          setLoading(false);
+          setLoading1(false);
           toast.success('تمت التعديل بنجاح')
           to('/resturants');
         }
       })
       .catch(err =>{
-        setLoading(false);
-        toast.error(err.message)
+        setLoading1(false);
+        console.log(err);
+        if(err?.response?.data?.data) {
+          toast.error(err?.response?.data?.data[0])          
+        } else {
+          toast.error(err.message)
+        }
       });
   }
 
   return (
     !loading &&
     <>
-      <section className="d-flex justify-content-end w-100 gap-5">
+      <section className="d-flex justify-content-end w-100 gap-5 position-relative">
         <div className="d-flex flex-column gap-4 flex-fill">
           <div className="d-flex justify-content-between">
             <MainPhotoInput img={img1} setImg={setImg1}/>
@@ -137,8 +150,9 @@ const EditResturant = () => {
           <MainInput label={'الوصف الأولي'} name={'main-desc'} setInputValue={setMainDesc} value={mainDesc} type={'textarea'} options={''}/>
           <MainInput label={'الوصف الثانوي'} name={'second-desc'} value={secondDesc} setInputValue={setSecondDesc} type={'textarea'} options={''}/>
         </div>
+        <Loading loading={loading1} style={'loading-get-all'}/>
       </section>
-      <div className="mx-auto mt-3" style={{width: 'fit-content'}} onClick={handleAddResturant}>
+      <div className="mx-auto mt-3" style={{width: 'fit-content'}} onClick={handleEditResturant}>
         <MainButton text={'تعديل المطعم'}/>
       </div>
     </>

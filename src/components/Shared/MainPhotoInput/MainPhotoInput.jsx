@@ -6,6 +6,7 @@ const MainPhotoInput = ({ setImg, img }) => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
+    console.log('img', img);
     setSelectedImage(img);
   }, []);
 

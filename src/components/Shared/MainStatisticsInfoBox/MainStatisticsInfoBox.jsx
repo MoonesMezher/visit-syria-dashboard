@@ -5,8 +5,8 @@ const MainStatisticsInfoBox = ({ unit, number, title }) => {
     return (
         <div className='BY_MainStatisticsInfoBox'>
             <div className='top'>
-                <div className='left'>{unit}</div>
                 <div className='right'>{number}</div>
+                <div className='left'>{unit}</div>
             </div>
             <div className='bottom'>{title}</div>
         </div>
