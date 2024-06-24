@@ -30,7 +30,9 @@ const MainTable = ({ headers, data ,currentPage ,totalPages,onPageChange,onEdit,
                     <tbody>
                     {data.map((item, rowIndex) => (
                         <tr key={rowIndex}>
-                            {item.data.map((cell, cellIndex) => (
+
+                            {item.data && item.data.map((cell, cellIndex) => (
+
                                 <td key={cellIndex} className="truncate">
                                     {cell}
                                 </td>

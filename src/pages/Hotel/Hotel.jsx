@@ -4,95 +4,91 @@ import "./Hotel.css"
 import MainButton from "../../components/Shared/MainButton/MainButton";
 import MainSearchInput from "../../components/Shared/MainSearchInput/MainSearchInput";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { Navigate, useNavigate, useNavigation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { deleteItem, useFetchCities, useFetchHotels } from "../../constant/api/FetchData";
 
 const Hotel = () => {
 
-    const options = ['id','اسم الفندق','المحافظة','عروض الاسعار'];
+    const options = [
+        { label: 'الاسم', value: 'name' },
+        { label: 'المدينة', value: 'city_name' },
+        { label: 'سعر الحجز', value: 'price' }
+    ];
     const headers = ["id", "اسم الفندق", "الموقع", "الوصف", "عرض الأسعار"];
-    const [cities , setCities] = useState([]);
-    const [cityNames, setCityNames] = useState([]);
-    const [hotels , setHotels] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(0);
-    const [selectedItem, setSelectedItem] = useState(null);
-    const [get ,setGet] = useState(true);
-    // const [itemsPerPage, setItemsPerPage] = useState(9); 
+    const [getItem, setGetItem] = useState(true);
+    const [selectedCity, setSelectedCity] = useState('');
+    const [sortBy,setSortBy] = useState('');
     const navigate = useNavigate()
 
+    // Fetch data (cities and hotels)
+    const { cities, cityNames, isLoadingCities } = useFetchCities();
+    const { hotels, totalPages, isLoadingHotels } = useFetchHotels(currentPage,getItem, selectedCity, sortBy);
+    const isLoading = isLoadingCities || isLoadingHotels;
+    // State for managing the search query
+    const [searchQuery, setSearchQuery] = useState("");
 
-    useEffect (() => {
-        axios.get('http://127.0.0.1:8000/api/cities')
-        .then ( res => {
-            setCities(res.data.data);
-            // Extracting city names and setting them to state
-            const names = res.data.data.map(city => city.name);
-            setCityNames(names);
-        })
-    },[]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(`http://127.0.0.1:8000/api/hotels?page=${currentPage}`);
-                setHotels(response.data.data);
-                setTotalPages(response.data.pagination.total_pages);
-            } catch (error) {
-                console.error("Failed to fetch hotels:", error);
-            }
-        };
-
-        fetchData();
-    }, [currentPage,get]);
-      // Function to handle page change
-    const handlePageChange = (pageNumber) => {
-        setCurrentPage(pageNumber);
-    };
 
     const transformedHotels = hotels.map(hotel => ({
         id: hotel.id, // Explicitly naming the itemId
         data: [
             hotel.id,
             hotel.name, 
-            hotel.city_id,
+            hotel.city_name,
             hotel.primary_description,
             hotel.price,
         ]
     }));
 
+    // Filter hotels based on the search query
+    const filteredHotels = searchQuery
+    ? transformedHotels.filter(hotel =>
+            hotel.data[1].toLowerCase().includes(searchQuery.toLowerCase())
+        )
+    : transformedHotels;
+
+
+    // Function to handle page change
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
     
+    //  Function to handle Delete hotel
     const handleDelete = (itemId) => {
-        axios.delete(`http://127.0.0.1:8000/api/hotels/${itemId}`, null)
-        .then(res => {
-            console.log(res.data);
-            setGet((prev) =>!prev);
-        }).catch(error => {
-            console.error("Failed to delete hotel:", error);
-        });
+        deleteItem(itemId,setGetItem); // Use the deleteHotel function from the hook
     };
 
+    //  Function to handle update hotel button
     const handleEdit = (itemId) => {
-        // Implement editing logic here
-        // console.log(`Editing item with ID: ${itemId}`);
-        setSelectedItem(itemId);
         navigate(`/hotels/edit/${itemId}`)
     };
 
+    // Effect to watch for changes in hotels and reset search query if necessary
+    useEffect(() => {
+        setSearchQuery("");
+    }, [hotels]);
 
     return (
         <section className="hotel-management">
+            {isLoading && 
+                <div className="d-flex justify-content-center">
+                    <div className="spinner-border" style={{ color:"rgb(126, 126, 126)" }} role="status">
+                    <span className="sr-only"></span>
+                    </div>
+                </div>
+            }
             <div className="hotel-btn">
                 <div className="filter">
-                    <MainSelect title="كامل القطر" options={cityNames}/>
-                    <MainSelect title="ترتيب حسب" options={options}/>
+                    <MainSelect title="كامل القطر" options={['كامل القطر',...cityNames]} onSelect={(option) => setSelectedCity(option === 'كامل القطر' ? '' : option)}/>
+                    <MainSelect title="ترتيب حسب" options={['ترتيب حسب',...options]} onSelect={(option) => setSortBy(option === 'ترتيب حسب' ? '' : option)}/>
                 </div>
                 <div className="add-search">
-                    <MainSearchInput/>
+                    <MainSearchInput placeholder = " البحث عن فندق"  onChange={(e) => setSearchQuery(e.target.value)}/>
                     <MainButton text={'اضافة فندق'} goTo="/hotels/add"/>
                 </div>
             </div>
-            <MainTable data={transformedHotels} headers={headers} totalPages={totalPages} onPageChange={handlePageChange} onDelete={handleDelete} onEdit={handleEdit} currentPage={currentPage}/>
+            <MainTable data={filteredHotels} headers={headers} totalPages={totalPages} onPageChange={handlePageChange} onDelete={handleDelete} onEdit={handleEdit} />
+
         </section>
     )
 }

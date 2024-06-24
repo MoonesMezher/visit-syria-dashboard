@@ -5,7 +5,7 @@ const MainInput = ({ type, name, id, label, value, setInputValue, options = [], 
   return (
     <>
       <div className="mb-3" style={{ direction: "rtl" }}>
-        <label htmlFor={id}>{label}</label>
+        <label className="input-label" htmlFor={id} style={{marginBottom:"5px"}}>{label}</label>
         {type == "textarea" ? (
           <textarea
             defaultValue={value}

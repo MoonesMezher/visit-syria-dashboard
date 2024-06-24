@@ -3,3 +3,28 @@ body {
   font-weight: var(--main_font_weight);
   font-family: "FrutigerLTArabic";
 }
+
+
+.hotel-management .hotel-btn .filter{
+  display: flex;
+  gap: 20px;
+}
+
+.hotel-management .hotel-btn {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 60px;
+  gap: 10px;
+}
+
+.hotel-management .add-search {
+  display: flex;
+  align-items: center;
+  gap: 21px;
+}
+
+@media (max-width: 1080px) {
+  .hotel-management .hotel-btn .filter{
+      gap: 10px;
+  }
+}
