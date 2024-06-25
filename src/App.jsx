@@ -56,10 +56,10 @@ function App() {
         <Route path="/blogs/add" element={<AddBlog/>} />
         <Route path="/blogs/edit/:id" element={<EditBlog/>} />
         <Route path="/blogs/reports" element={<SatisticsBlog/>} />
-        <Route path="/places" element={<LandMark/>} />
-        <Route path="/places/add" element={<AddLandMark/>} />
-        <Route path="/places/edit/:id" element={<EditLandMark/>} />
-        <Route path="/places/reports" element={<SatisticsLandMark/>} />
+        <Route path="/places" element={token? <LandMark/>: <Navigate to={'/error'}/>}/>
+        <Route path="/places/add" element={token? <AddLandMark/>: <Navigate to={'/error'}/>} />
+        <Route path="/places/edit/:id" element={token? <EditLandMark/>: <Navigate to={'/error'}/>}/>
+        <Route path="/places/reports" element={token? <SatisticsLandMark/>: <Navigate to={'/error'}/>}/>
         <Route path="/settings" element={<Settings/>} />
         <Route path="/login" element={true? <Login/>: <Navigate to='/'/>} />
         <Route path="*" element={<Navigate to="/error"/>} />

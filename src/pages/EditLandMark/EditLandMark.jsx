@@ -69,10 +69,10 @@ const EditLandMark = () => {
         event.preventDefault();
 
         let data = {
-            name: name,
-            location: location,
-            primary_description: primary_description,
-            secondary_description: secondary_description,
+            name: (name? name: landmark.name),
+            location: (location? location: landmark.location),
+            primary_description: (primary_description? primary_description: landmark.primary_description),
+            secondary_description: (secondary_description? secondary_description: landmark.secondary_description),
             internal_image: internal_image,
             external_image: external_image,
             city_id: "2",
@@ -91,54 +91,54 @@ const EditLandMark = () => {
     }
 
 
-    // return (
-    //     <section className="BY_EditLandMark">
-    //         {Object.keys(landmark).length > 0 ? ( 
-    //             <form onSubmit={(event) => sendData(event)} className='form_section'>
-    //                 <div className='inputes_section'>
-    //                     <div className='right_section'>
-    //                         <MainInput label={'اسم المعلم السياحي'} type={'text'} name={'name'} setInputValue={setName} options={''} defaultValue={landmark.name} />
-    //                         <MainInput label={'مدينة المعلم السياحي'} type={'select'} options={[1, 2, 3, 4]} />
-    //                         <MainInput label={'الموقع بالتفصيل'} type={'text'} name={'location'} setInputValue={setLocation} options={''} defaultValue={landmark.location} />
-    //                         <MainInput label={'الوصف الأولي'} type={'textarea'} name={'primary_description'} setInputValue={setPrimaryDescription} options={''} defaultValue={landmark.primary_description} />
-    //                         <MainInput label={'الوصف الثانوي'} type={'textarea'} name={'secondary_description'} setInputValue={setSecondaryDescription} options={''} defaultValue={landmark.secondary_description} />
-    //                     </div>
-    //                     <div className='left_section'>
-    //                         <div className='image_field'>
-    //                             <div>الصورة الخارجية </div>
-    //                             <div className='image_input'>
-    //                                 <MainPhotoInput img={`${mainURL}${landmark.external_image}`} setImg={setExternalImage} />
-    //                             </div>
-    //                         </div>
-    //                         <div className='image_field'>
-    //                             <label>الصورة الداخلية</label>
-    //                             <div className='image_input'>
-    //                                 <MainPhotoInput img={`${mainURL}${landmark.internal_image}`} setImg={setInternalImage} />
-    //                             </div>
-    //                         </div>
-    //                         <div className='image_field multi'>
-    //                             <label> إضافة صور للموقع </label>
-    //                             <div className='image_input'>
-    //                                 <MainPhotoGroupInput imgs={landmark.images} setImgs={setImages} />
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 </div>
+    return (
+        <section className="BY_EditLandMark">
+            {Object.keys(landmark).length > 0 ? ( 
+                <form onSubmit={(event) => sendData(event)} className='form_section'>
+                    <div className='inputes_section'>
+                        <div className='right_section'>
+                            <MainInput label={'اسم المعلم السياحي'} type={'text'} name={'name'} setInputValue={setName} options={''} value={landmark.name}  />
+                            <MainInput label={'مدينة المعلم السياحي'} type={'select'} options={[1, 2, 3, 4]} />
+                            <MainInput label={'الموقع بالتفصيل'} type={'text'} name={'location'} setInputValue={setLocation} options={''} value={landmark.location} />
+                            <MainInput label={'الوصف الأولي'} type={'textarea'} name={'primary_description'} setInputValue={setPrimaryDescription} options={''} value={landmark.primary_description} />
+                            <MainInput label={'الوصف الثانوي'} type={'textarea'} name={'secondary_description'} setInputValue={setSecondaryDescription} options={''} value={landmark.secondary_description} />
+                        </div>
+                        <div className='left_section'>
+                            <div className='image_field'>
+                                <div>الصورة الخارجية </div>
+                                <div className='image_input'>
+                                    <MainPhotoInput img={`${mainURL}${landmark.external_image}`} setImg={setExternalImage} />
+                                </div>
+                            </div>
+                            <div className='image_field'>
+                                <label>الصورة الداخلية</label>
+                                <div className='image_input'>
+                                    <MainPhotoInput img={`${mainURL}${landmark.internal_image}`} setImg={setInternalImage} />
+                                </div>
+                            </div>
+                            <div className='image_field multi'>
+                                <label> إضافة صور للموقع </label>
+                                <div className='image_input'>
+                                    <MainPhotoGroupInput imgs={landmark.images} setImgs={setImages} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    //                 <div className="buttonSection">
-    //                     <MainButton
-    //                         text="تعديل معلم سياحي"
-    //                         goTo=""
-    //                         type="submit"
-    //                     />
+                    <div className="buttonSection">
+                        <MainButton
+                            text="تعديل معلم سياحي"
+                            goTo=""
+                            type="submit"
+                        />
 
-    //                 </div>
-    //             </form>
-    //         ) : (
-    //             <div>Loading...</div>
-    //         )}
-    //     </section>
-    // )
+                    </div>
+                </form>
+            ) : (
+                <div>Loading...</div>
+            )}
+        </section>
+    )
 }
 
 export default EditLandMark
