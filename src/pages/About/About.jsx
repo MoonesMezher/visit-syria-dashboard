@@ -67,7 +67,7 @@ const handlePageChange=(pageNumber)=>{
 };
 
 const handleDelete = (itemId) => {
-  axios.delete(`http://127.0.0.1:8000/api/hotels/${itemId}`, null)
+  axios.delete(`http://127.0.0.1:8000/api/about/${itemId}`, null)
   .then(res => {
       console.log(res.data);
       setGet((prev) =>!prev);
