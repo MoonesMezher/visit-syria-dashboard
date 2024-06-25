@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import MainTable from "../../components/Shared/MainTable/MainTable"
 import MainButton from "../../components/Shared/MainButton/MainButton";
+import MainSelect from "../../components/Shared/MainSelect/MainSelect"
+
 import './About.css'
-import { dataPage1, headers } from "../../constant/staticData"
 import axios from "axios"
 import { useNavigate, useNavigation } from "react-router-dom";
 import MainPhotoInput from "../../components/Shared/MainPhotoInput/MainPhotoInput";
@@ -13,9 +14,13 @@ const About = () => {
     const[abouts,setAbout]=useState([])
     const[current_page,setcurrent_page]=useState(1)
     const[total_pages,setTotal_pages]=useState(0)
+    const[get,setGet]=useState(true)
 const navigate=useNavigate()
     
-       
+const options = [
+  { label: 'التصنيف', value: 'category' },
+  
+];
 
   
      
@@ -40,7 +45,7 @@ const navigate=useNavigate()
         };
       
         fetchAboutData();
-      }, [current_page]);
+      }, [current_page,get]);
       
 const handlePageChange=(pageNumber)=>{
   setcurrent_page(pageNumber)
@@ -66,8 +71,9 @@ const handleDelete = (itemId) => {
   .then(res => {
       console.log(res.data);
       setGet((prev) =>!prev);
+      alert('تم الحذف')
   }).catch(error => {
-      console.error("Failed to delete hotel:", error);
+      console.error("Failed to delete :", error);
   });
 };
 
@@ -76,11 +82,20 @@ const handleDelete = (itemId) => {
     return (
         <section>
             <div className="section-search">
-                <div className="div">
+            <MainButton text={'اضافة مقال'} goTo="/about/add" className="text-end"/>
 
+            <div className="hotel-btn">
+                <div className="filter">
+                    <MainSelect title="ترتيب حسب" options={['ترتيب حسب',...options]} />
                 </div>
+                <div className="add-search">
+
+                    {/* <MainSearchInput placeholder = " البحث عن فندق"  onChange={(e) => setSearchQuery(e.target.value)}/> */}
+                </div>
+            </div>
+            {/* <MainTable data={filteredHotels} headers={headers} totalPages={totalPages} onPageChange={handlePageChange} onDelete={handleDelete} onEdit={handleEdit} /> */}
+      
                 <div className="add-buuton-about">
-                <MainButton text={'اضافة مقال'} goTo="/about/add" className="text-end"/>
 
                 </div>
 
