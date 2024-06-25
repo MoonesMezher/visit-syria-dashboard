@@ -1,0 +1,31 @@
+.BY_LandMark {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    direction: rtl;
+    gap: 30px;
+}
+
+.BY_LandMark .top_section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10%;
+    max-width: 1040px;
+}
+
+.BY_LandMark .top_section .right_section,
+.BY_LandMark .top_section .left_section {
+    display: flex;
+    justify-content: space-between;
+    width: 45%;
+    gap: 5%;
+}
+
+.BY_LandMark .content_section {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    direction: rtl;
+    width: 100%;
+}

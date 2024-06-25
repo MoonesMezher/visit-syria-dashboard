@@ -23,3 +23,13 @@
 .BY_MainButton button:hover {
     background-color: var(--green_button);
 }
+
+.BY_MainButton button:focus {
+    outline: none;
+}
+
+@media (max-width: 1080px) {
+    .BY_MainButton {
+        width: 117px;
+    }
+}

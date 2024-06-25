@@ -1,0 +1,31 @@
+<<<<<<< HEAD
+textarea:focus,
+input:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+textarea,
+input {
+    padding: 15px 10px !important;
+}
+=======
+.text-input-style {
+  width: 445px;
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid var(--light_gray_input);
+}
+.textarea-input-style{
+  width: 445px;
+  height: 70px;
+  border-radius: 8px;
+  border: 1px solid var(--light_gray_input);
+}
+.select-input-style {
+  width: 445px;
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid var(--light_gray_input);
+}
+>>>>>>> origin/Alissar

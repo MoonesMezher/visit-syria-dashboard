@@ -1,68 +1,89 @@
+import React from 'react';
+import { Line } from 'react-chartjs-2';
 import {
-  CategoryScale,
-  Chart,
-  Legend,
-  LineElement,
-  LinearScale,
-  PointElement,
-  Tooltip,
-} from "chart.js";
-import React from "react";
-import { Line } from "react-chartjs-2";
+    CategoryScale,
+    Chart,
+    Legend,
+    LineElement,
+    LinearScale,
+    PointElement,
+    Tooltip,
+  } from "chart.js";
+import './MainChart.css'
 
 Chart.register(
-  LineElement,
-  PointElement,
-  CategoryScale,
-  LinearScale,
-  Tooltip,
-  Legend
-);
-
-import "./MainChart.css";
-
-const MainChart = (arrData) => {
-  const data = {
-    labels: [1, 7, 15, 22, 30],
-    datasets: [
-      {
-        label: "test",
-        data: [20, 40, 60, 80, 100, 120, 140],
-        tension: 0.1,
-      },
-    ],
-  };
-
-  const options = {
-    scales: {
-      x: {
-        reverse: true,
-        grid: {
-          display: false,
-        },
-      },
-      y: {
-        position: "right",
-        ticks: {
-          beginAtZero: true,
-          callback: function (value) {
-            return value + "k";
-          },
-          stepSize: 20,
-        },
-      },
-    },
-  };
-
-  options.scales.y.border = {
-    display: false,
-  };
-
-  return (
-    <div className="mainchart">
-      <Line data={data} options={options}></Line>
-    </div>
+    LineElement,
+    PointElement,
+    CategoryScale,
+    LinearScale,
+    Tooltip,
+    Legend
   );
+
+const MainChart = ({ chart_title,x_labels,array, unit,y_steps }) => {
+    const data = {
+        labels: x_labels,
+        datasets: [
+            {
+                data: array,
+                fill: false,
+                backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                borderColor: '#938E8E',
+                pointRadius: [5, 0, 0, 0, 0],
+                pointBackgroundColor: 'white',
+                borderWidth: 2,
+                tension: 0.4,
+                color:"red"
+            },
+        ],
+    };
+
+    const options = {
+        maintainAspectRatio: false, 
+        scales: {
+            y: {
+                position: "right",
+                ticks: {
+                    beginAtZero: true,
+                    callback: function (value) {
+                        return value + unit;
+                    },
+                    stepSize: y_steps,
+                    color: '#112211', 
+
+                },
+                border:{
+                    display:false,
+                },
+                color: '#red', 
+
+            },
+            x: {
+                grid: {
+                  display: false,
+                },
+                ticks:{
+                    color: '#112211', 
+                }
+              },
+        },
+        plugins: {
+            legend: {
+                display: false,
+            },
+        },
+
+    };
+
+
+    return (
+        <div className="mainchart">
+            <div className="chart-container">
+                <label>{chart_title}</label>
+                <Line data={data} options={options} />
+            </div>
+        </div>
+    );
 };
 
 export default MainChart;

@@ -1,131 +1,36 @@
 import MainPhotoInput from "../MainPhotoInput/MainPhotoInput";
-import { useRef, useState } from "react";
-const MainPhotoGroupInput = ({ imgs, setImgs,name ,defaultValue}) => {
-  const imgRef = useRef(null);
+import { useEffect, useRef, useState } from "react";
+import addImg from '../../../assets/images/input/add+.png'
 
-  const handleImgChange = (e) => {
-    const file = e.target.files;
-    console.log(file);
-    setImgs(Array.from(e.target.files));
-  };
-  const HandleImgClick = () => {
-    imgRef.current.click();
-  };
- 
+const MainPhotoGroupInput = ({ imgs, setImgs }) => {
+  const [img1, setImg1] = useState(imgs[0]);
+  const [img2, setImg2] = useState(imgs[1]);
+  const [img3, setImg3] = useState(imgs[2]);
+  const [img4, setImg4] = useState(imgs[3]);
+
+  useEffect(() => {
+    const imgs = [img1, img2, img3, img4].filter(e => e != null);
+    setImgs(imgs);
+  }, [img1, img2, img3, img4]);
+
   return (
-    <div
-      className="container border rounded border-dark-subtle d-flex align-items-center justify-content-center"
-      style={{
-        width: "284px",
-        height: "267px",
-        direction: "rtl",
-      }}
-    >
-      <div
-        className="container"
-        style={{
-          width: "221px",
-          height: "224px",
-        }}
-      >
-        <div className="row" style={{ marginBottom: "24px" }}>
-          <div className="col-6 ">
-            <MainPhotoInput />
-          </div>
-          <div className="col-6">
-            <MainPhotoInput />
-          </div>
-        </div>
-        <div className="row position-relative">
-          <div className="col-6 ">
-            <MainPhotoInput />
-          </div>
-          {/* <div className="col-6">
-            <div
-              className="container position-relative border rounded border-dark-subtle d-flex align-items-center justify-content-center "
-              style={{ width: "100px", height: "100px" }}
-            >
-              <img
-                src="/src/assets/images/input/addPhoto.png "
-                className="img-style"
-                alt="..."
-              />
-              <div className="">
-                <PiPencilSimpleLine
-                  className="position-absolute bottom-0"
-                  style={{
-                    width: "18.75px",
-                    height: "18.75px",
-                    left: "15px",
-                  }}
-                />
-              </div>
-            </div>
-          </div> */}
-          <div className="col-6">
-            <MainPhotoInput />
-          </div>
-
-          <div
-            className="col-6"
-            onClick={HandleImgClick}
-            style={{ cursor: "pointer" }}
-          >
-            <div
-              className="container position-absolute border d-flex align-items-center justify-content-center fldx-wrap "
-              style={{
-                backgroundColor: "rgba(217, 217, 217, 0.75)",
-                width: "100px",
-                height: "100px",
-                bottom: "0px",
-                borderRadius: "10px",
-              }}
-            >
-             
-              {/* show multi img */}
-                {imgs &&  imgs.length > 0 ? (
-          imgs?.map((image, index) => (
-            <img src={URL.createObjectURL(image)} alt="..."             
-                              style={{ height: "100px", width: "100px" }}
-                
-            />
-
-          
-          ))
-        )
-        // show image when update 
-        :defaultValue && defaultValue.length > 0 ? (
-          defaultValue.map((image, index) => (
-            <img
-              key={index}
-              src={`http://127.0.0.1:8000${image.path}`}
-              style={{ height: "100px", width: "100px" }}
-            />
-          ))
-        )
-
-        :  (
-           <img
-                  src="/src/assets/images/input/add.png "
-                  alt="......."
-                  style={{ height: "50px", width: "50px" }}
-                />        )}
-            
-              <input
-                type="file"
-                name={name}
-                id="inputImg"
-                ref={imgRef}
-                onChange={handleImgChange}
-                style={{ display: "none" }}
-                multiple
-              />
-            </div>
-          </div>
-        </div>
+    <div className="d-flex justify-content-center align-items-center gap-2" style={
+      {
+        border: '1px solid #dee2e6',
+        padding: '5px',
+        borderRadius: '5px',
+      }
+    }>
+      <div className="d-flex gap-2 flex-column">
+          <MainPhotoInput img={img1} setImg={setImg1}/>
+          <MainPhotoInput img={img2} setImg={setImg2}/>
       </div>
-     </div>
-  );
+      <div className="d-flex gap-2 flex-column">
+        <MainPhotoInput img={img3} setImg={setImg3}/>
+        <MainPhotoInput img={img4 || addImg} setImg={setImg4}/>
+      </div>
+    </div>
+  )
 };
 
 export default MainPhotoGroupInput;

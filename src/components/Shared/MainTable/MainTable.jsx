@@ -16,7 +16,7 @@ const MainTable = ({ headers, data ,currentPage ,totalPages,onPageChange,onEdit,
     
     return (
         <>
-            <div className="table-responsive ">
+            <div className="table-responsive" style={{justifyContent:'center', display: 'flex'}}>
                 <table className="table" id='myTable'>
                     <thead className="thead-light">
                         <tr>
@@ -30,7 +30,9 @@ const MainTable = ({ headers, data ,currentPage ,totalPages,onPageChange,onEdit,
                     <tbody>
                     {data.map((item, rowIndex) => (
                         <tr key={rowIndex}>
-                            {item.data.map((cell, cellIndex) => (
+
+                            {item.data && item.data.map((cell, cellIndex) => (
+
                                 <td key={cellIndex} className="truncate">
                                     {cell}
                                 </td>

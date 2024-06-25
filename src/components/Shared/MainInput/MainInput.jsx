@@ -1,50 +1,68 @@
-const MainInput = ({ type, name, id,value, label,  setInputValue, options = [],selected,defaultValue}) => {
+
+import './MainInput.css'
+
+const MainInput = ({ type, name, id, label, value, setInputValue, options = [], defaultValue }) => {
   return (
     <>
       <div className="mb-3" style={{ direction: "rtl" }}>
-        <label htmlFor={id}>{label}</label>
+        <label className="input-label" htmlFor={id} style={{marginBottom:"5px"}}>{label}</label>
         {type == "textarea" ? (
           <textarea
+            defaultValue={value}
             className="form-control"
             name={name}
             id={id}
-            rows={5}
-            // value={value}
-            defaultValue={defaultValue}
+            rows={3}
+            // value={value}            
             onChange={(e) => setInputValue(e.target.value)}
+            style={{
+              marginTop: '10px',
+              background: 'transparent',
+              borderColor: 'rgba(159, 154, 154, 1)',
+            }}
           ></textarea>
         ) : type == "text" ? (
           <input
-            className="form-control"
-            type="text"
-            id={id}
-            max={30}
-            defaultValue={defaultValue}
-
-            // value={value}
-            onChange={(e) => setInputValue(e.target.value)}
-          />
-        ) : (
-          <select
+            defaultValue={value}
             className="form-control"
             name={name}
             id={id}
-            defaultValue={defaultValue}
-
-            value={value}
+            // value={value}
             onChange={(e) => setInputValue(e.target.value)}
+            style={{
+              outline: '0px solid red',
+              marginTop: '10px',
+              background: 'transparent',
+              borderColor: 'rgba(159, 154, 154, 1)',
+            }}
+          />
+        ) : (
+          <select
+            className="main-select me-2"
+            defaultValue={value}
+            name={name}
+            id={id}
+            // value={value}
+            onChange={(e) => {
+              setInputValue(e.target.value)
+              // console.log(e.target.value);
+            }}
+            style={{
+              outline: '0px solid red',
+              marginTop: '10px',
+              background: 'transparent',
+              borderColor: 'rgba(159, 154, 154, 1)',
+              textAlign: 'center',
+              cursor: 'pointer',
+              padding: '0 10px',
+              borderRadius: '5px'
+            }}
           >
-             <option   selected>
-                {selected}
-              </option>
+          <option value="none" className='text-center'>عدم</option>
             {options.map((e, index) => (
-              <>
-              
-                <option key={index} value={e}>
-                {e}
+              <option key={index} value={e.id} className='text-center'>
+                {e.name}
               </option>
-              </>
-            
             ))}
           </select>
         )}
