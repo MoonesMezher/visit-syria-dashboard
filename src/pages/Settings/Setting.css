@@ -9,6 +9,7 @@
   font-size: 18px;
   font-weight: var(--main_font_weight);
   line-height: 21.78px;
+  margin-top: 0;
 }
 .setting .img-box {
   width: 90px;
@@ -26,6 +27,7 @@
   width: 137.33px;
   height: 32px;
   border-radius: 5.33px;
+  cursor: pointer;
 }
 .setting .input-filed {
   height: 48px;
@@ -61,4 +63,14 @@
 .setting .responsible-box .remove-admin-icon {
   width: 18px;
   height: 6px;
+}
+.setting button.submit-btn{
+  width: 150px;
+  border-radius: 10px;
+  height: 40px;
+  text-align: center;
+  margin-top: 10px;
+  margin-right: 10px;
+  border: none;
+  background-Color : var(--green_button);
 }
