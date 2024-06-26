@@ -52,7 +52,6 @@ const SatisticsLandMark = () => {
                             <MainStatisticsInfoBox title={'عدد زيارات المعالم'} number={"117K"} unit={'زيارة'} />
                         </div>
                         <div className="chart_section">
-                            {/* <MainChart arrData={[1, 10,4,5,10]} label="مخطط زيارات المعالم السياحية" /> */}
                             <MainChart
                                 chart_title="مخطط زيارات المعالم السياحية"
                                 x_labels={['30', '22', '15', '7', '1']}

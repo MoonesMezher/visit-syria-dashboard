@@ -4,13 +4,14 @@ import { LandMarkAPIURL } from '../LandMarksURLs';
 import { toast } from "react-toastify";
 
 // const token = localStorage.getItem("token");
-const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3MTkzMzU3MzAsImV4cCI6MTcxOTMzOTMzMCwibmJmIjoxNzE5MzM1NzMwLCJqdGkiOiI4M1hMQmthT0xWSHRmUTY0Iiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.kHEdqYmD9Edj7ZbSc-4j-Nb6rSMNqG0i4pPU-j_OKXY"
+const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3MTkzOTY1NjEsImV4cCI6MTcxOTQwMDE2MSwibmJmIjoxNzE5Mzk2NTYxLCJqdGkiOiJvUlBlVjVOdjlLc1IxVHdkIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.VXrU-I4Kflz1mwHYQm9xhAAacYWS7j211lPtO05c78g"
 
 
 export async function getAllLandmarks(currentPage, selectedCity, sortBy) {
     try {
         const cityQuery = selectedCity ? `&city=${selectedCity}` : '';
         const sortQuery = sortBy ? `&sort_by=${sortBy}` : '';
+        console.log("URL",LandMarkAPIURL + `?page=${currentPage}${cityQuery}${sortQuery}`);
         const response = await axios.get(LandMarkAPIURL + `?page=${currentPage}${cityQuery}${sortQuery}`);
         if (response.status === 200) {
             const landmarksData = response.data;

@@ -8,9 +8,11 @@ import './LandMark.css';
 import ConfirmaDelete from '../../components/Shared/ConfirmDelete/ConfirmDelete';
 import MainSearchInput from "../../components/Shared/MainSearchInput/MainSearchInput";
 import { useFetchCities } from "../../constant/api/FetchData";
+import Loading from "../../components/Shared/Loading/Loading";
 
 
 const LandMark = () => {
+    const [loading, setLoading] = useState(false);
 
     const { cities, cityNames, isLoadingCities } = useFetchCities();
     const [selectedCity, setSelectedCity] = useState('');
@@ -19,7 +21,7 @@ const LandMark = () => {
 
     const options = [
         { label: 'الاسم', value: 'name' },
-        { label: 'المحافظة', value: 'city_name' },
+        { label: 'المحافظة', value: 'city' },
         { label: 'الموقع', value: 'location' },
         { label: 'الوصف', value: 'primary_description' }
     ];
@@ -100,7 +102,8 @@ const LandMark = () => {
     useEffect(() => {
         setShowConfirm(false);
         getAllData();
-    }, [currentPage]);
+        console.log('landmark', landmarksRows);
+    }, [currentPage, selectedCity, sortBy]);
 
     useEffect(() => {
     }, [selectedItemId]);
@@ -112,9 +115,10 @@ const LandMark = () => {
 
     return (
         <section className="BY_LandMark">
+            <div className='BY_container'>
             <div className='top_section'>
                 <div className="right_section">
-                    <MainButton text="إضافة معلم سياحي" goTo="./add" />
+                    <MainButton text="إضافة معلم" goTo="./add" />
                     <MainSearchInput placeholder="بحث عن معلم " onChange={(e) => setSearchQuery(e.target.value)} />
                 </div>
                 <div className="left_section">
@@ -134,6 +138,8 @@ const LandMark = () => {
                 />
 
             </div>
+            <Loading loading={loading} style={'loading-get-all'} />
+
             {showConfirm && (
                 <ConfirmaDelete
                     onDelete={handleDeleteConfirm}
@@ -141,6 +147,9 @@ const LandMark = () => {
                     message="هل أنت متأكد من رغبتك في حذف هذاالمعلم؟"
                 />
             )}
+
+            </div>
+          
         </section>
     )
 }
