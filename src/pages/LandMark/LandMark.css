@@ -21,7 +21,7 @@
 .BY_LandMark .BY_container .top_section .left_section {
     display: flex;
     justify-content: space-between;
-    width: 48%;
+    width: 46%;
     gap: 5%;
     align-items: center;
 }
