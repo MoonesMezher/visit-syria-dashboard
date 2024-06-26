@@ -7,87 +7,107 @@ import "./SatisticsBlog.css";
 import { IoMdStarOutline } from "react-icons/io";
 
 const SatisticsBlog = () => {
-  const options = ["خلال 6 اشهر", "خلال سنة"];
-  const list1 = [
+  const options = ["خلال شهر", "خلال 6 اشهر", "خلال سنة"];
+
+  const blogsatisticsList = [
     {
-      name: "مدرج بصرى",
-      number: 15.265,
+      title: "المقالات الاكثر زيارة",
+      icon: <FaUserGroup />,
+      list: [
+        {
+          name: "مدرج بصرى",
+          number: 15.265,
+        },
+        {
+          name: "..مقالة",
+          number: 10.568,
+        },
+        {
+          name: "..مقالة",
+          number: 9.524,
+        },
+        {
+          name: "..مقالة",
+          number: 8.544,
+        },
+        {
+          name: "..مقالة",
+          number: 8.125,
+        },
+      ],
     },
     {
-      name: "..مقالة",
-      number: 10.568,
-    },
-    {
-      name: "..مقالة",
-      number: 9.524,
-    },
-    {
-      name: "..مقالة",
-      number: 8.544,
-    },
-    {
-      name: "..مقالة",
-      number: 8.125,
+      title: "المقالات الاعلى تقييما",
+      icon: <IoMdStarOutline />,
+      list: [
+        {
+          name: "التكية السليمانية",
+          number: 4.95,
+        },
+        {
+          name: "مقالة",
+          number: 4.92,
+        },
+        {
+          name: "مقالة",
+          number: 4.8,
+        },
+        {
+          name: "مقالة",
+          number: 4.78,
+        },
+        {
+          name: "مقالة",
+          number: 4.92,
+        },
+      ],
     },
   ];
 
-  const list2 = [
-    {
-      name: "التكية السليمانية",
-      number: 4.95,
-    },
-    {
-      name: "مقالة",
-      number: 4.92,
-    },
-    {
-      name: "مقالة",
-      number: 4.8,
-    },
-    {
-      name: "مقالة",
-      number: 4.78,
-    },
-    {
-      name: "مقالة",
-      number: 4.92,
-    },
-  ];
   return (
     <section>
       <div className="blog-stat-header">
-        <MainSelect title={"خلال شهر"} option={options} />
+        <MainSelect
+          title={"خلال شهر"}
+          options={options}
+          onSelect={(options) =>
+            setSortBy(options === "خلال شهر" ? "" : options)
+          }
+        />
       </div>
       <div className="blog-stat-body">
         <div className="blog-stat-body-left">
           <div className="blog-stat-info">
             <MainStatisticsInfoBox
-              unit={"زيارة"}
               number={"117K"}
               title={"عدد زيارات المدونة"}
+              unit={"زيارة"}
             />
             <MainStatisticsInfoBox
-              unit={"مقالة"}
               number={"106k"}
               title={"عدد مقالات المدونة"}
+              unit={"مقالة"}
             />
           </div>
 
-          <MainChart title={"مخطط زيارة المدونة"} />
+          <MainChart
+            chart_title={"مخطط زيارات المدونة"}
+            x_labels={["30", "22", "15", "7", "1"]}
+            array={[130, 100, 90, 40, 20]}
+            unit="K"
+            y_steps={20}
+          />
         </div>
         <div className="blog-stat-body-right">
-          <MainStatisticsListBox
-            title={"المقالات الاكثر زيارة"}
-            icon={<FaUserGroup />}
-            list={list1}
-            fixed={<FaUserGroup />}
-          />
-          <MainStatisticsListBox
-            title={"المقالات الاعلى تقييما"}
-            icon={<IoMdStarOutline />}
-            list={list2}
-            fixed={<IoMdStarOutline />}
-          />
+          {blogsatisticsList.map((e, i) => (
+            <MainStatisticsListBox
+              key={i}
+              fixed={e.icon}
+              icon={e.icon}
+              list={e.list}
+              title={e.title}
+            />
+          ))}
         </div>
       </div>
     </section>

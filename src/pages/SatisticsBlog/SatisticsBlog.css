@@ -1,3 +1,10 @@
+.blog-stat-header {
+  position: relative;
+  display: flex;
+  justify-content: end;
+  margin-bottom: 10px;
+}
+
 .blog-stat-body {
   margin-top: 15px;
   padding: 25px 35px;
@@ -6,11 +13,12 @@
   height: 100%;
   display: flex;
   justify-content: space-between;
+  gap: 30px;
 }
 
 .blog-stat-body-left {
   height: 100%;
-  width: 65%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -20,9 +28,11 @@
 .blog-stat-info {
   display: flex;
   justify-content: space-between;
+  gap: 30px;
 }
 
 .blog-stat-body-right {
+  width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

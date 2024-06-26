@@ -1,9 +1,3 @@
-/* .blog-header {
-  display: flex;
-  justify-content: space-between;
-  height: 100%;
-}
-
 .blog-body {
   height: 100vh;
   background-color: white;
@@ -40,28 +34,10 @@
   display: flex;
   gap: 30px;
   height: 100%;
-} */
-
-.blog-management .blog-btn .filter {
-  display: flex;
-  gap: 20px;
 }
-
-.blog-management .blog-btn {
+.month-select {
+  position: relative;
   display: flex;
-  justify-content: space-between;
-  margin-right: 60px;
-  gap: 10px;
-}
-
-.blog-management .add-search {
-  display: flex;
-  align-items: center;
-  gap: 21px;
-}
-
-@media (max-width: 1080px) {
-  .blog-management .blog-btn .filter {
-    gap: 10px;
-  }
+  justify-content: end;
+  margin-bottom: 10px;
 }
