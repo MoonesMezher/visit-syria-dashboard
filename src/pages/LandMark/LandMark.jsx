@@ -56,12 +56,16 @@ const LandMark = () => {
     };
 
     const getAllData = async () => {
+        setLoading(true);
         try {
+            setLoading(false);
             const response = await landmarksServices.getAllLandmarks(currentPage, selectedCity, sortBy);
             setlandmarksRows(response.data);
             setTotalPages(response.data.pagination.total_pages);
             setCurrentPage(response.data.pagination.currentPage);
+
         } catch (error) {
+            setLoading(false);
             console.log(error);
         }
     };
@@ -100,13 +104,15 @@ const LandMark = () => {
         : landmarkHeader;
 
     useEffect(() => {
-        setShowConfirm(false);
-        getAllData();
-        console.log('landmark', landmarksRows);
-    }, [currentPage, selectedCity, sortBy]);
+        console.log('loading', loading);
+    }, [selectedItemId, loading]);
 
     useEffect(() => {
-    }, [selectedItemId]);
+        setShowConfirm(false);
+        getAllData();
+    }, [currentPage, selectedCity, sortBy]);
+
+
 
     useEffect(() => {
         setSearchQuery("");
@@ -116,40 +122,41 @@ const LandMark = () => {
     return (
         <section className="BY_LandMark">
             <div className='BY_container'>
-            <div className='top_section'>
-                <div className="right_section">
-                    <MainButton text="إضافة معلم" goTo="./add" />
-                    <MainSearchInput placeholder="بحث عن معلم " onChange={(e) => setSearchQuery(e.target.value)} />
+                <div className='top_section'>
+                    <div className="right_section">
+                        <MainButton text="إضافة معلم" goTo="./add" />
+                        <MainSearchInput placeholder="بحث عن معلم " onChange={(e) => setSearchQuery(e.target.value)} />
+                    </div>
+                    <div className="left_section">
+                        <MainSelect title="كامل القطر" options={['كامل القطر', ...cityNames]} onSelect={(option) => setSelectedCity(option === 'كامل القطر' ? '' : option)} />
+                        <MainSelect title="ترتيب حسب" options={['ترتيب حسب', ...options]} onSelect={(option) => setSortBy(option === 'ترتيب حسب' ? '' : option)} />
+                    </div>
                 </div>
-                <div className="left_section">
-                    <MainSelect title="كامل القطر" options={['كامل القطر', ...cityNames]} onSelect={(option) => setSelectedCity(option === 'كامل القطر' ? '' : option)} />
-                    <MainSelect title="ترتيب حسب" options={['ترتيب حسب', ...options]} onSelect={(option) => setSortBy(option === 'ترتيب حسب' ? '' : option)} />
+                <div className='content_section'>
+                    {!loading && <MainTable
+                        data={filteredLandmarks}
+                        headers={headers}
+                        totalPages={totalPages}
+                        currentPage={currentPage}
+                        onPageChange={handlePageChange}
+                        onDelete={handleDeleteClick}
+                        onEdit={handleEdit}
+                    />
+                    }
+
                 </div>
-            </div>
-            <div className='content_section'>
-                <MainTable
-                    data={filteredLandmarks}
-                    headers={headers}
-                    totalPages={totalPages}
-                    currentPage={currentPage}
-                    onPageChange={handlePageChange}
-                    onDelete={handleDeleteClick}
-                    onEdit={handleEdit}
-                />
 
-            </div>
-            <Loading loading={loading} style={'loading-get-all'} />
+                {showConfirm && (
+                    <ConfirmaDelete
+                        onDelete={handleDeleteConfirm}
+                        onCancel={handleDeleteCancel}
+                        message="هل أنت متأكد من رغبتك في حذف هذاالمعلم؟"
+                    />
+                )}
 
-            {showConfirm && (
-                <ConfirmaDelete
-                    onDelete={handleDeleteConfirm}
-                    onCancel={handleDeleteCancel}
-                    message="هل أنت متأكد من رغبتك في حذف هذاالمعلم؟"
-                />
-            )}
-
+                <Loading loading={loading} style={'loading-get-all'} />
             </div>
-          
+
         </section>
     )
 }
