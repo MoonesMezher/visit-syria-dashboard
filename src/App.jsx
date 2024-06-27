@@ -41,9 +41,9 @@ function App() {
       />
       <Routes>
         <Route path="/" element={<Home/>} />
-        <Route path="/about" element={<About/>} />
-        <Route path="/about/add" element={<AddAbout/>} />
-        <Route path="/about/edit/:id" element={<EditAbout/>} />
+        <Route path="/about" element={token? <About/>: <Navigate to={'/error'}/>} />
+        <Route path="/about/add" element={token?<AddAbout/>: <Navigate to={'/error'}/>} />
+        <Route path="/about/edit/:id" element={token? <EditAbout/>: <Navigate to={'/error'}/>}/>
         <Route path="/hotels" element={<Hotel/>} />
         <Route path="/hotels/add" element={<AddHotel/>} />
         <Route path="/hotels/edit/:id" element={<EditHotel/>} />

@@ -9,7 +9,7 @@ const MainInput = ({ type, name, id, label, value, setInputValue, options = [], 
         {type == "textarea" ? (
           <textarea
             defaultValue={value}
-            className="form-control"
+            className="form-control textarea-input-style"
             name={name}
             id={id}
             rows={3}
@@ -24,7 +24,7 @@ const MainInput = ({ type, name, id, label, value, setInputValue, options = [], 
         ) : type == "text" ? (
           <input
             defaultValue={value}
-            className="form-control"
+            className="form-control text-input-style "
             name={name}
             id={id}
             // value={value}
@@ -38,7 +38,7 @@ const MainInput = ({ type, name, id, label, value, setInputValue, options = [], 
           />
         ) : (
           <select
-            className="main-select me-2"
+            className="main-select me-2 select-input-style "
             defaultValue={value}
             name={name}
             id={id}
@@ -56,11 +56,12 @@ const MainInput = ({ type, name, id, label, value, setInputValue, options = [], 
               cursor: 'pointer',
               padding: '0 10px',
               borderRadius: '5px'
+              
             }}
           >
           <option value="none" className='text-center'>عدم</option>
             {options.map((e, index) => (
-              <option key={index} value={e.id} className='text-center'>
+              <option key={index} value={e.id} className='text-center' >
                 {e.name}
               </option>
             ))}

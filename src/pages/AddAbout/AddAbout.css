@@ -1,9 +1,13 @@
-.add-about{
-background-color: #ffffff;
-border-radius: 8px;
-margin: auto;
-padding: 10px;
-}
-.item {
+.add-hotel-ay .add-img-ay .main-photo-ay {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12rem;
+    direction: rtl;
+}
+
+.add-hotel-ay .add-img-ay {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
