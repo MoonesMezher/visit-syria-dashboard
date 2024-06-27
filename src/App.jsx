@@ -61,7 +61,7 @@ function App() {
         <Route path="/places/edit/:id" element={<EditLandMark/>} />
         <Route path="/places/reports" element={<SatisticsLandMark/>} />
         <Route path="/settings" element={<Settings/>} />
-        <Route path="/login" element={true? <Login/>: <Navigate to='/'/>} />
+        <Route path="/login" element={token? <Login/>: <Navigate to='/'/>} />
         <Route path="*" element={<Navigate to="/error"/>} />
         <Route path="/error" element={<ErrorPage/>} />
       </Routes>
