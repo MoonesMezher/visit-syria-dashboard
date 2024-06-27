@@ -1,49 +1,55 @@
-.BY_AddLandMark .form_section {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    direction: rtl;
-  }
-  
-  .BY_AddLandMark .form_section .inputes_section {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  
-  .BY_AddLandMark .form_section .inputes_section .right_section,
-  .BY_AddLandMark .form_section .inputes_section .left_section {
-    width: 47%;
-  }
-  
-  .BY_AddLandMark .form_section .inputes_section .left_section {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  .BY_AddLandMark .form_section .inputes_section .left_section .image_field {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .BY_AddLandMark .form_section .inputes_section .left_section .image_field.multi {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  .BY_AddLandMark .form_section .inputes_section .left_section .image_field.multi label {
-    align-self: start;
-  }
-  
-  .BY_AddLandMark .form_section .inputes_section .left_section .image_field.multi .image_input {
-    display: flex;
-    align-self: flex-end;
-  }
-  
-  .BY_AddLandMark .form_section .buttonSection {
-    display: flex;
-    justify-content: center;
-  }
+.BY_AddLandMark .BY_container {
+  max-width: 1200px;
+  margin: 0 auto;
+
+}
+
+.BY_AddLandMark .BY_container .form_section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  direction: rtl;
+}
+
+.BY_AddLandMark .BY_container .form_section .inputes_section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.BY_AddLandMark .BY_container .form_section .inputes_section .right_section,
+.BY_AddLandMark .BY_container .form_section .inputes_section .left_section {
+  width: 47%;
+}
+
+.BY_AddLandMark .BY_container .form_section .inputes_section .left_section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.BY_AddLandMark .BY_container .form_section .inputes_section .left_section .image_field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.BY_AddLandMark .BY_container .form_section .inputes_section .left_section .image_field.multi {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.BY_AddLandMark .BY_container .form_section .inputes_section .left_section .image_field.multi label {
+  align-self: start;
+}
+
+.BY_AddLandMark .BY_container .form_section .inputes_section .left_section .image_field.multi .image_input {
+  display: flex;
+  align-self: flex-end;
+}
+
+.BY_AddLandMark .BY_container .form_section .buttonSection {
+  display: flex;
+  justify-content: center;
+}

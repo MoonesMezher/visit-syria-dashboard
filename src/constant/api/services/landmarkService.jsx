@@ -4,12 +4,15 @@ import { LandMarkAPIURL } from '../LandMarksURLs';
 import { toast } from "react-toastify";
 
 // const token = localStorage.getItem("token");
-const token ="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3MTkwODk1MDYsImV4cCI6MTcxOTA5MzEwNiwibmJmIjoxNzE5MDg5NTA2LCJqdGkiOiJxU3NvcjdEWmtJeFJlT3IyIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.tzVyjGQnuMmpBv79KwdGoxd1IlE1-FQnBJqAUx719rw"
+const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3MTk0MTcxMDUsImV4cCI6MTcxOTQyMDcwNSwibmJmIjoxNzE5NDE3MTA1LCJqdGkiOiI2c3o0SzdXVnpuYnJmVGVkIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.x6nODJmejkBlrYr0Cd1tYmilVvTjgMMmHDMbEldv0bI"
 
 
-export async function getAllLandmarks(currentPage) {
+export async function getAllLandmarks(currentPage, selectedCity, sortBy) {
     try {
-        const response = await axios.get(LandMarkAPIURL+`?page=${currentPage}`);
+        const cityQuery = selectedCity ? `&city=${selectedCity}` : '';
+        const sortQuery = sortBy ? `&sort_by=${sortBy}` : '';
+        console.log("URL",LandMarkAPIURL + `?page=${currentPage}${cityQuery}${sortQuery}`);
+        const response = await axios.get(LandMarkAPIURL + `?page=${currentPage}${cityQuery}${sortQuery}`);
         if (response.status === 200) {
             const landmarksData = response.data;
             return landmarksData;
@@ -24,7 +27,7 @@ export async function getAllLandmarks(currentPage) {
 
 export async function addNewLandmark(data) {
     try {
-        console.log('data',data);
+        console.log('data', data);
         const response = await axios.post(LandMarkAPIURL, data, {
             headers: {
                 'Content-Type': 'multipart/form-data',
@@ -55,6 +58,7 @@ export async function editLandmark(data, id) {
             },
         });
         if (response.status === 200) {
+            toast.success('تم التعديل بنجاح');
             const landmarkUpdatedData = response.data;
             return landmarkUpdatedData;
         } else {
@@ -84,7 +88,7 @@ export async function getLandmarkById(id) {
 
 export async function deleteLandmarkById(id) {
     try {
-        const response = await axios.delete(LandMarkAPIURL + '/' + id,{
+        const response = await axios.delete(LandMarkAPIURL + '/' + id, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'Authorization': `Bearer ${token}`
