@@ -1,4 +1,20 @@
-.section-search{
+section.sectionAbout{
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.section-serarch-about{
+display: flex;
+margin-top:10px;
+gap:10px;
+justify-content: space-between;
+padding: 0px 68px;
+align-items: center;
+}
+.search-about{
+    display: flex;
+    align-items: center;
     justify-content: space-between;
+    gap: 21px;
+
 }
