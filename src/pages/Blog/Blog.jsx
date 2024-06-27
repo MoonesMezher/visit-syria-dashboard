@@ -326,7 +326,7 @@ const Blog = () => {
         </div>
         <div className="add-search">
           <MainSearchInput
-            text={"بحث عن مقال"}
+            placeholder={"بحث عن مقال"}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <MainButton text={"اضافة مقال"} goTo={"/blogs/add"} />

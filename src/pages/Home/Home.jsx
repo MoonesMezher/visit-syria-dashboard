@@ -47,7 +47,7 @@ const Home = () => {
             <span onClick={handleClick}>
                 <MainButton text={'Add'}/>
             </span>
-            <MainTable data={dataPage1} headers={headers}/>
+            {/* <MainTable data={dataPage1} headers={headers}/> */}
             <MainInput label={'Name'} type={'text'}/>
             <MainInput label={'Name'} type={'textarea'}/>
             <MainInput label={'Name'} type={'select'} options={[1, 2, 3, 4]}/>

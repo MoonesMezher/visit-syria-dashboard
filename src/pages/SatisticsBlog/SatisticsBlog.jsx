@@ -63,51 +63,53 @@ const SatisticsBlog = () => {
       ],
     },
   ];
-
   return (
-    <section>
-      <div className="blog-stat-header">
-        <MainSelect
-          title={"خلال شهر"}
-          options={options}
-          onSelect={(options) =>
-            setSortBy(options === "خلال شهر" ? "" : options)
-          }
-        />
-      </div>
-      <div className="blog-stat-body">
-        <div className="blog-stat-body-left">
-          <div className="blog-stat-info">
-            <MainStatisticsInfoBox
-              number={"117K"}
-              title={"عدد زيارات المدونة"}
-              unit={"زيارة"}
-            />
-            <MainStatisticsInfoBox
-              number={"106k"}
-              title={"عدد مقالات المدونة"}
-              unit={"مقالة"}
-            />
-          </div>
-
-          <MainChart
-            chart_title={"مخطط زيارات المدونة"}
-            x_labels={["30", "22", "15", "7", "1"]}
-            array={[130, 100, 90, 40, 20]}
-            unit="K"
-            y_steps={20}
+    <section className="BY_SatisticsLandMark">
+      <div className="BY_container">
+        <div className="top_section">
+          <MainSelect
+            title={"خلال شهر"}
+            options={options}
+            onSelect={(options) =>
+              setSortBy(options === "خلال شهر" ? "" : options)
+            }
           />
         </div>
-        <div className="blog-stat-body-right">
-          {blogsatisticsList.map((e, i) => (
-            <MainStatisticsListBox
-              key={i}
-              fixed={e.icon}
-              icon={e.icon}
-              list={e.list}
-              title={e.title}
-            />
-          ))}
+        <div className="content_section">
+          <div className="right_section">
+            {blogsatisticsList.map((e, i) => (
+              <MainStatisticsListBox
+                key={i}
+                fixed={e.icon}
+                icon={e.icon}
+                list={e.list}
+                title={e.title}
+              />
+            ))}
+          </div>
+          <div className="left_section">
+            <div className="satistics_boxs_section">
+              <MainStatisticsInfoBox
+                number={"117K"}
+                title={"عدد زيارات المدونة"}
+                unit={"زيارة"}
+              />
+              <MainStatisticsInfoBox
+                number={"106k"}
+                title={"عدد مقالات المدونة"}
+                unit={"مقالة"}
+              />
+            </div>
+            <div className="chart_section">
+              <MainChart
+                chart_title={"مخطط زيارات المدونة"}
+                x_labels={["30", "22", "15", "7", "1"]}
+                array={[130, 100, 90, 40, 20]}
+                unit="K"
+                y_steps={20}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

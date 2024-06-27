@@ -4,6 +4,7 @@ import MainInput from "../../components/Shared/MainInput/MainInput";
 import MainPhotoGroupInput from "../../components/Shared/MainPhotoGroupInput/MainPhotoGroupInput";
 import MainPhotoInput from "../../components/Shared/MainPhotoInput/MainPhotoInput";
 import "./AddBlog.css";
+import MainSelect from "../../components/Shared/MainSelect/MainSelect";
 
 const AddBlog = () => {
   const [mainImageFile, setMainImageFile] = useState(null);
@@ -14,7 +15,7 @@ const AddBlog = () => {
 
   const category = [
     { label: "الطبيعة", value: "الطبيعة" },
-    { label: "عنوان الأثرية", value: "الأثرية" },
+    { label: "الأثرية", value: "الأثرية" },
   ];
 
   const sendData = (event) => {

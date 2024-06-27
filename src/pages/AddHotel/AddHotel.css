@@ -1,0 +1,13 @@
+.add-hotel-ay .add-img-ay .main-photo-ay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12rem;
+    direction: rtl;
+}
+
+.add-hotel-ay .add-img-ay {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

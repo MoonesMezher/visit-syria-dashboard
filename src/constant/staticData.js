@@ -20,3 +20,4 @@ export const dataPage1 = [
       [18, "Hotel 1", "Location 1", "Description 1", "Services 1", "$$"],
 
 ];
+

@@ -1,9 +1,17 @@
 import { VscSearch } from "react-icons/vsc"
 import "./MainSearchInput.css"
-const MainSearchInput = ({text}) => {
+
+const MainSearchInput = ({placeholder,onChange }) => {
+
+        const handleChange = (event) => {
+            if (onChange) {
+                onChange(event);
+            }
+        };
     return (
+        
         <div className="search-box-ay">
-            <input type='text' name='search' placeholder={text}/>
+            <input type='text' name='search' onChange={handleChange} placeholder={placeholder}/>
             <VscSearch className='search-icon'/>
         </div>
     )
