@@ -5,6 +5,7 @@ import MainPhotoGroupInput from "../../components/Shared/MainPhotoGroupInput/Mai
 import MainPhotoInput from "../../components/Shared/MainPhotoInput/MainPhotoInput";
 import "./AddBlog.css";
 import MainSelect from "../../components/Shared/MainSelect/MainSelect";
+import axios from "axios";
 
 const AddBlog = () => {
   const [mainImageFile, setMainImageFile] = useState(null);
