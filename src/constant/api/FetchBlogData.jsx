@@ -32,15 +32,28 @@ export const useFetchBlogs = (currentPage, getItem, sortBy) => {
     // const cityQuery = selectedCity ? `&city=${selectedCity}` : '';
     const sortQuery = sortBy ? `&sort_by=${sortBy}` : "";
     // axios.get(`http://127.0.0.1:8000/api/blogs?page=${currentPage}${cityQuery}${sortQuery}`)
-    axios
-      .get(`http://127.0.0.1:8000/api/blogs?page=${currentPage}${sortQuery}`)
-      .then((res) => {
-        console.log("Backend response:", res.data);
-        setBlogs(res.data.data);
-        // setTotalPages(res.data.pagination.total_pages);
-        setTotalPages(res.data.pagination);
-      })
-      .finally(() => setIsLoadingBlogs(false));
+    const fetchData = async () => {
+      try {
+        const response = await axios
+          .get(`http://127.0.0.1:8000/api/blogs?page=${currentPage}$`)
+          // .then((res) => {
+          // console.log("Backend response:", res.data);
+          // setBlogs(res.data.data);
+          // setTotalPages(res.data.pagination.total_pages);
+          // setTotalPages(res.data.pagination);
+          // })
+          .finally(() => setIsLoadingBlogs(false));
+        const responseData = response.data;
+        console.log(responseData);
+        if (responseData) {
+          setBlogs(responseData);
+          console.log("BLOG", blogs);
+          // setTotalPages(responseData.pagination.total_pages);
+        }
+      } catch (error) {
+        console.error("Failed to fetch blogs:", error);
+      }
+    };
     // }, [currentPage, getItem, selectedCity, sortBy]);
   }, [currentPage, getItem, sortBy]);
   return { blogs, totalPages, isLoadingBlogs };
@@ -52,9 +65,9 @@ export const deleteItem = (blog, setGetItem) => {
     .then((res) => {
       console.log(res.data);
       setGetItem((prev) => !prev);
-      toast.success("تم حذف العنصر بنجاح");
+      toast.success("تمت حذف العنصر بنجاح");
     })
     .catch((error) => {
-      console.error("Failed to delete blog:", error);
+      console.error("Failed to delete hotel:", error);
     });
 };
