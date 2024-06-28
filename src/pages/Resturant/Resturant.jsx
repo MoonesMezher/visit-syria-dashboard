@@ -37,28 +37,24 @@ const Resturant = () => {
     },[]);
 
     useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true)
-            try {
-                setLoading(false)
-                const response = await axios.get(`http://127.0.0.1:8000/api/restaurants/page/`+currentPage);
-                setResturants(response?.data?.data?.data);
-                console.log(response.data);
-                setTotalPages((response?.data?.data?.total / 9) + 1);
-            } catch (error) {
-                setLoading(false)
-                console.error("Failed to fetch resturants:", error);
-            }
-        };
-
-        fetchData();
+        setLoading(true)
+        axios.get(`http://127.0.0.1:8000/api/restaurants/page/`+currentPage)
+        .then(response => {
+            setResturants(response?.data?.data);
+            console.log(response.data);
+            setLoading(false)
+            setTotalPages(response?.data?.pagination.total_pages);
+        }).catch(error => {
+            setLoading(false)
+            console.error("Failed to fetch resturants:", error);
+        })
     }, [currentPage,get]);
       // Function to handle page change
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
 
-    const transformedHotels = resturants?.map(e => ({
+    const transformedRes = resturants?.map(e => ({
         id: e.id, // Explicitly naming the itemId
         data: [
             e.id,
@@ -78,7 +74,6 @@ const Resturant = () => {
     const handleDeleteItemAfterAccept = async (itemId) => {
         axios.delete(`http://127.0.0.1:8000/api/restaurants/delete/${itemId}`)
             .then(res => {
-                console.log(res.data);
                 setGet((prev) =>!prev);
                 setKeepGoing(false)
                 toast.success('تم الحذف بنجاح');
@@ -93,6 +88,23 @@ const Resturant = () => {
         navigate(`/resturants/edit/${itemId}`)
     };
 
+    const [searchQuery, setSearchQuery] = useState("");
+    const [filteredResturant, setFilteredResturant] = useState([]);
+
+    useEffect(() => {
+        setFilteredResturant(searchQuery
+        ? transformedRes.filter(res =>
+                res.data[1].toLowerCase().includes(searchQuery.toLowerCase())
+            )
+        : transformedRes)
+
+        console.log(filteredResturant);
+    }, [searchQuery])
+
+
+    useEffect(() => {
+        setSearchQuery("");
+    }, [resturants]);
 
     return (
         <section className="hotel-management">
@@ -102,7 +114,7 @@ const Resturant = () => {
                     <MainSelect title="ترتيب حسب" options={options}/>
                 </div>
                 <div className="add-search">
-                    <MainSearchInput/>
+                    <MainSearchInput placeholder = "البحث عن مطعم"  onChange={(e) => setSearchQuery(e.target.value)}/>
                     <MainButton text={'اضافة مطعم'} goTo="/resturants/add"/>
                 </div>
             </div>
@@ -114,7 +126,7 @@ const Resturant = () => {
                         message={"هل أنت متأكد من رغبتك في حذف هذا المطعم؟"}
                     />
             )}
-            {!loading && <MainTable data={transformedHotels} headers={headers} totalPages={totalPages} onPageChange={handlePageChange} onDelete={handleDelete} onEdit={handleEdit} currentPage={currentPage} />}
+            {!loading && <MainTable data={filteredResturant} headers={headers} totalPages={totalPages} onPageChange={handlePageChange} onDelete={handleDelete} onEdit={handleEdit} currentPage={currentPage} />}
         </section>
     )
 }
