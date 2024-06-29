@@ -1,49 +1,57 @@
-.BY_EditLandMark .form_section {
+.BY_EditLandMark .BY_container{
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.BY_EditLandMark .BY_container .form_section {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     direction: rtl;
   }
   
-  .BY_EditLandMark .form_section .inputes_section {
+  .BY_EditLandMark .BY_container .form_section .inputes_section {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
   }
   
-  .BY_EditLandMark .form_section .inputes_section .right_section,
-  .BY_EditLandMark .form_section .inputes_section .left_section {
+  .BY_EditLandMark .BY_container .form_section .inputes_section .right_section,
+  .BY_EditLandMark .BY_container .form_section .inputes_section .left_section {
     width: 47%;
   }
   
-  .BY_EditLandMark .form_section .inputes_section .left_section {
+  .BY_EditLandMark .BY_container .form_section .inputes_section .left_section {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
   
-  .BY_EditLandMark .form_section .inputes_section .left_section .image_field {
+  .BY_EditLandMark .BY_container .form_section .inputes_section .left_section .image_field {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
   
-  .BY_EditLandMark .form_section .inputes_section .left_section .image_field.multi {
+  .BY_EditLandMark .BY_container .form_section .inputes_section .left_section .image_field.multi {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
   
-  .BY_EditLandMark .form_section .inputes_section .left_section .image_field.multi label {
+  .BY_EditLandMark .BY_container .form_section .inputes_section .left_section .image_field.multi label {
     align-self: start;
   }
   
-  .BY_EditLandMark .form_section .inputes_section .left_section .image_field.multi .image_input {
-    display: flex;
+  .BY_EditLandMark .BY_container .form_section .inputes_section .left_section .image_field.multi .image_input {
     align-self: flex-end;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 5px;
+    row-gap: 5px;
+    justify-content: space-between;
   }
   
-  .BY_EditLandMark .form_section .buttonSection {
+  .BY_EditLandMark .BY_container .form_section .buttonSection {
     display: flex;
     justify-content: center;
   }
