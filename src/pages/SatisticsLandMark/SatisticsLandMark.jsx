@@ -1,11 +1,10 @@
 import MainStatisticsListBox from '../../components/Shared/MainStatisticsListBox/MainStatisticsListBox'
-
 import { MdOutlineArticle } from "react-icons/md";
 import { TbCoin } from "react-icons/tb";
 import MainSelect from '../../components/Shared/MainSelect/MainSelect';
 import MainStatisticsInfoBox from "../../components/Shared/MainStatisticsInfoBox/MainStatisticsInfoBox"
 import MainChart from "../../components/Shared/MainChart/MainChart"
-
+import "./SatisticsLandMark.css"
 
 const SatisticsLandMark = () => {
     const list = [

@@ -19,6 +19,7 @@ const LandMark = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [sortBy, setSortBy] = useState('');
 
+
     const options = [
         { label: 'الاسم', value: 'name' },
         { label: 'المحافظة', value: 'city' },
@@ -35,6 +36,7 @@ const LandMark = () => {
     const [totalPages, setTotalPages] = useState(0);
     const [selectedItemId, setSelectedItemId] = useState(null);
     const [showConfirm, setShowConfirm] = useState(false);
+    const [getItem, setGetItem] = useState(true);
 
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -44,8 +46,8 @@ const LandMark = () => {
         try {
             await
                 landmarksServices.deleteLandmarkById(itemId);
-            getAllData();
-        } catch (error) {
+                setGetItem((prev) =>!prev);
+            } catch (error) {
             console.error('Error in delete landmark:', error);
         }
     };
@@ -55,6 +57,7 @@ const LandMark = () => {
         navigate(`/places/edit/${itemId}`)
     };
 
+    useEffect(() => {
     const getAllData = async () => {
         setLoading(true);
         try {
@@ -69,6 +72,8 @@ const LandMark = () => {
             console.log(error);
         }
     };
+    getAllData();
+    }, [currentPage,getItem,sortBy,searchQuery,selectedCity]);
 
     const landmarkHeader = landmarksRows.map(item => ({
         id: item.id,
@@ -109,7 +114,7 @@ const LandMark = () => {
 
     useEffect(() => {
         setShowConfirm(false);
-        getAllData();
+        setGetItem((prev) =>!prev);
     }, [currentPage, selectedCity, sortBy]);
 
 
@@ -132,7 +137,7 @@ const LandMark = () => {
                         <MainSelect title="ترتيب حسب" options={['ترتيب حسب', ...options]} onSelect={(option) => setSortBy(option === 'ترتيب حسب' ? '' : option)} />
                     </div>
                 </div>
-                <div className='content_section'>
+                <div className='content_section-BY'>
                     {!loading && <MainTable
                         data={filteredLandmarks}
                         headers={headers}

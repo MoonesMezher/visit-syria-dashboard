@@ -3,14 +3,15 @@ import { useState } from 'react';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
 import {  toast } from 'react-toastify';
-const Login = () => {
+const Login = ({setToken}) => {
     const [email , setEmail] = useState('');
     const [password , setPassword] = useState('');
+    const [clicked , setClicked] = useState(false);
     const navigate = useNavigate();
     const notify = () => toast.error("Email or Password are incorrect");
     const handleLogin = async (e) => {
         e.preventDefault();
-        
+        setClicked(true)
         const headers = {
             'Content-Type': 'application/json'
         };
@@ -26,7 +27,8 @@ const Login = () => {
                 if (response.status === 200) {
                     localStorage.setItem('token', response.data.access_token);
                     localStorage.setItem('id', response.data.user.id);
-                    navigate('/home');
+                    setToken(response.data.access_token);
+                    navigate('/');
                 }
             }).catch(error => {
                 console.log(error);
@@ -35,7 +37,7 @@ const Login = () => {
                 } else {
                     console.log(error);
                 }
-            });
+            }).finally(()=>setClicked(false));
     }   
     return (
         <section className="login-page">
@@ -49,7 +51,7 @@ const Login = () => {
                 <form >
                     <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)}  placeholder='البريد الالكتروني' />
                     <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder='كلمة المرور ' />
-                    <button type='submit' onClick={(e)=>handleLogin(e)}>دخول</button>
+                    <button type='submit' onClick={(e)=>handleLogin(e)} style={{ opacity : clicked ? 0.5 : 1 }}>دخول</button>
                 </form>
             </div>
         </section>

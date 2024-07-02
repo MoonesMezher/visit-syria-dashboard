@@ -25,12 +25,13 @@ import EditAbout from './pages/EditAbout/EditAbout'
 import AddAbout from './pages/AddAbout/AddAbout'
 import { ToastContainer } from 'react-toastify'
 import ErrorPage from './pages/Error/Error'
+import { useState } from 'react'
 
 function App() {
-  const token = localStorage.getItem('token');
-
+  // const token = localStorage.getItem('token');
+  const [token,setToken] = useState("");
   return (
-    <Layout>
+    <Layout  showLayout={!!token}>
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -40,7 +41,7 @@ function App() {
         rtl={false}
       />
       <Routes>
-        <Route path="/" element={token?<Home/>: <Navigate to={'/login'}/>} />
+        <Route path="/" element={token?<Home/>: <Login setToken={setToken}/>} />
         <Route path="/about" element={token? <About/>: <Navigate to={'/error'}/>} />
         <Route path="/about/add" element={token?<AddAbout/>: <Navigate to={'/error'}/>} />
         <Route path="/about/edit/:id" element={token? <EditAbout/>: <Navigate to={'/error'}/>}/>

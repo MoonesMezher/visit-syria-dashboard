@@ -18,6 +18,9 @@ const Settings = () => {
   const notifyUpdatedPhoto = () => toast("Photo Updated Successfully");
   const notifyUpdatedAdmin = () => toast("Admin Updated Successfully");
   const notifyError = (er) => toast(er);
+
+
+  
   const formData = new FormData();
   const id = localStorage.getItem("id");
   const token = localStorage.getItem('token');

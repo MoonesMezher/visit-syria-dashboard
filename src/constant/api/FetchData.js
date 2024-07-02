@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
+const token = localStorage.getItem("token");
+
+
 // Custom Hook for Fetching Cities
 export const useFetchCities = () => {
     const [cities, setCities] = useState([]);
@@ -41,13 +44,57 @@ export const useFetchHotels = (currentPage,getItem, selectedCity, sortBy) => {
         return { hotels, totalPages, isLoadingHotels };
     };
 
-export const deleteItem = (itemId,setGetItem) => {
-    axios.delete(`http://127.0.0.1:8000/api/hotels/${itemId}`, null)
-    .then(res => {
-        console.log(res.data);
-        setGetItem((prev) =>!prev);
-        toast.success('تمت حذف العنصر بنجاح');
-    }).catch(error => {
-        console.error("Failed to delete hotel:", error);
-    });
+    export const deleteItem = (itemId,setGetItem) => {
+        axios.delete(`http://127.0.0.1:8000/api/hotels/${itemId}`, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `Bearer ${token}`
+            },
+        })
+        .then(res => {
+            console.log(res.data);
+            setGetItem((prev) =>!prev);
+            toast.success('تمت حذف العنصر بنجاح');
+        }).catch(error => {
+            toast.error(error.message)
+            // console.error("Failed to delete hotel:", error);
+        });
+    }
+
+
+export async function getHotelInfo(id) {
+    try {
+        const response = await axios.get('http://127.0.0.1:8000/api/hotels' + '/' + id);
+
+        if (response.status === 200) {
+            const hotelInfo = response.data;
+            return hotelInfo;
+        } else {
+            throw new Error(`Failed to get landmark with id=  ${id}`);
+        }
+    } catch (error) {
+        throw new Error(`Error: ${error.message}`);
+    }
+}
+
+
+export async function editHotel(data, id) {
+    try {
+        const response = await axios.post('http://127.0.0.1:8000/api/hotels' + '/' + id, data, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `Bearer ${token}`
+            },
+        });
+        if (response.status === 200) {
+            toast.success('تم التعديل بنجاح');
+            const hotelUpdatedData = response.data;
+            return hotelUpdatedData;
+        } else {
+            throw new Error('Failed to update landmark');
+        }
+    } catch (error) {
+        console.log(error.message)
+        throw new Error(`Error: ${error.message}`);
+    }
 }

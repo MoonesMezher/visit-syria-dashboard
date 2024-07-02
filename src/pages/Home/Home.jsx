@@ -1,63 +1,71 @@
-import { toast } from "react-toastify"
-import MainButton from "../../components/Shared/MainButton/MainButton"
 import MainChart from "../../components/Shared/MainChart/MainChart"
 import MainStatisticsInfoBox from "../../components/Shared/MainStatisticsInfoBox/MainStatisticsInfoBox"
 import MainStatisticsListBox from "../../components/Shared/MainStatisticsListBox/MainStatisticsListBox"
-import MainTable from "../../components/Shared/MainTable/MainTable"
-import { dataPage1, headers } from "../../constant/staticData"
 import { MdOutlineArticle } from "react-icons/md";
 import { TbCoin } from "react-icons/tb";
-import MainInput from "../../components/Shared/MainInput/MainInput"
-import MainPhotoInput from "../../components/Shared/MainPhotoInput/MainPhotoInput"
-import MainPhotoGroupInput from "../../components/Shared/MainPhotoGroupInput/MainPhotoGroupInput"
-import { useState } from "react"
+import MainSelect from '../../components/Shared/MainSelect/MainSelect';
+import "./Home.css"
 const Home = () => {
-    const handleClick = () => {
-        return toast.success('تمت العملية بنجاح');
-    };
-
     const list = [
         {
             name: 'Ayham',
             number: 20
         },
         {
-            name: 'Ayham',
+            name: 'Ali',
             number: 20
         },
         {
-            name: 'Ayham',
+            name: 'Ahmad',
             number: 20
         },
         {
-            name: 'Ayham',
+            name: 'Yousef',
             number: 20
         },
         {
-            name: 'Ayham',
+            name: 'Humam',
             number: 20
         },
     ]
-
-    const [img, setImg] = useState(null);
-    const [img1, setImg1] = useState([]);
-
+    const month = [
+        'خلال شهر',
+        'خلال شهرين',
+        'خلال عام'
+    ]
     return (
-        <section>
-            <span onClick={handleClick}>
-                <MainButton text={'Add'}/>
-            </span>
-            {/* <MainTable data={dataPage1} headers={headers}/> */}
-            <MainInput label={'Name'} type={'text'}/>
-            <MainInput label={'Name'} type={'textarea'}/>
-            <MainInput label={'Name'} type={'select'} options={[1, 2, 3, 4]}/>
-            <MainPhotoInput img={img} setImg={setImg}/>
-            <MainPhotoGroupInput imgs={img1} setImgs={setImg1}/>
-            <MainChart key={1} />
-            <MainStatisticsInfoBox title={'sss'} number={40} unit={'Km'}/>
-            <MainStatisticsInfoBox title={'sss'} number={40} unit={'Km'}/>
-            <MainStatisticsListBox title="المستخدم صاحب اكبر عدد حجوزات" list={list} icon={<MdOutlineArticle/>} fixed="حجز"/>
-            <MainStatisticsListBox title="المستخدم الذي دفع اكبر مبلغ" list={list} icon={<TbCoin />} fixed={<TbCoin />}/>
+        <section className="BY_SatisticsLandMark">
+            <div className='BY_container'>
+                <div className="top_section">
+                    <MainSelect title="خلال شهر" options={month} />
+                </div>
+                <div className="content_section home_statistic">
+                    <div className="row">
+                    <div className="satistics_boxs_section">
+                            <MainStatisticsInfoBox title={'عدد الزائرين الكلي'} number={"250k"} unit={'زائر'} />
+                            <MainStatisticsInfoBox title={'عدد المستخدمين الكلي'} number={"117K"} unit={'مستخدم'} />
+                            <MainStatisticsInfoBox title={'عدد المتخدمين النشطين'} number={"3K"} unit={'مستخدم نشط'} />
+                            <MainStatisticsInfoBox title={'عدد المتخدمين الجدد'} number={"1K"} unit={'مستخدم جديد'} />
+                        </div>
+                    </div>
+                    <div className="row">
+                    <div className="right_section" style={{ display:"flex",gap:"20px" }}>
+                        <MainStatisticsListBox title="المعالم الأكثر زيارة" list={list} icon={<MdOutlineArticle />} fixed="حجز" />
+                        <MainStatisticsListBox title="المعالم الأعلى تقييماً" list={list} icon={<TbCoin />} fixed={<TbCoin />} />
+                    </div>
+                    <div className="left_section">
+                        <div className="chart_section home_chart" style={{ height:"100%" }}>
+                            <MainChart
+                                chart_title="مخطط زيارات المعالم السياحية"
+                                x_labels={['30', '22', '15', '7', '1']}
+                                array={[130, 100, 90, 40, 20]}
+                                unit="K"
+                                y_steps={20} />
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
         </section>
     )
 }

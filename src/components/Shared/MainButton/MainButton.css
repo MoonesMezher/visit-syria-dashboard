@@ -23,7 +23,9 @@
 .BY_MainButton button:hover {
     background-color: var(--green_button);
 }
-
+.BY_MainButton button.clicked {
+    opacity: 0.5;
+}
 .BY_MainButton button:focus {
     outline: none;
 }
