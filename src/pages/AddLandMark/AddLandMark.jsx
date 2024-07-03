@@ -9,6 +9,7 @@ import { useFetchCities } from "../../constant/api/FetchData";
 // import MainSelect from '../../components/Shared/MainSelect/MainSelect';
 
 import './AddLandMark.css'
+import { toast } from 'react-toastify'
 const AddLandMark = () => {
     const navigate = useNavigate();
 
@@ -40,6 +41,7 @@ const AddLandMark = () => {
         console.log(data);
         try {
             landmarksServices.addNewLandmark(data);
+            toast.success('تمت الإضافة بنجاح');
             navigate("/places");
         } catch (error) {
             console.error('Error creating new landmark:', error);

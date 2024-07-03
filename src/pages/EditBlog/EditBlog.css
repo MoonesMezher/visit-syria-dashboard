@@ -1,0 +1,15 @@
+.image_field.multi_blog {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-between;
+  }
+  
+.image_input_blog {
+    align-self: flex-end;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 5px;
+    row-gap: 5px;
+    justify-content: space-between;
+    margin-top: 20px;
+  }

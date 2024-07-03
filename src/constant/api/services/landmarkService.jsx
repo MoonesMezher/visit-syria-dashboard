@@ -3,8 +3,8 @@ import axios from 'axios';
 import { LandMarkAPIURL } from '../LandMarksURLs';
 import { toast } from "react-toastify";
 
-// const token = localStorage.getItem("token");
-const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3MTk2NzEzNTgsImV4cCI6MTcxOTY3NDk1OCwibmJmIjoxNzE5NjcxMzU4LCJqdGkiOiJIODJDOHAwaDV6RzlyVk9tIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.fhthRcsSXgXSGDuiE8MKyArRul64Pmi9uuUvS8VOI_c"
+const token = localStorage.getItem("token");
+// const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3MTk2NzEzNTgsImV4cCI6MTcxOTY3NDk1OCwibmJmIjoxNzE5NjcxMzU4LCJqdGkiOiJIODJDOHAwaDV6RzlyVk9tIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.fhthRcsSXgXSGDuiE8MKyArRul64Pmi9uuUvS8VOI_c"
 
 
 export async function getAllLandmarks(currentPage, selectedCity, sortBy) {
@@ -36,7 +36,6 @@ export async function addNewLandmark(data) {
         });
         if (response.status === 200) {
             const landmarkData = response.data;
-            console.log(data);
             toast.success('تمت الإضافة بنجاح');
             return landmarkData.data;
         } else {

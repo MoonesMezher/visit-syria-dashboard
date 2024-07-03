@@ -6,35 +6,37 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import MainSearchInput from "../../components/Shared/MainSearchInput/MainSearchInput";
 import { useNavigate } from "react-router-dom";
-import moment from "moment";
+import { toast } from "react-toastify";
+import ConfirmaDelete from "../../components/Shared/ConfirmDelete/ConfirmDelete";
 
 const Blog = () => {
+  const [loading , setLoading] = useState(false);
   const [sortBy, setSortBy] = useState("");
   const [blogs, setBlogs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [get, setGet] = useState(true);
+  const [selectedItem, setSelectedItem] = useState("");
+  const [totalPages, setTotalPages] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
+  const [showConfirm, setShowConfirm] = useState(false);
 
   useEffect(() => {
     const sortQuery = sortBy ? `&sort_by=${sortBy}` : "";
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `http://127.0.0.1:8000/api/blogs?page=${currentPage}${sortQuery}`
-        );
-        const responseData = response.data;
-        console.log(responseData);
-        if (responseData) {
-          setBlogs(responseData);
-          console.log("BLOG", blogs);
-        }
-      } catch (error) {
-        console.error("Failed to fetch blogs:", error);
-      }
-    };
+    try {
+      setLoading(true)
+      axios
+        .get(`http://127.0.0.1:8000/api/blogs?page=${currentPage}${sortQuery}`)
+        .then((response) => {
+          setBlogs(response.data.data);
+          setTotalPages(response.data.pagination.total_pages);
+          setLoading(false)
+        });
+    } catch (error) {
+      setLoading(false)
+      console.error("Failed to fetch blogs:", error);
+    }
+  }, [currentPage, get, sortBy]);
 
-    fetchData();
-  }, [currentPage, get]);
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -43,23 +45,40 @@ const Blog = () => {
     blogs && blogs.length > 0
       ? blogs.map((blog) => ({
           id: blog.id,
-          data: [
-            blog.id,
-            blog.title,
-            moment(blog.created_at).format("YYYY-MM-DD"),
-          ],
+          data: [blog.id, blog.title, blog.created_at],
         }))
       : [];
 
-  const handleDelete = (blog) => {
+  const handleDeleteClick = (blogID) => {
+    setSelectedItem(blogID);
+    setShowConfirm(true);
+  };
+  const handleDeleteCancel = () => {
+    setSelectedItem(null);
+    setShowConfirm(false);
+  };
+
+  //delete
+  const handleDelete = (itemID) => {
+    setSelectedItem(itemID);
+
     axios
-      .delete(`http://127.0.0.1:8000/api/blog/${blog}`, null)
+      .delete(`http://127.0.0.1:8000/api/blog/${selectedItem}`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
       .then((res) => {
-        setGet((prev) => !prev);
         console.log(res.data);
+        setGet((prev) => !prev);
+
+        toast.success("تم الحذف بنجاح");
+        setShowConfirm(false);
+
+        navigate("/blogs");
       })
       .catch((error) => {
-        console.error("Failed to delete blog:", error);
+        console.error("Failed to delete :", error);
       });
   };
 
@@ -91,6 +110,13 @@ const Blog = () => {
 
   return (
     <section>
+      {loading && 
+            <div className="d-flex justify-content-center">
+                <div className="spinner-border" style={{ color:"rgb(126, 126, 126)" }} role="status">
+                <span className="sr-only"></span>
+                </div>
+            </div>
+        }
       <div className="blog-header">
         <MainSelect
           title="ترتيب حسب"
@@ -113,10 +139,18 @@ const Blog = () => {
           currentPage={currentPage}
           headers={headers}
           onPageChange={handlePageChange}
-          onDelete={handleDelete}
+          onDelete={handleDeleteClick}
           onEdit={handleEdit}
         />
       </div>
+
+      {showConfirm && (
+        <ConfirmaDelete
+          onDelete={handleDelete}
+          onCancel={handleDeleteCancel}
+          message="هل أنت متأكد من رغبتك في حذف هذاالمعلم؟"
+        />
+      )}
     </section>
   );
 };

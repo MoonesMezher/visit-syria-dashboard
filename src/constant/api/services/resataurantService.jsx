@@ -1,17 +1,14 @@
-// import { useState, useEffect } from "react";
-import axios from "axios";
-import { toast } from "react-toastify";
-
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import APIS from "./../index";
 const token = localStorage.getItem("token");
-
-
-export async function getBlogInfo(id) {
+export async function getRestaurantInfo(id) {
     try {
-        const response = await axios.get('http://127.0.0.1:8000/api/blog' + '/' + id);
+        const response = await axios.get(APIS.GET.RESTURANT+id);
 
         if (response.status === 200) {
-            const hotelInfo = response.data;
-            return hotelInfo;
+            const restaurantInfo = response.data;
+            return restaurantInfo;
         } else {
             throw new Error(`Failed to get landmark with id=  ${id}`);
         }
@@ -21,9 +18,9 @@ export async function getBlogInfo(id) {
 }
 
 
-export async function editBlog(data, id) {
+export async function editRestaurant(data, id) {
     try {
-        const response = await axios.post("http://127.0.0.1:8000/api/update/" + id, data, {
+        const response = await axios.post(APIS.PUT.RESTURANT+id, data, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'Authorization': `Bearer ${token}`
@@ -31,10 +28,10 @@ export async function editBlog(data, id) {
         });
         if (response.status === 200) {
             toast.success('تم التعديل بنجاح');
-            const blogUpdatedData = response.data;
-            return blogUpdatedData;
+            const restaurantUpdatedData = response.data;
+            return restaurantUpdatedData;
         } else {
-            throw new Error('Failed to update blog');
+            throw new Error('Failed to update landmark');
         }
     } catch (error) {
         console.log(error.message)

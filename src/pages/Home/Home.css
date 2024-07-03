@@ -1,0 +1,14 @@
+.BY_SatisticsLandMark .BY_container .content_section.home_statistic {
+    display: flex;
+    margin-top: 26px;
+    gap: 50px;
+    flex-direction: column;
+}
+
+.BY_SatisticsLandMark .BY_container .home_statistic .satistics_boxs_section {
+    display: flex;
+    gap: 32px;
+}
+.BY_SatisticsLandMark .BY_container .home_statistic .row .left_section .home_chart .mainchart {
+    height: 100%;
+}

@@ -6,6 +6,7 @@ import MainSearchInput from "../../components/Shared/MainSearchInput/MainSearchI
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { deleteItem, useFetchCities, useFetchHotels } from "../../constant/api/FetchData";
+import ConfirmaDelete from "../../components/Shared/ConfirmDelete/ConfirmDelete";
 
 const Hotel = () => {
 
@@ -19,6 +20,8 @@ const Hotel = () => {
     const [getItem, setGetItem] = useState(true);
     const [selectedCity, setSelectedCity] = useState('');
     const [sortBy,setSortBy] = useState('');
+    const [showConfirm, setShowConfirm] = useState(false);
+    const [selectedItem, setSelectedItem] = useState(null);
     const navigate = useNavigate()
 
     // Fetch data (cities and hotels)
@@ -53,11 +56,21 @@ const Hotel = () => {
         setCurrentPage(pageNumber);
     };
     
-    //  Function to handle Delete hotel
-    const handleDelete = (itemId) => {
-        deleteItem(itemId,setGetItem); // Use the deleteHotel function from the hook
+    const handleDeleteClick = (itemId) => {
+        setSelectedItem(itemId);
+        setShowConfirm(true);
     };
 
+    //  Function to handle Delete hotel
+    const handleDeleteConfirm = () => {
+        deleteItem(selectedItem,setGetItem); // Use the deleteHotel function from the hook
+        setShowConfirm(false);
+    };
+    
+
+    const handleDeleteCancel = () => {
+        setShowConfirm(false);
+    };
     //  Function to handle update hotel button
     const handleEdit = (itemId) => {
         navigate(`/hotels/edit/${itemId}`)
@@ -87,8 +100,14 @@ const Hotel = () => {
                     <MainButton text={'اضافة فندق'} goTo="/hotels/add"/>
                 </div>
             </div>
-            <MainTable data={filteredHotels} headers={headers} totalPages={totalPages} onPageChange={handlePageChange} onDelete={handleDelete} onEdit={handleEdit} />
-
+            <MainTable data={filteredHotels} headers={headers} totalPages={totalPages} onPageChange={handlePageChange} onDelete={handleDeleteClick} onEdit={handleEdit} />
+            {showConfirm && (
+                    <ConfirmaDelete
+                        onDelete={handleDeleteConfirm}
+                        onCancel={handleDeleteCancel}
+                        message="هل أنت متأكد من رغبتك في حذف هذا الفندق؟"
+                    />
+            )}
         </section>
     )
 }

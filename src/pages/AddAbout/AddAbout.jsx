@@ -55,12 +55,6 @@ const SendData = async (event) => {
     formData.append("category", category);
     formData.append("content", content);
     formData.append("main_image", main_image);
-    // formData.append("images", images);
-
-    // if(main_image){
-    //     formData.append("main_image", main_image); 
-
-    // }
     if(images){
       for (let i = 0; i < images.length; i++) {
         formData.append(`images[${i}]`, images[i]);

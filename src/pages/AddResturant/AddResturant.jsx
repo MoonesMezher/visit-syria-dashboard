@@ -45,7 +45,7 @@ const AddResturant = () => {
       }
     })
       .then(res => {
-        console.log(res);
+        // console.log(res);
         if(res?.status === 200) {
           toast.success('تمت الإضافة بنجاح')
           to('/resturants');
@@ -67,7 +67,7 @@ const AddResturant = () => {
   useEffect(() => {
       axios.get('http://127.0.0.1:8000/api/cities')
       .then ( res => {
-          console.log('22', res.data);
+          // console.log('22', res.data);
           setCities(res?.data?.data);
           // Extracting city names and setting them to state
           // const names = res?.data?.data?.map(city => city.name);
