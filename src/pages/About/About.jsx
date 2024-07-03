@@ -13,7 +13,6 @@ import MainSearchInput from "../../components/Shared/MainSearchInput/MainSearchI
 const About = () => {
     const headers = ["id", "عنوان المقال ", "التصنيفات", "نص المقال", "الصور "];
     const [loading , setLoading] = useState(false);
-
     const[abouts,setAbout]=useState([])
     const[current_page,setcurrent_page]=useState(1)
     const[total_pages,setTotal_pages]=useState(0)

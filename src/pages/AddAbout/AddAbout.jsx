@@ -70,7 +70,6 @@ const SendData = async (event) => {
 
     try {
       setLoading(true)
-
       const response = await axios.post(
         "http://127.0.0.1:8000/api/about",
         formData,
@@ -78,13 +77,11 @@ const SendData = async (event) => {
           headers: {
             "Content-Type": "multipart/form-data",
             'Authorization': 'Bearer ' + localStorage.getItem('token')
-
           },
         }
       );
       console.log(response.data.data);
       toast.success('تمت الإضافة بنجاح')
-
       navigate("/about");
     } catch (error) {
       console.error(error);
